@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Biblioteca Técnica — Checklists de Inspección POXDRIVE</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap');
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--orange:#E8641E;--ink:#132339;--cream:#F7F5F1;--border:#E2DED6;--lgray:#9A9690}
+html{scroll-behavior:smooth}
+body{font-family:'Montserrat',sans-serif;background:var(--cream);color:var(--ink);font-size:14px}
+header{background:var(--ink);padding:28px 24px 40px;text-align:center}
+.header-logo{height:36px;display:block;margin:0 auto 18px}
+header h1{font-size:clamp(1.5rem,3vw,2.4rem);font-weight:800;color:#fff;letter-spacing:-0.3px;margin-bottom:8px}
+header p{font-size:15px;color:rgba(255,255,255,.55);max-width:560px;margin:0 auto;line-height:1.6}
+.tag-row{display:flex;gap:8px;justify-content:center;margin-top:16px;flex-wrap:wrap}
+.tag{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.6);padding:4px 14px;border-radius:99px;font-size:11px;letter-spacing:.05em}
+.main{max-width:1040px;margin:0 auto;padding:40px 20px 60px}
+.section-label{font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--lgray);margin-bottom:20px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-bottom:48px}
+.hub-card{
+  background:#fff;border-radius:10px;border:1px solid var(--border);
+  padding:24px;text-decoration:none;color:var(--ink);
+  display:flex;flex-direction:column;gap:6px;
+  transition:transform .2s,box-shadow .2s,border-color .2s;
+  position:relative;overflow:hidden;
+}
+.hub-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:var(--accent);}
+.hub-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.1);border-color:var(--accent)}
+.hub-icon{font-size:28px;margin-bottom:4px}
+.hub-code{font-size:10px;font-weight:700;letter-spacing:.12em;color:var(--lgray);text-transform:uppercase}
+.hub-industry{font-size:17px;font-weight:700;color:var(--ink);line-height:1.2;margin-top:2px}
+.hub-subtitle{font-size:12px;color:var(--lgray);line-height:1.4;margin-top:2px}
+.hub-meta{font-size:11px;color:var(--lgray);margin-top:6px;padding-top:8px;border-top:1px solid var(--border)}
+.hub-cta{font-size:12px;font-weight:600;color:var(--accent);margin-top:4px}
+.info-box{background:var(--ink);color:#fff;border-radius:10px;padding:28px 32px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;margin-top:8px}
+.info-box h2{font-size:17px;font-weight:700;margin-bottom:8px}
+.info-box p{font-size:13px;color:rgba(255,255,255,.6);max-width:480px;line-height:1.65}
+.info-contacts{display:flex;flex-direction:column;gap:5px}
+.info-contacts a,.info-contacts span{font-size:12px;color:var(--orange);text-decoration:none}
+.info-label{font-size:9px;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:.12em;margin-bottom:7px}
+footer{background:var(--ink);color:rgba(255,255,255,.3);text-align:center;padding:18px;font-size:11px;margin-top:24px}
+@media(max-width:600px){.info-box{flex-direction:column}}
+</style>
+</head>
+<body>
+
+<header>
+  <img src="data:image/jpeg;base64,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NcRnOSvUcMCfuiPrXje04lyb3HD63T2TTjCqu3Pe0JLvJcrW7i9z6H2XB3EP7xVPqFXeUWp1KMl1dNrmqQlvaEuaLeinHYwPhJ+yr8QPiZph8Y61PbeGfC8KeZc+ItcbyohH3aNWIMn1yF7bga6LVP2jfgV+zjbyaF+zF4WTXvECqY7jxzr0O4IcYP2eM44684UdM+YOa8k+M37RfxY+PGpC68feJHe0jfda6TaAxWlv6bYweSBxubLY71w1NZJj84fPnFT3P+fMG1D/ALflpKo/L3Yf3XuJ8SZXw+vZ8PUn7TriKqTq+tOGsaK7Nc1T++tjY8c/EHxr8S9fl8UePfE13qt/Lw093Lu2jOdqjoijsqgAdhWPRRX09KlSoU1TpxUYrRJKyS7JLY+Kr162JrSq1pOUpO7bbbb7tvVsKKKK0MgooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP/Z" alt="POXDRIVE" class="header-logo">
+  <h1>Biblioteca Técnica de Inspección</h1>
+  <p>Checklists de autoevaluación de pisos y revestimientos industriales para detectar oportunidades de mejora en higiene, seguridad, resistencia y mantenimiento.</p>
+  <div class="tag-row">
+    <span class="tag">10 industrias</span>
+    <span class="tag">Completar online</span>
+    <span class="tag">Exportar a PDF</span>
+    <span class="tag">Guardado automático</span>
+  </div>
+</header>
+
+<main class="main">
+  <div class="section-label">Seleccioná la industria para comenzar la autoevaluación</div>
+  <div class="grid">
+    
+  <a href="POX-CK-001.html" class="hub-card" style="--accent:#E8641E">
+    <div class="hub-icon">🏭</div>
+    <div class="hub-code">POX-CK-001</div>
+    <div class="hub-industry">Industria Alimenticia</div>
+    <div class="hub-subtitle">Autoevaluación técnica para plantas alimenticias, BPM e higiene industrial</div>
+    <div class="hub-meta">6 secciones · 30 puntos de inspección</div>
+    <div class="hub-cta">Abrir checklist →</div>
+  </a>
+  <a href="POX-CK-002.html" class="hub-card" style="--accent:#E8641E">
+    <div class="hub-icon">💊</div>
+    <div class="hub-code">POX-CK-002</div>
+    <div class="hub-industry">Industria Farmacéutica</div>
+    <div class="hub-subtitle">Autoevaluación técnica según criterios GMP / BPF</div>
+    <div class="hub-meta">6 secciones · 30 puntos de inspección</div>
+    <div class="hub-cta">Abrir checklist →</div>
+  </a>
+  <a href="POX-CK-003.html" class="hub-card" style="--accent:#E8641E">
+    <div class="hub-icon">⛏</div>
+    <div class="hub-code">POX-CK-003</div>
+    <div class="hub-industry">Industria Minera</div>
+    <div class="hub-subtitle">Autoevaluación para áreas de alto desgaste, impacto y exposición química</div>
+    <div class="hub-meta">6 secciones · 30 puntos de inspección</div>
+    <div class="hub-cta">Abrir checklist →</div>
+  </a>
+  <a href="POX-CK-004.html" class="hub-card" style="--accent:#E8641E">
+    <div class="hub-icon">📦</div>
+    <div class="hub-code">POX-CK-004</div>
+    <div class="hub-industry">Centros Logísticos</div>
+    <div class="hub-subtitle">Autoevaluación para depósitos, centros de distribución y áreas de carga</div>
+    <div class="hub-meta">6 secciones · 30 puntos de inspección</div>
+    <div class="hub-cta">Abrir checklist →</div>
+  </a>
+  <a href="POX-CK-005.html" class="hub-card" style="--accent:#E8641E">
+    <div class="hub-icon">⚙️</div>
+    <div class="hub-code">POX-CK-005</div>
+    <div class="hub-industry">Industria General</div>
+    <div class="hub-subtitle">Autoevaluación transversal para plantas industriales y manufactureras</div>
+    <div class="hub-meta">6 secciones · 30 puntos de inspección</div>
+    <div class="hub-cta">Abrir checklist →</div>
+  </a>
+  <a href="POX-CK-006.html" class="hub-card" style="--accent:#E8641E">
+    <div class="hub-icon">⚗️</div>
+    <div class="hub-code">POX-CK-006</div>
+    <div class="hub-industry">Industria Química y Petroquímica</div>
+    <div class="hub-subtitle">Autoevaluación para áreas con exposición química, contención y procesos agresivos</div>
+    <div class="hub-meta">6 secciones · 30 puntos de inspección</div>
+    <div class="hub-cta">Abrir checklist →</div>
+  </a>
+  <a href="POX-CK-007.html" class="hub-card" style="--accent:#E8641E">
+    <div class="hub-icon">🏥</div>
+    <div class="hub-code">POX-CK-007</div>
+    <div class="hub-industry">Hospitales y Laboratorios</div>
+    <div class="hub-subtitle">Autoevaluación para superficies higiénicas, lavables y seguras</div>
+    <div class="hub-meta">6 secciones · 30 puntos de inspección</div>
+    <div class="hub-cta">Abrir checklist →</div>
+  </a>
+  <a href="POX-CK-008.html" class="hub-card" style="--accent:#E8641E">
+    <div class="hub-icon">❄️</div>
+    <div class="hub-code">POX-CK-008</div>
+    <div class="hub-industry">Frigoríficos</div>
+    <div class="hub-subtitle">Autoevaluación para bajas temperaturas, humedad, lavado intensivo y seguridad</div>
+    <div class="hub-meta">6 secciones · 30 puntos de inspección</div>
+    <div class="hub-cta">Abrir checklist →</div>
+  </a>
+  <a href="POX-CK-009.html" class="hub-card" style="--accent:#E8641E">
+    <div class="hub-icon">🔧</div>
+    <div class="hub-code">POX-CK-009</div>
+    <div class="hub-industry">Automotriz y Metalmecánica</div>
+    <div class="hub-subtitle">Autoevaluación para producción, talleres, mecanizado, ensamble y tránsito industrial</div>
+    <div class="hub-meta">6 secciones · 30 puntos de inspección</div>
+    <div class="hub-cta">Abrir checklist →</div>
+  </a>
+  <a href="POX-CK-010.html" class="hub-card" style="--accent:#E8641E">
+    <div class="hub-icon">🛢️</div>
+    <div class="hub-code">POX-CK-010</div>
+    <div class="hub-industry">Petróleo y Gas</div>
+    <div class="hub-subtitle">Autoevaluación para talleres, contención, hidrocarburos y ambientes exigentes</div>
+    <div class="hub-meta">6 secciones · 30 puntos de inspección</div>
+    <div class="hub-cta">Abrir checklist →</div>
+  </a>
+  </div>
+
+  <div class="info-box">
+    <div>
+      <div class="info-label">¿Necesitás un diagnóstico técnico?</div>
+      <h2>Nuestros especialistas evalúan el estado real de tu piso.</h2>
+      <p>POXDRIVE diseña, fabrica e instala revestimientos epoxi y poliuretánicos de alto desempeño. Podemos diagnosticar causas de deterioro y recomendar soluciones adaptadas a tu operación.</p>
+    </div>
+    <div>
+      <div class="info-label">Contacto</div>
+      <div class="info-contacts">
+        <span>📞 011 3527-7140</span>
+        <span>💬 +54 9 11 3820-0513</span>
+        <a href="mailto:consultas@poxdrive.com.ar">✉ consultas@poxdrive.com.ar</a>
+        <a href="https://www.poxdrive.com.ar" target="_blank">🌐 www.poxdrive.com.ar</a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>FARBENTEC S.R.L. — POXDRIVE · Pisos y Revestimientos Industriales · www.poxdrive.com.ar</footer>
+</body>
+</html>

@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>POX-CK-007 | Hospitales y Laboratorios — POXDRIVE</title>
+<style>
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --orange:#E84F09;--orange-dark:#C43F06;--ink:#1A1B1D;--ink2:#2C2E30;
+  --cream:#F7F5F1;--border:#E2DED6;--gray:#5A564F;--lgray:#9A9690;
+  --green:#1A7A4A;--green-bg:#EBF7F1;--green-border:#A3D9BC;
+  --yellow:#8A6200;--yellow-bg:#FFF8E6;--yellow-border:#F0C84A;
+  --red:#B91C1C;--red-bg:#FEF2F2;--red-border:#FBADB0;
+  --accent:#E84F09;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--cream);color:var(--ink);font-size:14px;line-height:1.5}
+.app-header{background:var(--ink);padding:0;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.4)}
+.header-inner{max-width:960px;margin:0 auto;padding:12px 24px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.header-logo{height:28px;object-fit:contain}
+.header-doc{font-size:10px;color:var(--lgray);letter-spacing:.06em;margin-top:2px}
+.header-right{display:flex;align-items:center;gap:10px}
+.score-badge{background:var(--ink2);border:1px solid rgba(255,255,255,.1);border-radius:99px;padding:6px 14px;display:flex;align-items:center;gap:8px;transition:background .4s,border-color .4s}
+.score-badge.good{background:#0D4A2A;border-color:#1A7A4A}
+.score-badge.ok{background:#4A3600;border-color:#8A6200}
+.score-badge.warn{background:#5C0F0F;border-color:#B91C1C}
+.score-num{font-size:17px;font-weight:700;color:#fff;line-height:1}
+.score-label{font-size:9px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.1em}
+.score-interp{font-size:11px;color:rgba(255,255,255,.65)}
+.btn-print,.btn-back{color:#fff;border:none;cursor:pointer;padding:8px 16px;border-radius:6px;font-size:12px;font-weight:600;letter-spacing:.04em;transition:background .2s;white-space:nowrap;text-decoration:none;display:inline-block}
+.btn-print{background:var(--orange)}.btn-print:hover{background:var(--orange-dark)}
+.btn-back{background:rgba(255,255,255,.1)}.btn-back:hover{background:rgba(255,255,255,.2)}
+.main{max-width:960px;margin:0 auto;padding:24px 24px 60px}
+.card{background:#fff;border-radius:8px;border:1px solid var(--border);margin-bottom:18px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.05)}
+.card-header{background:var(--ink);color:#fff;padding:13px 22px;display:flex;justify-content:space-between;align-items:center}
+.card-header h2{font-size:12.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.card-body{padding:20px}
+.sec-num{background:var(--accent);color:#fff;font-size:10px;font-weight:700;padding:3px 9px;border-radius:99px;letter-spacing:.08em}
+.sec-progress{display:flex;height:4px;border-radius:2px;overflow:hidden;margin-top:4px}
+.pg{background:#1A7A4A;transition:width .4s}.py{background:#F0C84A;transition:width .4s}.pr{background:#EF4444;transition:width .4s}.pe{background:rgba(255,255,255,.15);flex:1}
+.datos-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.fg{display:flex;flex-direction:column;gap:4px}
+.fg label{font-size:10.5px;font-weight:600;color:var(--lgray);text-transform:uppercase;letter-spacing:.08em}
+.fg input,.fg select,.fg textarea{border:1px solid var(--border);border-radius:6px;padding:8px 11px;font-size:13.5px;color:var(--ink);background:#fff;transition:border-color .2s;font-family:inherit}
+.fg input:focus,.fg select:focus,.fg textarea:focus{outline:none;border-color:var(--orange);box-shadow:0 0 0 3px rgba(232,79,9,.1)}
+.areas-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
+.area-check{display:flex;align-items:center;gap:7px;cursor:pointer;padding:7px 9px;border-radius:6px;border:1px solid var(--border);transition:all .15s;user-select:none}
+.area-check:hover{border-color:var(--orange);background:#FFF5F0}
+.area-check input{display:none}
+.checkmark{width:17px;height:17px;border:2px solid var(--border);border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px;transition:all .15s}
+.area-check input:checked + .checkmark{background:var(--orange);border-color:var(--orange);color:#fff}
+.area-check input:checked ~ .area-label{color:var(--orange);font-weight:600}
+.area-label{font-size:12px}
+.insp-table{width:100%;border-collapse:collapse}
+.insp-table th{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--lgray);padding:0 10px 10px;text-align:center}
+.insp-table th:first-child{text-align:left}
+.insp-table tbody tr{border-top:1px solid var(--border)}
+.insp-table tbody tr:hover{background:#FAFAF9}
+.insp-table td{padding:9px 10px}
+.item-text{font-size:13px;color:var(--ink);width:60%}
+.item-radio{text-align:center;width:13.3%}
+.rp{display:inline-block;padding:5px 12px;border-radius:99px;font-size:11px;font-weight:600;cursor:pointer;border:1.5px solid var(--border);color:var(--lgray);background:#fff;transition:all .15s;white-space:nowrap;user-select:none}
+.rp input{display:none}
+.rp-c:hover{color:var(--green);border-color:var(--green)}
+.rp-p:hover{color:var(--yellow);border-color:var(--yellow)}
+.rp-n:hover{color:var(--red);border-color:var(--red)}
+.sel-c{background:var(--green-bg);border-color:var(--green-border);color:var(--green)}
+.sel-p{background:var(--yellow-bg);border-color:var(--yellow-border);color:var(--yellow)}
+.sel-n{background:var(--red-bg);border-color:var(--red-border);color:var(--red)}
+.legend{background:#fff;border:1px solid var(--border);border-radius:8px;padding:12px 18px;margin-bottom:18px;display:flex;gap:20px;flex-wrap:wrap;align-items:center}
+.legend-item{display:flex;align-items:center;gap:7px}
+.legend-item span:first-child{padding:4px 11px;border-radius:99px;font-size:11px;font-weight:600}
+.legend-item span:last-child{font-size:12px;color:var(--gray)}
+.score-table{width:100%;border-collapse:collapse}
+.score-table th{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--lgray);padding:8px 14px;background:var(--cream);text-align:left}
+.score-table td{padding:10px 14px;font-size:13px;border-top:1px solid var(--border)}
+.score-row-active td{background:#FFF5F0;font-weight:600;color:var(--orange)}
+.score-range{font-weight:700;font-size:14px}
+.at{width:100%;border-collapse:collapse;font-size:13px}
+.at th{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--lgray);padding:7px 9px;background:var(--cream);text-align:left;border-bottom:2px solid var(--border)}
+.at td{padding:5px 7px;border-bottom:1px solid var(--border);vertical-align:top}
+.at td input,.at td select{width:100%;border:none;background:transparent;font-family:inherit;font-size:13px;color:var(--ink);padding:3px 5px;border-radius:4px}
+.at td input:focus,.at td select:focus{background:var(--cream);outline:none}
+.at td.td-del{width:32px;text-align:center}
+.btn-del{background:none;border:none;cursor:pointer;color:var(--border);font-size:15px;padding:3px;border-radius:4px;transition:color .15s}
+.btn-del:hover{color:var(--red)}
+.btn-add{background:none;border:1.5px dashed var(--border);color:var(--lgray);padding:7px 14px;border-radius:6px;font-size:12px;cursor:pointer;margin-top:8px;width:100%;transition:all .15s;font-family:inherit}
+.btn-add:hover{border-color:var(--orange);color:var(--orange)}
+.rs{padding:4px 8px;border-radius:99px;font-size:11px;font-weight:600;border:1.5px solid var(--border);background:#fff;color:var(--gray);cursor:pointer;font-family:inherit}
+.rs.riesgo-alto{background:var(--red-bg);border-color:var(--red-border);color:var(--red)}
+.rs.riesgo-medio{background:var(--yellow-bg);border-color:var(--yellow-border);color:var(--yellow)}
+.rs.riesgo-bajo{background:var(--green-bg);border-color:var(--green-border);color:var(--green)}
+.diag{background:var(--ink);color:#fff;border-radius:8px;padding:24px 28px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+.diag h3{font-size:15px;font-weight:700;margin-bottom:7px}
+.diag p{font-size:12.5px;color:rgba(255,255,255,.6);max-width:500px;line-height:1.6}
+.diag-c{display:flex;flex-direction:column;gap:5px}
+.diag-c a,.diag-c span{font-size:12px;color:var(--orange);text-decoration:none}
+.diag-cl{font-size:9px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px}
+.save-dot{width:6px;height:6px;border-radius:50%;background:var(--lgray);display:inline-block;margin-right:4px;transition:background .3s}
+.save-dot.saved{background:#22C55E}
+.save-text{font-size:9.5px;color:rgba(255,255,255,.35)}
+@media print{
+  .app-header .btn-print,.app-header .btn-back,.btn-add,.btn-del{display:none!important}
+  .app-header{position:static;box-shadow:none}
+  .score-badge{border:1px solid #ccc;background:#fff!important}
+  .score-num,.score-label,.score-interp{color:#000!important}
+  body{background:#fff;font-size:10.5pt}
+  .card{box-shadow:none;page-break-inside:avoid}
+  .diag{background:#f0f0f0;color:#000}
+  .diag-c a,.diag-c span{color:var(--orange)}
+  .main{padding:0}
+}
+@media(max-width:680px){
+  .datos-grid{grid-template-columns:1fr}
+  .areas-grid{grid-template-columns:repeat(2,1fr)}
+  .insp-table td.item-text{font-size:12px}
+  .rp{padding:4px 8px;font-size:10px}
+  .diag{flex-direction:column}
+}
+
+.sec-num{background:#0D6E6E!important}
+</style>
+</head>
+<body>
+<header class="app-header">
+  <div class="header-inner">
+    <div>
+      <img src="data:image/jpeg;base64,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NcRnOSvUcMCfuiPrXje04lyb3HD63T2TTjCqu3Pe0JLvJcrW7i9z6H2XB3EP7xVPqFXeUWp1KMl1dNrmqQlvaEuaLeinHYwPhJ+yr8QPiZph8Y61PbeGfC8KeZc+ItcbyohH3aNWIMn1yF7bga6LVP2jfgV+zjbyaF+zF4WTXvECqY7jxzr0O4IcYP2eM44684UdM+YOa8k+M37RfxY+PGpC68feJHe0jfda6TaAxWlv6bYweSBxubLY71w1NZJj84fPnFT3P+fMG1D/ALflpKo/L3Yf3XuJ8SZXw+vZ8PUn7TriKqTq+tOGsaK7Nc1T++tjY8c/EHxr8S9fl8UePfE13qt/Lw093Lu2jOdqjoijsqgAdhWPRRX09KlSoU1TpxUYrRJKyS7JLY+Kr162JrSq1pOUpO7bbbb7tvVsKKKK0MgooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP/Z" alt="POXDRIVE" class="header-logo">
+      <div class="header-doc">POX-CK-007 · Hospitales y Laboratorios · v1.0</div>
+    </div>
+    <div class="header-right">
+      <div style="display:flex;align-items:center;gap:4px">
+        <span class="save-dot" id="sd"></span>
+        <span class="save-text" id="st">Sin guardar</span>
+      </div>
+      <div class="score-badge" id="sb">
+        <div>
+          <div class="score-num"><span id="sn">0</span><span style="font-size:11px;opacity:.4">/30</span></div>
+          <div class="score-label">Cumple</div>
+        </div>
+        <div class="score-interp" id="si">Completá el formulario</div>
+      </div>
+      <a href="POX-CK-006.html" class="btn-back">← Industria Química y Petroquímica</a><a href="index.html" class="btn-back">⊞ Ver todos</a><a href="POX-CK-008.html" class="btn-back">Frigoríficos →</a>
+      <button class="btn-print" onclick="window.print()">🖨 Imprimir</button>
+    </div>
+  </div>
+</header>
+
+<main class="main">
+
+<!-- DATOS GENERALES -->
+<div class="card">
+  <div class="card-header"><h2>📋 Datos Generales</h2></div>
+  <div class="card-body">
+    <div class="datos-grid">
+      <div class="fg"><label>Empresa</label><input type="text" id="fe" placeholder="Nombre de la empresa" oninput="autoSave()"></div>
+      <div class="fg"><label>Responsable de la inspección</label><input type="text" id="fr" placeholder="Nombre y cargo" oninput="autoSave()"></div>
+      <div class="fg"><label>Fecha</label><input type="date" id="ff" oninput="autoSave()"></div>
+      <div class="fg"><label>Sector / Área evaluada</label><input type="text" id="fs" placeholder="Ej: Planta nivel 1 — Sector A" oninput="autoSave()"></div>
+    </div>
+  </div>
+</div>
+
+<!-- OBJETIVO -->
+<div style="background:rgba(232,79,9,.06);border:1px solid rgba(232,79,9,.2);border-radius:8px;padding:14px 18px;margin-bottom:18px">
+  <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#0D6E6E;margin-bottom:5px">Objetivo de esta autoevaluación</div>
+  <div style="font-size:13px;color:var(--gray);line-height:1.6">Evaluar pisos y revestimientos en hospitales, laboratorios y centros de salud para detectar mejoras en higiene, seguridad, limpieza, resistencia química y mantenimiento.</div>
+</div>
+
+<!-- ÁREAS -->
+<div class="card">
+  <div class="card-header"><h2>📍 Áreas Inspeccionadas</h2></div>
+  <div class="card-body">
+    <div class="areas-grid"><label class="area-check">
+  <input type="checkbox" id="ar_0" onchange="autoSave()">
+  <span class="checkmark">✓</span>
+  <span class="area-label">Laboratorio</span>
+</label>
+<label class="area-check">
+  <input type="checkbox" id="ar_1" onchange="autoSave()">
+  <span class="checkmark">✓</span>
+  <span class="area-label">Esterilización</span>
+</label>
+<label class="area-check">
+  <input type="checkbox" id="ar_2" onchange="autoSave()">
+  <span class="checkmark">✓</span>
+  <span class="area-label">Sala técnica</span>
+</label>
+<label class="area-check">
+  <input type="checkbox" id="ar_3" onchange="autoSave()">
+  <span class="checkmark">✓</span>
+  <span class="area-label">Vestuarios</span>
+</label>
+<label class="area-check">
+  <input type="checkbox" id="ar_4" onchange="autoSave()">
+  <span class="checkmark">✓</span>
+  <span class="area-label">Quirófano</span>
+</label>
+<label class="area-check">
+  <input type="checkbox" id="ar_5" onchange="autoSave()">
+  <span class="checkmark">✓</span>
+  <span class="area-label">Farmacia</span>
+</label>
+<label class="area-check">
+  <input type="checkbox" id="ar_6" onchange="autoSave()">
+  <span class="checkmark">✓</span>
+  <span class="area-label">Depósito</span>
+</label>
+<label class="area-check">
+  <input type="checkbox" id="ar_7" onchange="autoSave()">
+  <span class="checkmark">✓</span>
+  <span class="area-label">Lavadero</span>
+</label>
+<label class="area-check">
+  <input type="checkbox" id="ar_8" onchange="autoSave()">
+  <span class="checkmark">✓</span>
+  <span class="area-label">Pasillos</span>
+</label>
+<label class="area-check">
+  <input type="checkbox" id="ar_9" onchange="autoSave()">
+  <span class="checkmark">✓</span>
+  <span class="area-label">Guardia</span>
+</label>
+<label class="area-check">
+  <input type="checkbox" id="ar_10" onchange="autoSave()">
+  <span class="checkmark">✓</span>
+  <span class="area-label">Otra</span>
+</label></div>
+  </div>
+</div>
+
+<!-- LEYENDA -->
+<div class="legend">
+  <div class="legend-item">
+    <span style="background:var(--green-bg);border:1.5px solid var(--green-border);color:var(--green);padding:4px 11px;border-radius:99px;font-size:11px;font-weight:600">✓ Cumple</span>
+    <span>Condición adecuada</span>
+  </div>
+  <div class="legend-item">
+    <span style="background:var(--yellow-bg);border:1.5px solid var(--yellow-border);color:var(--yellow);padding:4px 11px;border-radius:99px;font-size:11px;font-weight:600">⚠ Parcial</span>
+    <span>Requiere seguimiento</span>
+  </div>
+  <div class="legend-item">
+    <span style="background:var(--red-bg);border:1.5px solid var(--red-border);color:var(--red);padding:4px 11px;border-radius:99px;font-size:11px;font-weight:600">✗ No cumple</span>
+    <span>Acción correctiva</span>
+  </div>
+  <div style="margin-left:auto;font-size:10.5px;color:var(--lgray)">Datos guardados automáticamente en el navegador</div>
+</div>
+
+
+<div class="card">
+  <div class="card-header">
+    <h2><span class="sec-num" style="background:#0D6E6E">1</span>&nbsp; Estado General de Superficies</h2>
+    <div style="text-align:right;min-width:110px">
+      <div style="font-size:9.5px;color:rgba(255,255,255,.4);margin-bottom:3px" id="sec1_pc">0 / 5 respondidos</div>
+      <div class="sec-progress">
+        <div class="pg" id="sec1_pg" style="width:0%"></div>
+        <div class="py" id="sec1_py" style="width:0%"></div>
+        <div class="pr" id="sec1_pr" style="width:0%"></div>
+        <div class="pe"></div>
+      </div>
+    </div>
+  </div>
+  <div class="card-body" style="padding:0">
+    <table class="insp-table">
+      <thead><tr>
+        <th style="padding-left:20px">Punto de inspección</th>
+        <th>✓ Cumple</th><th>⚠ Parcial</th><th>✗ No cumple</th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td class="item-text" style="padding-left:20px">El piso no presenta grietas, fisuras ni roturas visibles.</td>
+          <td class="item-radio">
+            <label class="rp rp-c" id="lbl_i0_c">
+              <input type="radio" name="i0" value="cumple" onchange="onRC('i0','cumple')"> ✓
+            </label>
+          </td>
+          <td class="item-radio">
+            <label class="rp rp-p" id="lbl_i0_p">
+              <input type="radio" name="i0" value="parcial" onchange="onRC('i0','parcial')"> ⚠
+            </label>
+          </td>
+          <td class="item-radio" style="padding-right:20px">
+            <label class="rp rp-n" id="lbl_i0_n">
+              <input type="radio" name="i0" value="nocumple" onchange="onRC('i0','nocumple')"> ✗
+            </label>
+          </td>
+        </tr>
+        <tr>
+          <td class="item-text" style="padding-left:20px">No existen baches, desprendimientos o sectores sueltos.</td>
+          <td class="item-radio">
+            <label class="rp rp-c" id="lbl_i1_c">
+              <input type="radio" name="i1" value="cumple" onchange="onRC('i1','cumple')"> ✓
+            </label>
+          </td>
+          <td class="item-radio">
+            <label class="rp rp-p" id="lbl_i1_p">
+              <input type="radio" name="i1" value="parcial" onchange="onRC('i1','parcial')"> ⚠
+            </label>
+          </td>
+          <td class="item-radio" style="padding-right:20px">
+            <label class="rp rp-n" id="lbl_i1_n">
+              <input type="radio" name="i1" value="nocumple" onchange="onRC('i1','nocumple')"> ✗
+            </label>
+          </td>
+        </tr>
+        <tr>
+          <td class="item-text" style="padding-left:20px">No se observan reparaciones provisorias o deterioradas.</td>
+          <td class="item-radio">
+            <label class="rp rp-c" id="lbl_i2_c">
+              <input type="radio" name="i2" value="cumple" onchange="onRC('i2','cumple')"> ✓
+            </label>
+          </td>
+          <td class="item-radio">
+            <label class="rp rp-p" id="lbl_i2_p">
+              <input type="radio" name="i2" value="parcial" onchange="onRC('i2','parcial')"> ⚠
+            </label>
+          </td>
+          <td class="item-radio" style="padding-right:20px">
+            <label class="rp rp-n" id="lbl_i2_n">
+              <input type="radio" name="i2" value="nocumple" onchange="onRC('i2','nocumple')"> ✗
+            </label>
+          </td>
+        </tr>
+        <tr>
+          <td class="item-text" style="padding-left:20px">La superficie presenta desgaste uniforme y controlado.</td>
+          <td class="item-radio">
+            <label class="rp rp-c" id="lbl_i3_c">
+              <input type="radio" name="i3" value="cumple" onchange="onRC('i3','cumple')"> ✓
+            </label>
+          </td>
+          <td class="item-radio">
+            <label class="rp rp-p" id="lbl_i3_p">
+              <input type="radio" name="i3" value="parcial" onchange="onRC('i3','parcial')"> ⚠
+            </label>
+          </td>
+          <td class="item-radio" style="padding-right:20px">
+            <label class="rp rp-n" id="lbl_i3_n">
+              <input type="radio" name="i3" value="nocumple" onchange="onRC('i3','nocumple')"> ✗
+            </label>
+          </td>
+        </tr>
+        <tr>
+          <td class="item-text" style="padding-left:20px">El revestimiento conserva adherencia al soporte.</td>
+          <td class="item-radio">
+            <label class="rp rp-c" id="lbl_i4_c">
+              <input type="radio" name="i4" value="cumple" onchange="onRC('i4','cumple')"> ✓
+            </label>
+          </td>
+          <td class="item-radio">
+            <label class="rp rp-p" id="lbl_i4_p">
+              <input type="radio" name="i4" value="parcial" onchange="onRC('i4','parcial')"> ⚠
+            </label>
+          </td>
+          <td class="item-radio" style="padding-right:20px">
+            <label class="rp rp-n" id="lbl_i4_n">
+              <input type="radio" name="i4" value="nocumple" onchange="onRC('i4','nocumple')"> ✗
+            </label>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <h2><span class="sec-num" style="background:#0D6E6E">2</span>&nbsp; Higiene y Lavabilidad</h2>
+    <div style="text-align:right;min-width:110px">
+      <div style="font-size:9.5px;color:rgba(255,255,255,.4);margin-bottom:3px" id="sec2_pc">0 / 5 respondidos</div>
+      <div class="sec-progress">
+        <div class="pg" id="sec2_pg" style="width:0%"></div>
+        <div class="py" id="sec2_py" style="width:0%"></div>
+        <div class="pr" id="sec2_pr" style="width:0%"></div>
+        <div class="pe"></div>
+      </div>
+    </div>
+  </div>
+  <div class="card-body" style="padding:0">
+    <table class="insp-table">
+      <thead><tr>
+        <th style="padding-left:20px">Punto de inspección</th>
+        <th>✓ Cumple</th><th>⚠ Parcial</th><th>✗ No cumple</th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td class="item-text" style="padding-left:20px">El piso es continuo y fácil de limpiar.</td>
+          <td class="item-radio">
+            <label class="rp rp-c" id="lbl_i5_c">
+              <input type="radio" name="i5" value="cumple" onchange="onRC('i5','cumple')"> ✓
+            </label>
+          </td>
+          <td class="item-radio">
+            <label class="rp rp-p" id="lbl_i5_p">
+              <input type="radio" name="i5" value="parcial" onchange="onRC('i5','parcial')"> ⚠
+            </label>
+          </td>
+          <td class="item-radio" style="padding-right:20px">
+            <label class="rp rp-n" id="lbl_i5_n">
+              <input type="radio" name="i5" value="nocumple" onchange="onRC('i5','nocumple')"> ✗
+            </label>
+          </td>
+        </tr>
+        <tr>
+          <td class="item-text" style="padding-left:20px">No hay poros abiertos ni juntas deterioradas.</td>
+          <td class="item-radio">
+            <label class="rp rp-c" id="lbl_i6_c">
+              <input type="radio" name="i6" value="cumple" onchange="onRC('i6','cumple')"> ✓
+            </label>
+          </td>
+          <td class="item-radio">
+            <label class="rp rp-p" id="lbl_i6_p">
+              <input type="radio" name="i6" value="parcial" onchange="onRC('i6','parcial')"> ⚠
+            </label>
+          </td>
+          <td class="item-radio" style="padding-right:20px">
+            <label class="rp rp-n" id="lbl_i6_n">
+              <input type="radio" name="i6" value="nocumple" onchange="onRC('i6','nocumple')"> ✗
+            </label>
+          </td>
+        </tr>
+        <tr>
+          <td class="item-text" style="padding-left:20px">La superficie resiste desinfectantes habituales.</td>
+          <td class="item-radio">
+            <label class="rp rp-c" id="lbl_i7_c">
+              <input type="radio" name="i7" value="cumple" onchange="onRC('i7','cumple')"> ✓
+            </label>
+          </td>
+          <td class="item-radio">
+            <label class="rp rp-p" id="lbl_i7_p">
+              <input type="radio" name="i7" value="parcial" onchange="onRC('i7','parcial')"> ⚠
+            </label>
+          </td>
+          <td class="item-radio" style="padding-right:20px">
+            <label class="rp rp-n" id="lbl_i7_n">
+              <input type="radio" name="i7" value="nocumple" onchange="onRC('i7','nocumple')"> ✗
+            </label>
+          </td>
+        </tr>
+        <tr>
+          <td class="item-text" style="padding-left:20px">Los encuentros piso-pared facilitan limpieza.</td>
+          <td class="item-radio">
+            <label class="rp rp-c" id="lbl_i8_c">
+              <input type="radio" name="i8" value="cumple" onchange="onRC('i8','cumple')"> ✓
+            </label>
+          </td>
+          <td class="item-radio">
+            <label class="rp rp-p" id="lbl_i8_p">
+              <input type="radio" name="i8" value="parcial" onchange="onRC('i8','parcial')"> ⚠
+            </label>
+          </td>
+          <td class="item-radio" style="padding-right:20px">
+            <label class="rp rp-n" id="lbl_i8_n">
+              <input type="radio" name="i8" value="nocumple" onchange="onRC('i8','nocumple')"> ✗
+            </label>
+          </td>
+        </tr>
+        <tr>
+          <td class="item-text" style="padding-left:20px">No hay zonas de acumulación de suciedad o humedad.</td>
+          <td class="item-radio">
+            <label class="rp rp-c" id="lbl_i9_c">
+              <input type="radio" name="i9" value="cumple" onchange="onRC('i9','cumple')"> ✓
+            </label>
+          </td>
+          <td class="item-radio">
+            <label class="rp rp-p" id="lbl_i9_p">
+              <input type="radio" name="i9" value="parcial" onchange="onRC('i9','parcial')"> ⚠
+            </label>
+          </td>
+          <td class="item-radio" style="padding-right:20px">
+            <label class="rp rp-n" id="lbl_i9_n">
+              <input type="radio" name="i9" value="nocumple" onchange="onRC('i9','nocumple')"> ✗
+            </label>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <h2><span class="sec-num" style="background:#0D6E6E">3</span>&nbsp; Seguridad Operativa</h2>
+    <div style="text-align:right;min-width:110px">
+      <div style="font-size:9.5px;color:rgba(255,255,255,.4);margin-bottom:3px" id="sec3_pc">0 / 5 respondidos</div>
+      <div class="sec-progress">
+        <div class="pg" id="sec3_pg" style="width:0%"></div>
+        <div class="py" id="sec3_py" style="width:0%"></div>
+        <div class="pr" id="sec3_pr" style="width:0%"></div>
+        <div class="pe"></div>
+      </div>
+    </div>
+  </div>
+  <div class="card-body" style="padding:0">
+    <table class="insp-table">
+      <thead><tr>
+        <th style="padding-left:20px">Punto de inspección</th>
+        <th>✓ Cumple</th><th>⚠ Parcial</th><th>✗ No cumple</th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td class="item-text" style="padding-left:20px">La superficie mantiene condiciones antideslizantes adecuadas para el área.</td>
+          <td class="item-radio">
+            <label class="rp rp-c" id="lbl_i10_c">
+              <input type="radio" name="i10" value="cumple" onchange="onRC('i10','cumple')"> ✓
+            </label>
+          </td>
+          <td class="item-radio">
+            <label class="rp rp-p" id="lbl_i10_p">
+              <input type="radio" name="i10" value="parcial" onchange="onRC('i10','parcial')"> ⚠
+            </label>
+          </td>
+          <td class="item-radio" style="padding-right:20px">
+            <label class="rp rp-n" id="lbl_i10_n">
+              <input type="radio" name="i10" value="nocumple" onchange="onRC('i10','nocumple')"> ✗
+            </label>
+          </td>
+        </tr>
+        <tr>
+          <td class="item-text" style="padding-left:20px">No existen desniveles, bordes levantados o zonas de tropiezo.</td>
+          <td class="item-radio">
+            <label class="rp rp-c" id="lbl_i11_c">
+              <input type="radio" name="i11" value="cumple" onchange="onRC('i11','cumple')"> ✓
+            </label>
+          </td>
+          <td class="item-radio">
+            <label class="rp rp-p" id="lbl_i11_p">
+              <input type="radio" name="i11" value="parcial" onchange="onRC('i11','parcial')"> ⚠
+            </label>
+          </td>
+          <td class="item-radio" style="padding-right:20px">
+            <label class="rp rp-n" id="lbl_i11_n">
+              <input type="radio" name="i11" value="nocumple" onchange="onRC('i11','nocumple')"> ✗
+            </label>
+          </td>
+        </tr>
+        <tr>
+          <td class="item-text" style="padding-left:20px">La circulación de personas y equipos se realiza de forma segura.</td>
+          <td class="item-radio">
+            <label class="rp rp-c" id="lbl_i12_c">
+              <input type="radio" name="i12" value="cumple" onchange="onRC('i12','cumple')"> ✓
+            </label>
+          </td>
+          <td class="item-radio">
+            <label class="rp rp-p" id="lbl_i12_p">
+              <input type="radio" name="i12" value="parcial" onchange="onRC('i12','parcial')"> ⚠
+            </label>
+          </td>
+          <td class="item-radio" style="padding-right:20px">
+            <label class="rp rp-n" id="lbl_i12_n">
+              <input type="radio" name="i12" value="nocumple" onchange="onRC('i12','nocumple')"> ✗
+            </label>
+          </td>
+        </tr>
+        <tr>
+          <td class="item-text" style="padding-left:20px">Las demarcaciones, sendas y zonas de seguridad están visibles.</td>
+          <td class="item-radio">
+            <label class="rp rp-c" id="lbl_i13_c">
+              <input type="radio" name="i13" value="cumple" onchange="onRC('i13','cumple')"> ✓
+            </label>
+          </td>
+          <td class="item-radio">
+            <label class="rp rp-p" id="lbl_i13_p">
+              <input type="radio" name="i13" value="parcial" onchange="onRC('i13','parcial')"> ⚠
+            </label>
+          </td>
+          <td class="item-radio" style="padding-right:20px">
+            <label class="rp rp-n" id="lbl_i13_n">
+              <input type="radio" name="i13" value="nocumple" onchange="onRC('i13','nocumple')"> ✗
+            </label>
+          </td>
+        </tr>
+        <tr>
+          <td class="item-text" style="padding-left:20px">No se acumulan líquidos, polvo u otros contaminantes que generen riesgo operativo.</td>
+          <td class="item-radio">
+            <label class="rp rp-c" id="lbl_i14_c">
+              <input type="radio" name="i14" value="cumple" onchange="onRC('i14','cumple')"> ✓
+            </label>
+          </td>
+          <td class="item-radio">
+            <label class="rp rp-p" id="lbl_i14_p">
+              <input type="radio" name="i14" value="parcial" onchange="onRC('i14','parcial')"> ⚠
+            </label>
+          </td>
+          <td class="item-radio" style="padding-right:20px">
+            <label class="rp rp-n" id="lbl_i14_n">
+              <input type="radio" name="i14" value="nocumple" onchange="onRC('i14','nocumple')"> ✗
+            </label>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <h2><span class="sec-num" style="background:#0D6E6E">4</span>&nbsp; Resistencia Química y Uso Intensivo</h2>
+    <div style="text-align:right;min-width:110px">
+      <div style="font-size:9.5px;color:rgba(255,255,255,.4);margin-bottom:3px" id="sec4_pc">0 / 5 respondidos</div>
+      <div class="sec-progress">
+        <div class="pg" id="sec4_pg" style="width:0%"></div>
+        <div class="py" id="sec4_py" style="width:0%"></div>
+        <div class="pr" id="sec4_pr" style="width:0%"></div>
+        <div class="pe"></div>
+      </div>
+    </div>
+  </div>
+  <div class="card-body" style="padding:0">
+    <table class="insp-table">
+      <thead><tr>
+        <th style="padding-left:20px">Punto de inspección</th>
+        <th>✓ Cumple</th><th>⚠ Parcial</th><th>✗ No cumple</th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td class="item-text" style="padding-left:20px">El revestimiento resiste alcoholes y sanitizantes.</td>
+          <td class="item-radio">
+            <label class="rp rp-c" id="lbl_i15_c">
+              <input type="radio" name="i15" value="cumple" onchange="onRC('i15','cumple')"> ✓
+            </label>
+          </td>
+          <td class="item-radio">
+            <label class="rp rp-p" id="lbl_i15_p">
+              <input type="radio" name="i15" value="parcial" onchange="onRC('i15','parcial')"> ⚠
+            </label>
+          </td>
+          <td class="item-radio" style="padding-right:20px">
+            <label class="rp rp-n" id="lbl_i15_n">
+              <input type="radio" name="i15" value="nocumple" onchange="onRC('i15','nocumple')"> ✗
+            </label>
+          </td>
+        </tr>
+        <tr>
+          <td class="item-text" style="padding-left:20px">Soporta tránsito de camillas, carros y equipos.</td>
+          <td class="item-radio">
+            <label class="rp rp-c" id="lbl_i16_c">
+              <input type="radio" name="i16" value="cumple" onchange="onRC('i16','cumple')"> ✓
+            </label>
+          </td>
+          <td class="item-radio">
+            <label class="rp rp-p" id="lbl_i16_p">
+              <input type="radio" name="i16" value="parcial" onchange="onRC('i16','parcial')"> ⚠
+            </label>
+          </td>
+          <td class="item-radio" style="padding-right:20px">
+            <label class="rp rp-n" id="lbl_i16_n">
+              <input type="radio" name="i16" value="nocumple" onchange="onRC('i16','nocumple')"> ✗
+            </label>
+          </td>
+        </tr>
+        <tr>
+          <td class="item-text" style="padding-left:20px">No presenta marcas profundas por ruedas o impactos.</td>
+          <td class="item-radio">
+            <label class="rp rp-c" id="lbl_i17_c">
+              <input type="radio" name="i17" value="cumple" onchange="onRC('i17','cumple')"> ✓
+            </label>
+          </td>
+          <td class="item-radio">
+            <label class="rp rp-p" id="lbl_i17_p">
+              <input type="radio" name="i17" value="parcial" onchange="onRC('i17','parcial')"> ⚠
+            </label>
+          </td>
+          <td class="item-radio" style="padding-right:20px">
+            <label class="rp rp-n" id="lbl_i17_n">
+              <input type="radio" name="i17" value="nocumple" onchange="onRC('i17','nocumple')"> ✗
+            </label>
+          </td>
+        </tr>
+        <tr>
+          <td class="item-text" style="padding-left:20px">No presenta desprendimientos por limpieza frecuente.</td>
+          <td class="item-radio">
+            <label class="rp rp-c" id="lbl_i18_c">
+              <input type="radio" name="i18" value="cumple" onchange="onRC('i18','cumple')"> ✓
+            </label>
+          </td>
+          <td class="item-radio">
+            <label class="rp rp-p" id="lbl_i18_p">
+              <input type="radio" name="i18" value="parcial" onchange="onRC('i18','parcial')"> ⚠
+            </label>
+          </td>
+          <td class="item-radio" style="padding-right:20px">
+            <label class="rp rp-n" id="lbl_i18_n">
+              <input type="radio" name="i18" value="nocumple" onchange="onRC('i18','nocumple')"> ✗
+            </label>
+          </td>
+        </tr>
+        <tr>
+          <td class="item-text" style="padding-left:20px">El acabado mantiene buen aspecto institucional.</td>
+          <td class="item-radio">
+            <label class="rp rp-c" id="lbl_i19_c">
+              <input type="radio" name="i19" value="cumple" onchange="onRC('i19','cumple')"> ✓
+            </label>
+          </td>
+          <td class="item-radio">
+            <label class="rp rp-p" id="lbl_i19_p">
+              <input type="radio" name="i19" value="parcial" onchange="onRC('i19','parcial')"> ⚠
+            </label>
+          </td>
+          <td class="item-radio" style="padding-right:20px">
+            <label class="rp rp-n" id="lbl_i19_n">
+              <input type="radio" name="i19" value="nocumple" onchange="onRC('i19','nocumple')"> ✗
+            </label>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <h2><span class="sec-num" style="background:#0D6E6E">5</span>&nbsp; Áreas Específicas Salud / Laboratorio</h2>
+    <div style="text-align:right;min-width:110px">
+      <div style="font-size:9.5px;color:rgba(255,255,255,.4);margin-bottom:3px" id="sec5_pc">0 / 5 respondidos</div>
+      <div class="sec-progress">
+        <div class="pg" id="sec5_pg" style="width:0%"></div>
+        <div class="py" id="sec5_py" style="width:0%"></div>
+        <div class="pr" id="sec5_pr" style="width:0%"></div>
+        <div class="pe"></div>
+      </div>
+    </div>
+  </div>
+  <div class="card-body" style="padding:0">
+    <table class="insp-table">
+      <thead><tr>
+        <th style="padding-left:20px">Punto de inspección</th>
+        <th>✓ Cumple</th><th>⚠ Parcial</th><th>✗ No cumple</th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td class="item-text" style="padding-left:20px">En quirófanos, el piso es continuo, antiestático y sin poros.</td>
+          <td class="item-radio">
+            <label class="rp rp-c" id="lbl_i20_c">
+              <input type="radio" name="i20" value="cumple" onchange="onRC('i20','cumple')"> ✓
+            </label>
+          </td>
+          <td class="item-radio">
+            <label class="rp rp-p" id="lbl_i20_p">
+              <input type="radio" name="i20" value="parcial" onchange="onRC('i20','parcial')"> ⚠
+            </label>
+          </td>
+          <td class="item-radio" style="padding-right:20px">
+            <label class="rp rp-n" id="lbl_i20_n">
+              <input type="radio" name="i20" value="nocumple" onchange="onRC('i20','nocumple')"> ✗
+            </label>
+          </td>
+        </tr>
+        <tr>
+          <td class="item-text" style="padding-left:20px">En esterilización, resiste alta temperatura y humedad.</td>
+          <td class="item-radio">
+            <label class="rp rp-c" id="lbl_i21_c">
+              <input type="radio" name="i21" value="cumple" onchange="onRC('i21','cumple')"> ✓
+            </label>
+          </td>
+          <td class="item-radio">
+            <label class="rp rp-p" id="lbl_i21_p">
+              <input type="radio" name="i21" value="parcial" onchange="onRC('i21','parcial')"> ⚠
+            </label>
+          </td>
+          <td class="item-radio" style="padding-right:20px">
+            <label class="rp rp-n" id="lbl_i21_n">
+              <input type="radio" name="i21" value="nocumple" onchange="onRC('i21','nocumple')"> ✗
+            </label>
+          </td>
+        </tr>
+        <tr>
+          <td class="item-text" style="padding-left:20px">En laboratorio, la superficie no absorbe ni reacciona con reactivos.</td>
+          <td class="item-radio">
+            <label class="rp rp-c" id="lbl_i22_c">
+              <input type="radio" name="i22" value="cumple" onchange="onRC('i22','cumple')"> ✓
+            </label>
+          </td>
+          <td class="item-radio">
+            <label class="rp rp-p" id="lbl_i22_p">
+              <input type="radio" name="i22" value="parcial" onchange="onRC('i22','parcial')"> ⚠
+            </label>
+          </td>
+          <td class="item-radio" style="padding-right:20px">
+            <label class="rp rp-n" id="lbl_i22_n">
+              <input type="radio" name="i22" value="nocumple" onchange="onRC('i22','nocumple')"> ✗
+            </label>
+          </td>
+        </tr>
+        <tr>
+          <td class="item-text" style="padding-left:20px">En pasillos y guardia, el antideslizamiento está conservado.</td>
+          <td class="item-radio">
+            <label class="rp rp-c" id="lbl_i23_c">
+              <input type="radio" name="i23" value="cumple" onchange="onRC('i23','cumple')"> ✓
+            </label>
+          </td>
+          <td class="item-radio">
+            <label class="rp rp-p" id="lbl_i23_p">
+              <input type="radio" name="i23" value="parcial" onchange="onRC('i23','parcial')"> ⚠
+            </label>
+          </td>
+          <td class="item-radio" style="padding-right:20px">
+            <label class="rp rp-n" id="lbl_i23_n">
+              <input type="radio" name="i23" value="nocumple" onchange="onRC('i23','nocumple')"> ✗
+            </label>
+          </td>
+        </tr>
+        <tr>
+          <td class="item-text" style="padding-left:20px">En lavadero, el sistema resiste humedad permanente y detergentes.</td>
+          <td class="item-radio">
+            <label class="rp rp-c" id="lbl_i24_c">
+              <input type="radio" name="i24" value="cumple" onchange="onRC('i24','cumple')"> ✓
+            </label>
+          </td>
+          <td class="item-radio">
+            <label class="rp rp-p" id="lbl_i24_p">
+              <input type="radio" name="i24" value="parcial" onchange="onRC('i24','parcial')"> ⚠
+            </label>
+          </td>
+          <td class="item-radio" style="padding-right:20px">
+            <label class="rp rp-n" id="lbl_i24_n">
+              <input type="radio" name="i24" value="nocumple" onchange="onRC('i24','nocumple')"> ✗
+            </label>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <h2><span class="sec-num" style="background:#0D6E6E">6</span>&nbsp; Mantenimiento</h2>
+    <div style="text-align:right;min-width:110px">
+      <div style="font-size:9.5px;color:rgba(255,255,255,.4);margin-bottom:3px" id="sec6_pc">0 / 5 respondidos</div>
+      <div class="sec-progress">
+        <div class="pg" id="sec6_pg" style="width:0%"></div>
+        <div class="py" id="sec6_py" style="width:0%"></div>
+        <div class="pr" id="sec6_pr" style="width:0%"></div>
+        <div class="pe"></div>
+      </div>
+    </div>
+  </div>
+  <div class="card-body" style="padding:0">
+    <table class="insp-table">
+      <thead><tr>
+        <th style="padding-left:20px">Punto de inspección</th>
+        <th>✓ Cumple</th><th>⚠ Parcial</th><th>✗ No cumple</th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td class="item-text" style="padding-left:20px">Existe un plan de inspección periódica de pisos y revestimientos.</td>
+          <td class="item-radio">
+            <label class="rp rp-c" id="lbl_i25_c">
+              <input type="radio" name="i25" value="cumple" onchange="onRC('i25','cumple')"> ✓
+            </label>
+          </td>
+          <td class="item-radio">
+            <label class="rp rp-p" id="lbl_i25_p">
+              <input type="radio" name="i25" value="parcial" onchange="onRC('i25','parcial')"> ⚠
+            </label>
+          </td>
+          <td class="item-radio" style="padding-right:20px">
+            <label class="rp rp-n" id="lbl_i25_n">
+              <input type="radio" name="i25" value="nocumple" onchange="onRC('i25','nocumple')"> ✗
+            </label>
+          </td>
+        </tr>
+        <tr>
+          <td class="item-text" style="padding-left:20px">Las reparaciones se encuentran documentadas.</td>
+          <td class="item-radio">
+            <label class="rp rp-c" id="lbl_i26_c">
+              <input type="radio" name="i26" value="cumple" onchange="onRC('i26','cumple')"> ✓
+            </label>
+          </td>
+          <td class="item-radio">
+            <label class="rp rp-p" id="lbl_i26_p">
+              <input type="radio" name="i26" value="parcial" onchange="onRC('i26','parcial')"> ⚠
+            </label>
+          </td>
+          <td class="item-radio" style="padding-right:20px">
+            <label class="rp rp-n" id="lbl_i26_n">
+              <input type="radio" name="i26" value="nocumple" onchange="onRC('i26','nocumple')"> ✗
+            </label>
+          </td>
+        </tr>
+        <tr>
+          <td class="item-text" style="padding-left:20px">Las juntas y encuentros se revisan preventivamente.</td>
+          <td class="item-radio">
+            <label class="rp rp-c" id="lbl_i27_c">
+              <input type="radio" name="i27" value="cumple" onchange="onRC('i27','cumple')"> ✓
+            </label>
+          </td>
+          <td class="item-radio">
+            <label class="rp rp-p" id="lbl_i27_p">
+              <input type="radio" name="i27" value="parcial" onchange="onRC('i27','parcial')"> ⚠
+            </label>
+          </td>
+          <td class="item-radio" style="padding-right:20px">
+            <label class="rp rp-n" id="lbl_i27_n">
+              <input type="radio" name="i27" value="nocumple" onchange="onRC('i27','nocumple')"> ✗
+            </label>
+          </td>
+        </tr>
+        <tr>
+          <td class="item-text" style="padding-left:20px">El sistema permite limpieza y mantenimiento adecuados.</td>
+          <td class="item-radio">
+            <label class="rp rp-c" id="lbl_i28_c">
+              <input type="radio" name="i28" value="cumple" onchange="onRC('i28','cumple')"> ✓
+            </label>
+          </td>
+          <td class="item-radio">
+            <label class="rp rp-p" id="lbl_i28_p">
+              <input type="radio" name="i28" value="parcial" onchange="onRC('i28','parcial')"> ⚠
+            </label>
+          </td>
+          <td class="item-radio" style="padding-right:20px">
+            <label class="rp rp-n" id="lbl_i28_n">
+              <input type="radio" name="i28" value="nocumple" onchange="onRC('i28','nocumple')"> ✗
+            </label>
+          </td>
+        </tr>
+        <tr>
+          <td class="item-text" style="padding-left:20px">Se planifican intervenciones antes de que las fallas sean críticas.</td>
+          <td class="item-radio">
+            <label class="rp rp-c" id="lbl_i29_c">
+              <input type="radio" name="i29" value="cumple" onchange="onRC('i29','cumple')"> ✓
+            </label>
+          </td>
+          <td class="item-radio">
+            <label class="rp rp-p" id="lbl_i29_p">
+              <input type="radio" name="i29" value="parcial" onchange="onRC('i29','parcial')"> ⚠
+            </label>
+          </td>
+          <td class="item-radio" style="padding-right:20px">
+            <label class="rp rp-n" id="lbl_i29_n">
+              <input type="radio" name="i29" value="nocumple" onchange="onRC('i29','nocumple')"> ✗
+            </label>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- RESULTADO -->
+<div class="card">
+  <div class="card-header"><h2>📊 Resultado de la Autoevaluación</h2></div>
+  <div class="card-body" style="padding:0">
+    <table class="score-table">
+      <thead><tr><th>Cantidad de respuestas Cumple</th><th>Interpretación</th></tr></thead>
+      <tbody>
+        <tr id="sr4"><td class="score-range">25 a 30</td><td>Excelente: condiciones generales adecuadas. Mantener inspección periódica.</td></tr>
+        <tr id="sr3"><td class="score-range">19 a 24</td><td>Bueno: planificar mejoras preventivas antes de que evolucionen.</td></tr>
+        <tr id="sr2"><td class="score-range">12 a 18</td><td>Atención: existen sectores que deberían evaluarse técnicamente.</td></tr>
+        <tr id="sr1"><td class="score-range">Menos de 12</td><td>Evaluación técnica recomendada: puede afectar seguridad o continuidad operativa.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ACCIONES CORRECTIVAS -->
+<div class="card">
+  <div class="card-header"><h2>🛠 Plan de Acciones Correctivas</h2></div>
+  <div class="card-body">
+    <table class="at">
+      <thead><tr>
+        <th style="width:30%">Hallazgo</th>
+        <th style="width:12%">Riesgo</th>
+        <th style="width:28%">Acción recomendada</th>
+        <th style="width:16%">Responsable</th>
+        <th style="width:11%">Fecha objetivo</th>
+        <th style="width:36px"></th>
+      </tr></thead>
+      <tbody id="ab">
+        <tr>
+          <td><input type="text" placeholder="Descripción del hallazgo" oninput="autoSave()"></td>
+          <td><select class="rs" onchange="updRS(this);autoSave()"><option value="">— Riesgo —</option><option value="riesgo-alto">🔴 Alto</option><option value="riesgo-medio">🟡 Medio</option><option value="riesgo-bajo">🟢 Bajo</option></select></td>
+          <td><input type="text" placeholder="Acción a tomar" oninput="autoSave()"></td>
+          <td><input type="text" placeholder="Responsable" oninput="autoSave()"></td>
+          <td><input type="date" oninput="autoSave()"></td>
+          <td class="td-del"><button class="btn-del" onclick="delRow(this)">✕</button></td>
+        </tr>
+      </tbody>
+    </table>
+    <button class="btn-add" onclick="addRow()">+ Agregar hallazgo</button>
+  </div>
+</div>
+
+<!-- OBSERVACIONES -->
+<div class="card">
+  <div class="card-header"><h2>📝 Observaciones Generales</h2></div>
+  <div class="card-body">
+    <div class="fg">
+      <label>Notas y observaciones adicionales</label>
+      <textarea id="fo" rows="3" placeholder="Ingrese observaciones generales sobre el estado del piso, condiciones especiales, recomendaciones..." style="resize:vertical" oninput="autoSave()"></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- DIAGNÓSTICO -->
+<div class="diag">
+  <div>
+    <div class="diag-cl">Diagnóstico Técnico POXDRIVE</div>
+    <h3>¿Detectaste oportunidades de mejora?</h3>
+    <p>En POXDRIVE desarrollamos soluciones para pisos y revestimientos industriales adaptadas a las condiciones reales de cada operación en la industria hospitales y laboratorios. Nuestros especialistas pueden diagnosticar el estado actual, identificar causas de deterioro y recomendar sistemas epoxi, poliuretánicos o morteros de alta resistencia.</p>
+  </div>
+  <div>
+    <div class="diag-cl">Contacto</div>
+    <div class="diag-c">
+      <span>📞 011 3527-7140</span>
+      <span>💬 +54 9 11 3820-0513</span>
+      <a href="mailto:consultas@poxdrive.com.ar">✉ consultas@poxdrive.com.ar</a>
+      <a href="https://www.poxdrive.com.ar" target="_blank">🌐 www.poxdrive.com.ar</a>
+    </div>
+  </div>
+</div>
+
+</main>
+<script>
+
+const SEC={'1':['i0','i1','i2','i3','i4'],'2':['i5','i6','i7','i8','i9'],'3':['i10','i11','i12','i13','i14'],'4':['i15','i16','i17','i18','i19'],'5':['i20','i21','i22','i23','i24'],'6':['i25','i26','i27','i28','i29']};
+const TOTAL=30;
+const STORE_KEY='poxck_30_-1298561465739374448'.replace('-','n');
+
+function onRC(iid,val){
+  ['c','p','n'].forEach(s=>{
+    const el=document.getElementById('lbl_'+iid+'_'+s);
+    if(el)el.className='rp rp-'+(s==='c'?'c':s==='p'?'p':'n');
+  });
+  const sfx=val==='cumple'?'c':val==='parcial'?'p':'n';
+  const cls='rp sel-'+(val==='cumple'?'c':val==='parcial'?'p':'n');
+  const el=document.getElementById('lbl_'+iid+'_'+sfx);
+  if(el)el.className=cls;
+  updScore();autoSave();
+}
+function updScore(){
+  let tc=0;
+  for(const[sec,ids]of Object.entries(SEC)){
+    let c=0,p=0,n=0,ans=0;
+    ids.forEach(id=>{
+      const r=document.querySelector('input[name="'+id+'"]:checked');
+      if(r){ans++;if(r.value==='cumple')c++;else if(r.value==='parcial')p++;else n++;}
+    });
+    const tot=ids.length;
+    const pg=document.getElementById('sec'+sec+'_pg');
+    const py=document.getElementById('sec'+sec+'_py');
+    const pr=document.getElementById('sec'+sec+'_pr');
+    const pc=document.getElementById('sec'+sec+'_pc');
+    if(pg)pg.style.width=(c/tot*100)+'%';
+    if(py)py.style.width=(p/tot*100)+'%';
+    if(pr)pr.style.width=(n/tot*100)+'%';
+    if(pc)pc.textContent=ans+' / '+tot+' respondidos';
+    tc+=c;
+  }
+  document.getElementById('sn').textContent=tc;
+  const b=document.getElementById('sb');
+  const si=document.getElementById('si');
+  b.className='score-badge';
+  ['1','2','3','4'].forEach(r=>{const e=document.getElementById('sr'+r);if(e)e.className=''});
+  if(tc>=25){b.classList.add('good');si.textContent='Excelente estado';const e=document.getElementById('sr4');if(e)e.className='score-row-active';}
+  else if(tc>=19){b.classList.add('good');si.textContent='Buen estado';const e=document.getElementById('sr3');if(e)e.className='score-row-active';}
+  else if(tc>=12){b.classList.add('ok');si.textContent='Requiere atención';const e=document.getElementById('sr2');if(e)e.className='score-row-active';}
+  else{
+    const ans=document.querySelectorAll('input[type=radio]:checked').length;
+    if(ans===0){si.textContent='Complete el formulario';}
+    else{b.classList.add('warn');si.textContent='Evaluación técnica urgente';const e=document.getElementById('sr1');if(e)e.className='score-row-active';}
+  }
+}
+function addRow(){
+  const tb=document.getElementById('ab');
+  const tr=document.createElement('tr');
+  tr.innerHTML=`<td><input type="text" placeholder="Descripción del hallazgo" oninput="autoSave()"></td><td><select class="rs" onchange="updRS(this);autoSave()"><option value="">— Riesgo —</option><option value="riesgo-alto">🔴 Alto</option><option value="riesgo-medio">🟡 Medio</option><option value="riesgo-bajo">🟢 Bajo</option></select></td><td><input type="text" placeholder="Acción a tomar" oninput="autoSave()"></td><td><input type="text" placeholder="Responsable" oninput="autoSave()"></td><td><input type="date" oninput="autoSave()"></td><td class="td-del"><button class="btn-del" onclick="delRow(this)">✕</button></td>`;
+  tb.appendChild(tr);autoSave();
+}
+function delRow(btn){const tb=document.getElementById('ab');if(tb.rows.length>1){btn.closest('tr').remove();autoSave();}}
+function updRS(sel){sel.className='rs '+(sel.value||'');}
+let st=null;
+function autoSave(){
+  clearTimeout(st);
+  document.getElementById('st').textContent='Guardando...';
+  st=setTimeout(()=>{
+    try{
+      const d={};
+      ['fe','fr','ff','fs','fo'].forEach(id=>{const e=document.getElementById(id);if(e)d[id]=e.value;});
+      document.querySelectorAll('[id^="ar_"]').forEach(e=>{d[e.id]=e.checked;});
+      for(let i=0;i<TOTAL;i++){const r=document.querySelector('input[name="i'+i+'"]:checked');d['i'+i]=r?r.value:'';}
+      const rows=[];
+      document.querySelectorAll('#ab tr').forEach(tr=>{
+        const ins=tr.querySelectorAll('input,select');
+        rows.push(Array.from(ins).map(e=>e.value));
+      });
+      d._r=rows;
+      localStorage.setItem(STORE_KEY,JSON.stringify(d));
+      document.getElementById('sd').className='save-dot saved';
+      document.getElementById('st').textContent='Guardado';
+    }catch(e){document.getElementById('st').textContent='Error';}
+  },600);
+}
+function loadData(){
+  try{
+    const raw=localStorage.getItem(STORE_KEY);
+    if(!raw)return;
+    const d=JSON.parse(raw);
+    ['fe','fr','ff','fs','fo'].forEach(id=>{const e=document.getElementById(id);if(e&&d[id]!==undefined)e.value=d[id];});
+    document.querySelectorAll('[id^="ar_"]').forEach(e=>{if(d[e.id]!==undefined)e.checked=d[e.id];});
+    for(let i=0;i<TOTAL;i++){const v=d['i'+i];if(v){const r=document.querySelector('input[name="i'+i+'"][value="'+v+'"]');if(r){r.checked=true;onRC('i'+i,v);}};}
+    if(d._r&&d._r.length){
+      const tb=document.getElementById('ab');
+      while(tb.rows.length>0)tb.deleteRow(0);
+      d._r.forEach((row,ri)=>{
+        addRow();
+        const ins=tb.rows[ri].querySelectorAll('input,select');
+        row.forEach((v,j)=>{if(ins[j]){ins[j].value=v;if(ins[j].tagName==='SELECT')updRS(ins[j]);}});
+      });
+    }
+    document.getElementById('sd').className='save-dot saved';
+    document.getElementById('st').textContent='Recuperado';
+    updScore();
+  }catch(e){console.warn(e);}
+}
+const ffd=document.getElementById('ff');
+if(ffd&&!ffd.value)ffd.value=new Date().toISOString().split('T')[0];
+loadData();updScore();
+
+</script>
+</body>
+</html>
