@@ -1,0 +1,298 @@
+---
+---
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pisos para Centros Logísticos — POXDRIVE</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Calibri, Arial, sans-serif; background: #1A1A1A; color: #F0EDEA; }
+    header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(26,26,26,0.97); border-bottom: 1px solid #2a2a2a; }
+    .nav-inner { max-width: 1100px; margin: 0 auto; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+    .nav-logo { font-size: 1.4rem; font-weight: 900; letter-spacing: 2px; text-decoration: none; color: #F0EDEA; }
+    .nav-logo span { color: #E8500A; }
+    nav { display: flex; gap: 2rem; align-items: center; }
+    nav a { color: #F0EDEA; text-decoration: none; font-size: 0.9rem; opacity: 0.75; transition: opacity 0.2s; }
+    nav a:hover, nav a.active { opacity: 1; color: #E8500A; }
+    .nav-cta { background: #E8500A; color: #fff !important; padding: 0.5rem 1.2rem; font-weight: 700; border-radius: 2px; opacity: 1 !important; }
+
+    .hero { padding: 9rem 2rem 5rem; max-width: 1100px; margin: 0 auto; }
+    .breadcrumb { font-size: 0.8rem; opacity: 0.5; margin-bottom: 1.5rem; }
+    .breadcrumb span { color: #E8500A; }
+    .hero-eyebrow { font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; color: #E8500A; margin-bottom: 1rem; }
+    .hero h1 { font-size: 2.8rem; line-height: 1.2; font-style: italic; font-family: Georgia, serif; max-width: 700px; margin-bottom: 1.5rem; }
+    .hero-sub { font-size: 1.05rem; opacity: 0.7; max-width: 600px; line-height: 1.7; margin-bottom: 2.5rem; }
+    .hero-badges { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .badge { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.15); padding: 0.5rem 1.1rem; font-size: 0.8rem; border-radius: 2px; }
+
+    section { padding: 5rem 2rem; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-label { font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; color: #E8500A; margin-bottom: 0.8rem; }
+    .section-title { font-size: 2rem; font-style: italic; font-family: Georgia, serif; margin-bottom: 0.8rem; }
+    .section-sub { opacity: 0.6; font-size: 0.95rem; max-width: 580px; line-height: 1.6; margin-bottom: 2.5rem; }
+
+    .req-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; }
+    .req-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 1.8rem; }
+    .req-card .icon { font-size: 1.8rem; margin-bottom: 1rem; }
+    .req-card h4 { font-size: 1rem; font-weight: 700; margin-bottom: 0.6rem; }
+    .req-card p { font-size: 0.88rem; opacity: 0.65; line-height: 1.6; }
+
+    .sol-wrap { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; }
+    .sol-header { background: #E8500A; padding: 2rem 2.5rem; }
+    .sol-header h3 { font-size: 1.6rem; font-style: italic; font-family: Georgia, serif; margin-bottom: 0.4rem; }
+    .sol-header p { opacity: 0.9; font-size: 0.9rem; }
+    .sol-body { padding: 2.5rem; }
+    .ficha { width: 100%; border-collapse: collapse; }
+    .ficha tr { border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .ficha td { padding: 0.8rem 0; font-size: 0.9rem; }
+    .ficha td:first-child { opacity: 0.55; width: 45%; }
+    .ficha td:last-child { font-weight: 600; }
+
+    .sistemas-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.2rem; margin-top: 1rem; }
+    .sistema-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 1.5rem; }
+    .sistema-card .num { font-size: 1.6rem; font-style: italic; font-family: Georgia, serif; color: #E8500A; margin-bottom: 0.5rem; }
+    .sistema-card h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.4rem; }
+    .sistema-card .zona { font-size: 0.8rem; opacity: 0.55; margin-bottom: 0.6rem; }
+    .sistema-card p { font-size: 0.85rem; opacity: 0.7; line-height: 1.5; }
+
+    .caso-wrap { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; }
+    .caso-header { padding: 2.5rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .caso-header .tag { font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: #E8500A; margin-bottom: 0.8rem; }
+    .caso-header h3 { font-size: 1.5rem; font-style: italic; font-family: Georgia, serif; }
+    .caso-stats { display: grid; grid-template-columns: repeat(4, 1fr); padding: 2rem 2.5rem; gap: 1rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .caso-stat b { display: block; font-size: 1.8rem; font-style: italic; font-family: Georgia, serif; color: #E8500A; }
+    .caso-stat span { font-size: 0.8rem; opacity: 0.55; }
+    .caso-body { padding: 2.5rem; }
+    .caso-body p { opacity: 0.7; line-height: 1.7; margin-bottom: 1.5rem; font-size: 0.95rem; }
+    .sistema-steps { display: flex; flex-direction: column; gap: 0.6rem; }
+    .step { display: flex; gap: 1rem; align-items: flex-start; }
+    .step .n { background: #E8500A; color: #fff; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+    .step p { font-size: 0.88rem; opacity: 0.75; line-height: 1.5; margin: 0; }
+
+    .cta-section { background: #E8500A; }
+    .cta-section .container { text-align: center; }
+    .cta-section h2 { font-size: 2rem; font-style: italic; font-family: Georgia, serif; margin-bottom: 0.8rem; }
+    .cta-section p { opacity: 0.9; margin-bottom: 2rem; }
+    .cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-white { background: #fff; color: #E8500A; padding: 0.8rem 1.8rem; font-weight: 700; border-radius: 2px; text-decoration: none; font-size: 0.9rem; }
+    .btn-outline { border: 2px solid rgba(255,255,255,0.6); color: #fff; padding: 0.8rem 1.8rem; border-radius: 2px; text-decoration: none; font-size: 0.9rem; }
+
+    footer { background: #111; border-top: 1px solid #222; padding: 3rem 2rem; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 2rem; font-size: 0.85rem; opacity: 0.6; }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2rem; }
+      .caso-stats { grid-template-columns: repeat(2, 1fr); }
+      nav { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">POX<span>DRIVE</span></a>
+    <nav>
+      <a href="/alimenticia">Alimentaria</a>
+      <a href="/farmaceutica">Farmacéutica</a>
+      <a href="/mineria">Minería</a>
+      <a href="/logistica" class="active">Logística</a>
+      <a href="/#contacto" class="nav-cta">Solicitar presupuesto</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <p class="breadcrumb">POXDRIVE / <span>CENTROS LOGÍSTICOS</span></p>
+  <p class="hero-eyebrow">Pisos para centros logísticos</p>
+  <h1>El piso que resiste autoelevadores las 24 horas</h1>
+  <p class="hero-sub">Los centros logísticos y depósitos operan con tránsito constante de autoelevadores, racks de alta carga, zonas de picking y docks de carga y descarga. Cada zona tiene exigencias distintas. POXDRIVE especifica el sistema correcto para cada una.</p>
+  <div class="hero-badges">
+    <span class="badge">✓ Tránsito de autoelevadores</span>
+    <span class="badge">✓ Superficie monolítica</span>
+    <span class="badge">✓ Antideslizante en rampas</span>
+    <span class="badge">✓ Docks y playas de carga</span>
+  </div>
+</div>
+
+<section style="background: rgba(255,255,255,0.02); border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06);">
+  <div class="container">
+    <p class="section-label">El problema en logística</p>
+    <h2 class="section-title">Por qué los depósitos destrozan los pisos convencionales</h2>
+    <p class="section-sub">Un autoelevador de 3 toneladas con ruedas de poliuretano o metal concentra una carga brutal en pocos centímetros cuadrados. Más ciclos de paso, más daño acumulado.</p>
+    <div class="req-grid">
+      <div class="req-card">
+        <div class="icon">🏭</div>
+        <h4>Tránsito intenso de autoelevadores</h4>
+        <p>Los autoelevadores recorren los mismos pasillos cientos de veces por día. Las ruedas duras concentran la carga y generan desgaste localizado, fisuras y espalling en el hormigón.</p>
+      </div>
+      <div class="req-card">
+        <div class="icon">📦</div>
+        <h4>Cargas de racks de alta densidad</h4>
+        <p>Los racks de 6-8 metros con cargas de toneladas transmiten presiones enormes a las bases. El piso debe ser monolítico y continuo para distribuir esa carga sin fracturarse.</p>
+      </div>
+      <div class="req-card">
+        <div class="icon">🚛</div>
+        <h4>Docks de carga y descarga</h4>
+        <p>Los docks combinan impacto de camiones, tránsito de autoelevadores cargados y exposición a la intemperie. Es la zona de mayor deterioro en cualquier depósito.</p>
+      </div>
+      <div class="req-card">
+        <div class="icon">⚡</div>
+        <h4>Continuidad operativa</h4>
+        <p>El depósito no puede parar. El sistema de piso debe planificarse por sectores y tener tiempos de habilitación cortos para no interrumpir la operación logística.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <p class="section-label">Sistema principal</p>
+    <h2 class="section-title">MASTERPOX AC-33 — Autonivelante epoxi para depósitos</h2>
+    <p class="section-sub">El sistema de referencia para depósitos y centros logísticos con tránsito de autoelevadores y racks de alta carga.</p>
+    <div class="sol-wrap">
+      <div class="sol-header">
+        <h3>MASTERPOX AC-33</h3>
+        <p>Autonivelante epoxi industrial desde 3 mm · Superficie continua monolítica · Alta resistencia mecánica</p>
+      </div>
+      <div class="sol-body">
+        <table class="ficha">
+          <tr><td>Tipo de producto</td><td>Autonivelante epoxi 2 componentes</td></tr>
+          <tr><td>Espesor mínimo</td><td>3 mm (sistemas de hasta 6 mm disponibles)</td></tr>
+          <tr><td>Resistencia a compresión</td><td>&gt; 70 MPa</td></tr>
+          <tr><td>Resistencia a la abrasión</td><td>Muy alta — apto tránsito de autoelevadores</td></tr>
+          <tr><td>Acabado</td><td>Liso, continuo, sin juntas en toda el área</td></tr>
+          <tr><td>Resistencia química</td><td>Aceites, combustibles, agua, detergentes industriales</td></tr>
+          <tr><td>Áreas de aplicación</td><td>Depósitos, picking, pasillos de racks, plataformas</td></tr>
+          <tr><td>Habilitación al tránsito</td><td>24–48 horas</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background: rgba(255,255,255,0.02); border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06);">
+  <div class="container">
+    <p class="section-label">Sistemas por zona</p>
+    <h2 class="section-title">Un sistema para cada área del depósito</h2>
+    <p class="section-sub">Las distintas zonas de un centro logístico tienen condiciones de exigencia diferentes. POXDRIVE especifica el sistema correcto para cada una.</p>
+    <div class="sistemas-grid">
+      <div class="sistema-card">
+        <div class="num">01</div>
+        <h4>MASTERPOX AC-33</h4>
+        <div class="zona">Depósitos · Picking · Bajo racks</div>
+        <p>Autonivelante epoxi monolítico desde 3 mm. Superficie continua y sin juntas. El sistema de referencia para zonas de almacenaje con tránsito de autoelevadores.</p>
+      </div>
+      <div class="sistema-card">
+        <div class="num">02</div>
+        <h4>MASTERPOX AN-1 AD</h4>
+        <div class="zona">Pasillos de tránsito · Zonas de picking intenso</div>
+        <p>Multicapa epoxi antideslizante. Alta resistencia al desgaste en zonas de tránsito concentrado. Permite demarcación de pasillos y zonas de seguridad integrada.</p>
+      </div>
+      <div class="sistema-card">
+        <div class="num">03</div>
+        <h4>MASTERPOX MORTERO E</h4>
+        <div class="zona">Docks de carga · Playas de maniobra</div>
+        <p>Mortero epoxi heavy duty para las zonas de mayor impacto. Soporta el impacto de camiones en el dock, carga dinámica de autoelevadores cargados y tránsito pesado intenso.</p>
+      </div>
+      <div class="sistema-card">
+        <div class="num">04</div>
+        <h4>MASTERPOX AN-1 AD</h4>
+        <div class="zona">Rampas de acceso · Zonas húmedas</div>
+        <p>Antideslizante para rampas exteriores e interiores. Coeficiente de fricción optimizado para autoelevadores y operarios. Esencial en zonas expuestas a lluvia o limpieza.</p>
+      </div>
+      <div class="sistema-card">
+        <div class="num">05</div>
+        <h4>TEXAFIC T-1</h4>
+        <div class="zona">Exteriores · Playas de camiones · UV</div>
+        <p>Terminación poliuretánica alifática para zonas exteriores o semi-exteriores. Resistencia UV para que no se degrade ni amarille. Apta para plataformas de camiones.</p>
+      </div>
+      <div class="sistema-card">
+        <div class="num">06</div>
+        <h4>POXDRIVE SAS-1</h4>
+        <div class="zona">Pisos existentes · Sellado económico</div>
+        <p>Sellador acrílico para consolidar pisos de hormigón existentes en buen estado. Reduce el polvo, mejora la limpieza y extiende la vida del sustrato sin obra mayor.</p>
+      </div>
+      <div class="sistema-card">
+        <div class="num">07</div>
+        <h4>MASTERPOX I-PISOS</h4>
+        <div class="zona">Imprimación · Anclaje del sistema</div>
+        <p>Imprimación epoxi de penetración profunda. Ancla el sistema al sustrato y cierra la porosidad del hormigón. Es la base de cualquier sistema POXDRIVE de alta performance.</p>
+      </div>
+      <div class="sistema-card">
+        <div class="num">08</div>
+        <h4>MASTERPOX AN-1 (paredes)</h4>
+        <div class="zona">Paredes · Zócalos · Encuentros sanitarios</div>
+        <p>Revestimiento epoxi para paredes en zonas de picking y almacenaje refrigerado. Protege el muro de impactos de autoelevadores y facilita la limpieza en zonas con alimentos.</p>
+      </div>
+      <div class="sistema-card">
+        <div class="num">09</div>
+        <h4>MASTERPOX AD-5</h4>
+        <div class="zona">Juntas de dilatación · Naves grandes</div>
+        <p>Sellado de juntas de dilatación con material flexible de alta durabilidad. Las naves grandes tienen juntas cada 5-6 m que deben sellarse para evitar infiltraciones y roturas por movimiento.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <p class="section-label">Caso de obra</p>
+    <h2 class="section-title">Depósito Industrial · La Tablada</h2>
+    <p class="section-sub">Renovación completa de pisos en depósito de electrodomésticos con tránsito intenso de autoelevadores y demarcación de circuitos.</p>
+    <div class="caso-wrap">
+      <div class="caso-header">
+        <div class="tag">LOGÍSTICA · LA TABLADA, BUENOS AIRES</div>
+        <h3>1.500 m² de depósito renovados con sistema multicapa y demarcación</h3>
+      </div>
+      <div class="caso-stats">
+        <div class="caso-stat"><b>1.500 m²</b><span>área intervenida</span></div>
+        <div class="caso-stat"><b>15 días</b><span>tiempo de obra</span></div>
+        <div class="caso-stat"><b>3 colores</b><span>demarcación integrada</span></div>
+        <div class="caso-stat"><b>2022</b><span>año de ejecución</span></div>
+      </div>
+      <div class="caso-body">
+        <p>Principal fábrica argentina de electrodomésticos (confidencial). Av. Crovara, La Tablada. 1.500 m² de depósito de producto terminado con tránsito constante de autoelevadores. El piso de hormigón original presentaba grave deterioro con baches, fisuras y zonas de espalling por años de uso intensivo.</p>
+        <p>La obra se ejecutó en 15 días, con cierre por sectores para mantener la operación del depósito durante la intervención. El sistema incluyó masillado de baches y fisuras, tres manos de sistema epoxi y demarcación de circuitos de tránsito en gris y azul con señalética de seguridad.</p>
+        <p style="opacity:0.75; font-size:0.85rem; font-weight: 600; margin-bottom: 0.5rem;">Sistema aplicado:</p>
+        <div class="sistema-steps">
+          <div class="step"><div class="n">1</div><p>Preparación mecánica de sustrato — granallado y esmerilado de toda el área</p></div>
+          <div class="step"><div class="n">2</div><p>Reparación y masillado de baches y fisuras con MASTERPOX M-2</p></div>
+          <div class="step"><div class="n">3</div><p>Imprimación epoxi MASTERPOX I-PISOS sobre sustrato preparado</p></div>
+          <div class="step"><div class="n">4</div><p>3 manos de MASTERPOX AN-1 — gris base en sector depósito</p></div>
+          <div class="step"><div class="n">5</div><p>MASTERPOX AN-1 color azul en sectores diferenciados de picking</p></div>
+          <div class="step"><div class="n">6</div><p>Demarcación de pasillos, zonas de carga y señalética de seguridad</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="container">
+    <h2>¿Tiene un depósito o centro logístico que necesita pisos técnicos?</h2>
+    <p>Le especificamos el sistema correcto para cada zona: depósito, pasillos, docks y rampas. Con demarcación incluida.</p>
+    <div class="cta-btns">
+      <a href="https://wa.me/5491138200513" class="btn-white">Hablar por WhatsApp</a>
+      <a href="/#contacto" class="btn-outline">Solicitar visita técnica</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div><strong>POXDRIVE</strong><br>FARBENTEC S.R.L.</div>
+    <div>Rincón 4672 (1766)<br>La Tablada, Buenos Aires</div>
+    <div>WhatsApp +54 9 11 3820-0513<br>Lunes a viernes 8 a 15 h</div>
+    <div>
+      <a href="/alimenticia" style="color:#F0EDEA; text-decoration:none;">Alimentaria</a> ·
+      <a href="/farmaceutica" style="color:#F0EDEA; text-decoration:none;">Farmacéutica</a> ·
+      <a href="/mineria" style="color:#F0EDEA; text-decoration:none;">Minería</a> ·
+      <a href="/logistica" style="color:#E8500A; text-decoration:none;">Logística</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

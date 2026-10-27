@@ -1,0 +1,297 @@
+---
+---
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pisos para Industria Minera — POXDRIVE</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Calibri, Arial, sans-serif; background: #1A1A1A; color: #F0EDEA; }
+    header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(26,26,26,0.97); border-bottom: 1px solid #2a2a2a; }
+    .nav-inner { max-width: 1100px; margin: 0 auto; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+    .nav-logo { font-size: 1.4rem; font-weight: 900; letter-spacing: 2px; text-decoration: none; color: #F0EDEA; }
+    .nav-logo span { color: #E8500A; }
+    nav { display: flex; gap: 2rem; align-items: center; }
+    nav a { color: #F0EDEA; text-decoration: none; font-size: 0.9rem; opacity: 0.75; transition: opacity 0.2s; }
+    nav a:hover, nav a.active { opacity: 1; color: #E8500A; }
+    .nav-cta { background: #E8500A; color: #fff !important; padding: 0.5rem 1.2rem; font-weight: 700; border-radius: 2px; opacity: 1 !important; }
+
+    .hero { padding: 9rem 2rem 5rem; max-width: 1100px; margin: 0 auto; }
+    .breadcrumb { font-size: 0.8rem; opacity: 0.5; margin-bottom: 1.5rem; }
+    .breadcrumb span { color: #E8500A; }
+    .hero-eyebrow { font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; color: #E8500A; margin-bottom: 1rem; }
+    .hero h1 { font-size: 2.8rem; line-height: 1.2; font-style: italic; font-family: Georgia, serif; max-width: 700px; margin-bottom: 1.5rem; }
+    .hero-sub { font-size: 1.05rem; opacity: 0.7; max-width: 600px; line-height: 1.7; margin-bottom: 2.5rem; }
+    .hero-badges { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .badge { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.15); padding: 0.5rem 1.1rem; font-size: 0.8rem; border-radius: 2px; }
+
+    section { padding: 5rem 2rem; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-label { font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; color: #E8500A; margin-bottom: 0.8rem; }
+    .section-title { font-size: 2rem; font-style: italic; font-family: Georgia, serif; margin-bottom: 0.8rem; }
+    .section-sub { opacity: 0.6; font-size: 0.95rem; max-width: 580px; line-height: 1.6; margin-bottom: 2.5rem; }
+
+    .req-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; }
+    .req-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 1.8rem; }
+    .req-card .icon { font-size: 1.8rem; margin-bottom: 1rem; }
+    .req-card h4 { font-size: 1rem; font-weight: 700; margin-bottom: 0.6rem; }
+    .req-card p { font-size: 0.88rem; opacity: 0.65; line-height: 1.6; }
+
+    .sol-wrap { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; }
+    .sol-header { background: #E8500A; padding: 2rem 2.5rem; }
+    .sol-header h3 { font-size: 1.6rem; font-style: italic; font-family: Georgia, serif; margin-bottom: 0.4rem; }
+    .sol-header p { opacity: 0.9; font-size: 0.9rem; }
+    .sol-body { padding: 2.5rem; }
+    .ficha { width: 100%; border-collapse: collapse; }
+    .ficha tr { border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .ficha td { padding: 0.8rem 0; font-size: 0.9rem; }
+    .ficha td:first-child { opacity: 0.55; width: 45%; }
+    .ficha td:last-child { font-weight: 600; }
+
+    .sistemas-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.2rem; margin-top: 1rem; }
+    .sistema-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 1.5rem; }
+    .sistema-card .num { font-size: 1.6rem; font-style: italic; font-family: Georgia, serif; color: #E8500A; margin-bottom: 0.5rem; }
+    .sistema-card h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.4rem; }
+    .sistema-card .zona { font-size: 0.8rem; opacity: 0.55; margin-bottom: 0.6rem; }
+    .sistema-card p { font-size: 0.85rem; opacity: 0.7; line-height: 1.5; }
+
+    .caso-wrap { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; }
+    .caso-header { padding: 2.5rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .caso-header .tag { font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: #E8500A; margin-bottom: 0.8rem; }
+    .caso-header h3 { font-size: 1.5rem; font-style: italic; font-family: Georgia, serif; }
+    .caso-stats { display: grid; grid-template-columns: repeat(4, 1fr); padding: 2rem 2.5rem; gap: 1rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .caso-stat b { display: block; font-size: 1.8rem; font-style: italic; font-family: Georgia, serif; color: #E8500A; }
+    .caso-stat span { font-size: 0.8rem; opacity: 0.55; }
+    .caso-body { padding: 2.5rem; }
+    .caso-body p { opacity: 0.7; line-height: 1.7; margin-bottom: 1.5rem; font-size: 0.95rem; }
+    .sistema-steps { display: flex; flex-direction: column; gap: 0.6rem; }
+    .step { display: flex; gap: 1rem; align-items: flex-start; }
+    .step .n { background: #E8500A; color: #fff; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+    .step p { font-size: 0.88rem; opacity: 0.75; line-height: 1.5; margin: 0; }
+
+    .cta-section { background: #E8500A; }
+    .cta-section .container { text-align: center; }
+    .cta-section h2 { font-size: 2rem; font-style: italic; font-family: Georgia, serif; margin-bottom: 0.8rem; }
+    .cta-section p { opacity: 0.9; margin-bottom: 2rem; }
+    .cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-white { background: #fff; color: #E8500A; padding: 0.8rem 1.8rem; font-weight: 700; border-radius: 2px; text-decoration: none; font-size: 0.9rem; }
+    .btn-outline { border: 2px solid rgba(255,255,255,0.6); color: #fff; padding: 0.8rem 1.8rem; border-radius: 2px; text-decoration: none; font-size: 0.9rem; }
+
+    footer { background: #111; border-top: 1px solid #222; padding: 3rem 2rem; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 2rem; font-size: 0.85rem; opacity: 0.6; }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2rem; }
+      .caso-stats { grid-template-columns: repeat(2, 1fr); }
+      nav { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">POX<span>DRIVE</span></a>
+    <nav>
+      <a href="/alimenticia">Alimentaria</a>
+      <a href="/farmaceutica">Farmacéutica</a>
+      <a href="/mineria" class="active">Minería</a>
+      <a href="/logistica">Logística</a>
+      <a href="/#contacto" class="nav-cta">Solicitar presupuesto</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <p class="breadcrumb">POXDRIVE / <span>INDUSTRIA MINERA</span></p>
+  <p class="hero-eyebrow">Pisos para industria minera</p>
+  <h1>Resistencia extrema para entornos de alta exigencia</h1>
+  <p class="hero-sub">Sistemas de pisos que soportan tránsito pesado de maquinaria, ácidos y reactivos de proceso, aceites, diesel y condiciones climáticas extremas. Para talleres, depósitos, plantas de proceso y cubetos de contención en minería.</p>
+  <div class="hero-badges">
+    <span class="badge">✓ Tránsito pesado</span>
+    <span class="badge">✓ Resistencia química severa</span>
+    <span class="badge">✓ Antiácido Novolac</span>
+    <span class="badge">✓ Apto exterior</span>
+  </div>
+</div>
+
+<section style="background: rgba(255,255,255,0.02); border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06);">
+  <div class="container">
+    <p class="section-label">El problema en minería</p>
+    <h2 class="section-title">Por qué los pisos convencionales no sobreviven en minería</h2>
+    <p class="section-sub">Las plantas mineras combinan las peores condiciones para cualquier piso: cargas extremas, ácidos concentrados, temperatura y exposición exterior. Un sistema estándar dura meses.</p>
+    <div class="req-grid">
+      <div class="req-card">
+        <div class="icon">⚙️</div>
+        <h4>Cargas extremas</h4>
+        <p>Maquinaria pesada, equipos de perforación, autoelevadores industriales y camiones generan impactos y cargas puntuales que destruyen pisos convencionales en semanas.</p>
+      </div>
+      <div class="req-card">
+        <div class="icon">⚗️</div>
+        <h4>Ácidos y reactivos</h4>
+        <p>El proceso minero utiliza ácido sulfúrico, clorhídrico, cianuros y otros reactivos agresivos. Los cubetos de contención y zonas de proceso deben resistir derrames sin fallar.</p>
+      </div>
+      <div class="req-card">
+        <div class="icon">🌡️</div>
+        <h4>Rangos térmicos extremos</h4>
+        <p>Desde plantas en altura con heladas nocturnas hasta procesos industriales con agua caliente. El piso debe mantenerse estable en todo el rango sin delaminarse ni fisurar.</p>
+      </div>
+      <div class="req-card">
+        <div class="icon">🌧️</div>
+        <h4>Exposición exterior</h4>
+        <p>Muchas áreas mineras son semi-abiertas o exteriores. El sistema debe resistir radiación UV, lluvia y cambios climáticos sin perder adherencia ni degradarse.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <p class="section-label">Sistema de referencia</p>
+    <h2 class="section-title">MASTERPOX MORTERO ANTIÁCIDO Novolac</h2>
+    <p class="section-sub">El sistema de máxima resistencia química para cubetos de contención, zonas de proceso ácido y áreas con exposición a reactivos concentrados.</p>
+    <div class="sol-wrap">
+      <div class="sol-header">
+        <h3>MASTERPOX MORTERO ANTIÁCIDO Novolac</h3>
+        <p>Mortero epoxi 3 componentes · Alta resistencia a ácidos fuertes · Cubetos y zonas de proceso</p>
+      </div>
+      <div class="sol-body">
+        <table class="ficha">
+          <tr><td>Tipo de producto</td><td>Mortero epoxi Novolac 3 componentes</td></tr>
+          <tr><td>Espesor de aplicación</td><td>5–10 mm</td></tr>
+          <tr><td>Resistencia química</td><td>Ácido sulfúrico, clorhídrico, nítrico (concentrados)</td></tr>
+          <tr><td>Resistencia mecánica</td><td>Muy alta — soporta cargas pesadas y tránsito industrial</td></tr>
+          <tr><td>Temperatura de servicio</td><td>Hasta +120°C continuo</td></tr>
+          <tr><td>Aplicación</td><td>Cubetos de contención, pisos de proceso ácido, zanjas</td></tr>
+          <tr><td>Acabado</td><td>Antideslizante incorporado, sin poros</td></tr>
+          <tr><td>Tiempo de curado</td><td>48–72 horas para habilitación al tránsito</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background: rgba(255,255,255,0.02); border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06);">
+  <div class="container">
+    <p class="section-label">Sistemas por área</p>
+    <h2 class="section-title">Cada zona de la planta tiene su sistema</h2>
+    <p class="section-sub">Una operación minera tiene múltiples ambientes con exigencias distintas. POXDRIVE especifica el sistema correcto para cada una.</p>
+    <div class="sistemas-grid">
+      <div class="sistema-card">
+        <div class="num">01</div>
+        <h4>MASTERPOX AN-1 AD</h4>
+        <div class="zona">Talleres · Depósitos · Tránsito pesado</div>
+        <p>Multicapa epoxi antideslizante de alta resistencia mecánica. Soporta tránsito de maquinaria pesada, impactos y cargas puntuales. Fácil limpieza de aceites y lubricantes.</p>
+      </div>
+      <div class="sistema-card">
+        <div class="num">02</div>
+        <h4>MASTERPOX MORTERO E</h4>
+        <div class="zona">Reparación estructural · Anclaje de equipos</div>
+        <p>Mortero epoxi 3 componentes para reparación técnica de baches, fisuras y bases de máquinas. Alta resistencia mecánica a vibración y cargas concentradas de equipos fijos.</p>
+      </div>
+      <div class="sistema-card">
+        <div class="num">03</div>
+        <h4>MASTERPOX AN-1</h4>
+        <div class="zona">Zonas con diésel, aceites y solventes</div>
+        <p>Alta resistencia química a hidrocarburos, aceites industriales, diésel y solventes alifáticos. Para pisos de mantenimiento de equipos y zonas de almacenaje de combustibles.</p>
+      </div>
+      <div class="sistema-card">
+        <div class="num">04</div>
+        <h4>MORTERO ANTIÁCIDO Novolac</h4>
+        <div class="zona">Cubetos · Proceso ácido · Zanjas de contención</div>
+        <p>Resistencia a ácidos fuertes concentrados. El sistema de referencia para zonas de proceso con sulfúrico, clorhídrico o cianuros. Impermeabilidad total al sustrato.</p>
+      </div>
+      <div class="sistema-card">
+        <div class="num">05</div>
+        <h4>TEXAFIC CEM-AU</h4>
+        <div class="zona">Plantas de proceso húmedo · GMP minero</div>
+        <p>Poliuretano cementicio 5mm. Soporta lavado constante, agua caliente y vapor. Para plantas de proceso con presencia de agua y cambios térmicos bruscos.</p>
+      </div>
+      <div class="sistema-card">
+        <div class="num">06</div>
+        <h4>TEXAFIC T-1</h4>
+        <div class="zona">Exteriores · Zonas UV · Parqueaderos de equipos</div>
+        <p>Terminación poliuretánica alifática con alta resistencia UV para exteriores. No se amarilla ni degrada con exposición solar prolongada. Resistente a lluvia y cambios climáticos.</p>
+      </div>
+      <div class="sistema-card">
+        <div class="num">07</div>
+        <h4>MASTERPOX AN-1 (paredes)</h4>
+        <div class="zona">Paredes sanitarias · Zócalos · Medias cañas</div>
+        <p>Revestimiento epoxi para paredes en zonas de proceso. Impermeabilización de encuentros piso-pared con media caña sanitaria. Resistencia química a salpicaduras de proceso.</p>
+      </div>
+      <div class="sistema-card">
+        <div class="num">08</div>
+        <h4>AN-1 AD / TEXAFIC T-1 AD</h4>
+        <div class="zona">Rampas · Accesos · Zonas húmedas antideslizantes</div>
+        <p>Versión antideslizante para rampas de acceso, zonas de lavado de equipos y áreas con presencia constante de agua. Coeficiente de fricción optimizado para seguridad.</p>
+      </div>
+      <div class="sistema-card">
+        <div class="num">09</div>
+        <h4>MASTERPOX AD-5</h4>
+        <div class="zona">Juntas de dilatación · Sellos perimetrales</div>
+        <p>Sellado de juntas de dilatación con material flexible de alta durabilidad. Evita la filtración de líquidos a través de juntas en pisos de grandes superficies y naves industriales.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <p class="section-label">Caso de obra</p>
+    <h2 class="section-title">Planta Industrial · Villa Flandria</h2>
+    <p class="section-sub">Renovación de pisos en planta de manufactura industrial con tránsito de maquinaria pesada y exposición a químicos.</p>
+    <div class="caso-wrap">
+      <div class="caso-header">
+        <div class="tag">INDUSTRIA · VILLA FLANDRIA, BUENOS AIRES</div>
+        <h3>De hormigón degradado a piso de alta performance en 5 días</h3>
+      </div>
+      <div class="caso-stats">
+        <div class="caso-stat"><b>600 m²</b><span>área intervenida</span></div>
+        <div class="caso-stat"><b>5 días</b><span>tiempo de obra</span></div>
+        <div class="caso-stat"><b>3 manos</b><span>sistema aplicado</span></div>
+        <div class="caso-stat"><b>2023</b><span>año de ejecución</span></div>
+      </div>
+      <div class="caso-body">
+        <p>Parque Industrial Villa Flandria. Planta de manufactura textil automotriz con tránsito constante de autoelevadores y maquinaria industrial. El hormigón existente presentaba desgaste severo, fisuras y zonas de espalling por la carga de equipos.</p>
+        <p>El sistema fue ejecutado por contratista certificado POXDRIVE en 5 días de obra, con un solo cierre de planta de fin de semana para el grueso de la aplicación y habilitación paulatina por sectores.</p>
+        <p style="opacity:0.75; font-size:0.85rem; font-weight: 600; margin-bottom: 0.5rem;">Sistema aplicado:</p>
+        <div class="sistema-steps">
+          <div class="step"><div class="n">1</div><p>Preparación de sustrato: granallado mecánico para apertura de poros y remoción de material suelto</p></div>
+          <div class="step"><div class="n">2</div><p>Reparación de baches y fisuras con MASTERPOX MORTERO E</p></div>
+          <div class="step"><div class="n">3</div><p>Imprimación epoxi MASTERPOX I-PISOS para anclaje del sistema</p></div>
+          <div class="step"><div class="n">4</div><p>3 manos de MASTERPOX AN-1 con agregado antideslizante en rampa de acceso</p></div>
+          <div class="step"><div class="n">5</div><p>Demarcación de pasillos y zonas de carga según layout de planta</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="container">
+    <h2>¿Tiene una operación minera que necesita pisos técnicos?</h2>
+    <p>Le especificamos el sistema correcto para cada área: talleres, cubetos, proceso ácido y exteriores.</p>
+    <div class="cta-btns">
+      <a href="https://wa.me/5491138200513" class="btn-white">Hablar por WhatsApp</a>
+      <a href="/#contacto" class="btn-outline">Solicitar visita técnica</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div><strong>POXDRIVE</strong><br>FARBENTEC S.R.L.</div>
+    <div>Rincón 4672 (1766)<br>La Tablada, Buenos Aires</div>
+    <div>WhatsApp +54 9 11 3820-0513<br>Lunes a viernes 8 a 15 h</div>
+    <div>
+      <a href="/alimenticia" style="color:#F0EDEA; text-decoration:none;">Alimentaria</a> ·
+      <a href="/farmaceutica" style="color:#F0EDEA; text-decoration:none;">Farmacéutica</a> ·
+      <a href="/mineria" style="color:#E8500A; text-decoration:none;">Minería</a> ·
+      <a href="/logistica" style="color:#F0EDEA; text-decoration:none;">Logística</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

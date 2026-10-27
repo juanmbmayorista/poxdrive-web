@@ -1,0 +1,297 @@
+---
+---
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pisos para Industria Farmacéutica — POXDRIVE</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Calibri, Arial, sans-serif; background: #1A1A1A; color: #F0EDEA; }
+    header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(26,26,26,0.97); border-bottom: 1px solid #2a2a2a; }
+    .nav-inner { max-width: 1100px; margin: 0 auto; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+    .nav-logo { font-size: 1.4rem; font-weight: 900; letter-spacing: 2px; text-decoration: none; color: #F0EDEA; }
+    .nav-logo span { color: #E8500A; }
+    nav { display: flex; gap: 2rem; align-items: center; }
+    nav a { color: #F0EDEA; text-decoration: none; font-size: 0.9rem; opacity: 0.75; transition: opacity 0.2s; }
+    nav a:hover, nav a.active { opacity: 1; color: #E8500A; }
+    .nav-cta { background: #E8500A; color: #fff !important; padding: 0.5rem 1.2rem; font-weight: 700; border-radius: 2px; opacity: 1 !important; }
+
+    /* HERO */
+    .hero { padding: 9rem 2rem 5rem; max-width: 1100px; margin: 0 auto; }
+    .breadcrumb { font-size: 0.8rem; opacity: 0.5; margin-bottom: 1.5rem; }
+    .breadcrumb span { color: #E8500A; }
+    .hero-eyebrow { font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; color: #E8500A; margin-bottom: 1rem; }
+    .hero h1 { font-size: 2.8rem; line-height: 1.2; font-style: italic; font-family: Georgia, serif; max-width: 700px; margin-bottom: 1.5rem; }
+    .hero-sub { font-size: 1.05rem; opacity: 0.7; max-width: 600px; line-height: 1.7; margin-bottom: 2.5rem; }
+    .hero-badges { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .badge { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.15); padding: 0.5rem 1.1rem; font-size: 0.8rem; border-radius: 2px; }
+
+    /* SECCIÓN GENÉRICA */
+    section { padding: 5rem 2rem; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-label { font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; color: #E8500A; margin-bottom: 0.8rem; }
+    .section-title { font-size: 2rem; font-style: italic; font-family: Georgia, serif; margin-bottom: 0.8rem; }
+    .section-sub { opacity: 0.6; font-size: 0.95rem; max-width: 580px; line-height: 1.6; margin-bottom: 2.5rem; }
+
+    /* REQUISITOS */
+    .req-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; }
+    .req-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 1.8rem; }
+    .req-card .icon { font-size: 1.8rem; margin-bottom: 1rem; }
+    .req-card h4 { font-size: 1rem; font-weight: 700; margin-bottom: 0.6rem; }
+    .req-card p { font-size: 0.88rem; opacity: 0.65; line-height: 1.6; }
+
+    /* SOLUCIÓN */
+    .sol-wrap { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; }
+    .sol-header { background: #E8500A; padding: 2rem 2.5rem; }
+    .sol-header h3 { font-size: 1.6rem; font-style: italic; font-family: Georgia, serif; margin-bottom: 0.4rem; }
+    .sol-header p { opacity: 0.9; font-size: 0.9rem; }
+    .sol-body { padding: 2.5rem; }
+    .ficha { width: 100%; border-collapse: collapse; }
+    .ficha tr { border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .ficha td { padding: 0.8rem 0; font-size: 0.9rem; }
+    .ficha td:first-child { opacity: 0.55; width: 45%; }
+    .ficha td:last-child { font-weight: 600; }
+
+    /* SISTEMAS */
+    .sistemas-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.2rem; margin-top: 1rem; }
+    .sistema-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 1.5rem; }
+    .sistema-card .num { font-size: 1.6rem; font-style: italic; font-family: Georgia, serif; color: #E8500A; margin-bottom: 0.5rem; }
+    .sistema-card h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.4rem; }
+    .sistema-card .zona { font-size: 0.8rem; opacity: 0.55; margin-bottom: 0.6rem; }
+    .sistema-card p { font-size: 0.85rem; opacity: 0.7; line-height: 1.5; }
+
+    /* CASO */
+    .caso-wrap { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; }
+    .caso-header { padding: 2.5rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .caso-header .tag { font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: #E8500A; margin-bottom: 0.8rem; }
+    .caso-header h3 { font-size: 1.5rem; font-style: italic; font-family: Georgia, serif; }
+    .caso-stats { display: grid; grid-template-columns: repeat(4, 1fr); padding: 2rem 2.5rem; gap: 1rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .caso-stat b { display: block; font-size: 1.8rem; font-style: italic; font-family: Georgia, serif; color: #E8500A; }
+    .caso-stat span { font-size: 0.8rem; opacity: 0.55; }
+    .caso-body { padding: 2.5rem; }
+    .caso-body p { opacity: 0.7; line-height: 1.7; margin-bottom: 1.5rem; font-size: 0.95rem; }
+    .sistema-steps { display: flex; flex-direction: column; gap: 0.6rem; }
+    .step { display: flex; gap: 1rem; align-items: flex-start; }
+    .step .n { background: #E8500A; color: #fff; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+    .step p { font-size: 0.88rem; opacity: 0.75; line-height: 1.5; margin: 0; }
+
+    /* CTA */
+    .cta-section { background: #E8500A; }
+    .cta-section .container { text-align: center; }
+    .cta-section h2 { font-size: 2rem; font-style: italic; font-family: Georgia, serif; margin-bottom: 0.8rem; }
+    .cta-section p { opacity: 0.9; margin-bottom: 2rem; }
+    .cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-white { background: #fff; color: #E8500A; padding: 0.8rem 1.8rem; font-weight: 700; border-radius: 2px; text-decoration: none; font-size: 0.9rem; }
+    .btn-outline { border: 2px solid rgba(255,255,255,0.6); color: #fff; padding: 0.8rem 1.8rem; border-radius: 2px; text-decoration: none; font-size: 0.9rem; }
+
+    /* FOOTER */
+    footer { background: #111; border-top: 1px solid #222; padding: 3rem 2rem; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 2rem; font-size: 0.85rem; opacity: 0.6; }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2rem; }
+      .caso-stats { grid-template-columns: repeat(2, 1fr); }
+      nav { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">POX<span>DRIVE</span></a>
+    <nav>
+      <a href="/alimenticia">Alimentaria</a>
+      <a href="/farmaceutica" class="active">Farmacéutica</a>
+      <a href="/mineria">Minería</a>
+      <a href="/logistica">Logística</a>
+      <a href="/#contacto" class="nav-cta">Solicitar presupuesto</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <p class="breadcrumb">POXDRIVE / <span>INDUSTRIA FARMACÉUTICA</span></p>
+  <p class="hero-eyebrow">Pisos para industria farmacéutica</p>
+  <h1>Cumplimiento GMP/BPF desde el piso</h1>
+  <p class="hero-sub">Sistemas de pisos y revestimientos diseñados para cumplir las exigencias de ANMAT, GMP internacionales y auditorías de buenas prácticas de fabricación. Sin juntas, sin poros, sin riesgo de contaminación cruzada.</p>
+  <div class="hero-badges">
+    <span class="badge">✓ GMP / BPF</span>
+    <span class="badge">✓ Sin poros ni juntas</span>
+    <span class="badge">✓ Resistencia química</span>
+    <span class="badge">✓ VOC-free disponible</span>
+  </div>
+</div>
+
+<section style="background: rgba(255,255,255,0.02); border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06);">
+  <div class="container">
+    <p class="section-label">Lo que exige la normativa</p>
+    <h2 class="section-title">Por qué el piso es crítico en una planta farmacéutica</h2>
+    <p class="section-sub">ANMAT y los estándares GMP internacionales establecen requisitos específicos sobre superficies de pisos. Incumplirlos puede significar el cierre de planta.</p>
+    <div class="req-grid">
+      <div class="req-card">
+        <div class="icon">🔬</div>
+        <h4>Sin juntas ni poros</h4>
+        <p>Las superficies deben ser lisas, impermeables y sin grietas. Las juntas y poros acumulan bacterias y dificultan la desinfección. ANMAT lo exige explícitamente.</p>
+      </div>
+      <div class="req-card">
+        <div class="icon">🧪</div>
+        <h4>Resistencia a desinfectantes</h4>
+        <p>Los protocolos farmacéuticos usan etanol, metanol, hipoclorito y peróxido de hidrógeno. El piso debe resistir ciclos de limpieza agresiva sin degradarse.</p>
+      </div>
+      <div class="req-card">
+        <div class="icon">🛡️</div>
+        <h4>Auditabilidad visual</h4>
+        <p>Superficies claras y lisas que permitan detectar visualmente cualquier contaminante. Un piso oscuro o rugoso oculta residuos y no pasa una auditoría.</p>
+      </div>
+      <div class="req-card">
+        <div class="icon">🌡️</div>
+        <h4>Estabilidad térmica</h4>
+        <p>Las áreas de autoclave, esterilización y producción húmeda generan cambios térmicos bruscos. El sistema debe mantenerse íntegro sin delaminar.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <p class="section-label">Solución principal</p>
+    <h2 class="section-title">MASTERPOX AC-100 — Autonivelante epoxi sanitario</h2>
+    <p class="section-sub">El sistema de referencia para laboratorios, salas técnicas y áreas de producción seca en industria farmacéutica.</p>
+    <div class="sol-wrap">
+      <div class="sol-header">
+        <h3>MASTERPOX AC-100</h3>
+        <p>Autonivelante epoxi VOC-free · 2–3 mm · Superficie continua sin juntas · Apto GMP/BPF</p>
+      </div>
+      <div class="sol-body">
+        <table class="ficha">
+          <tr><td>Tipo de producto</td><td>Autonivelante epoxi 2 componentes</td></tr>
+          <tr><td>Espesor de aplicación</td><td>2–3 mm</td></tr>
+          <tr><td>Contenido de sólidos</td><td>100% (sin solventes)</td></tr>
+          <tr><td>Emisión de VOC</td><td>Libre de compuestos orgánicos volátiles</td></tr>
+          <tr><td>Acabado</td><td>Liso, sin juntas, sin poros</td></tr>
+          <tr><td>Resistencia química</td><td>Alcoholes, desinfectantes, solventes suaves, ácidos diluidos</td></tr>
+          <tr><td>Áreas de aplicación</td><td>Laboratorios, salas técnicas, producción seca, pasillos GMP</td></tr>
+          <tr><td>Habilitación para tránsito</td><td>24–48 horas</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background: rgba(255,255,255,0.02); border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06);">
+  <div class="container">
+    <p class="section-label">Soluciones por área</p>
+    <h2 class="section-title">Sistema completo para cada zona de la planta</h2>
+    <p class="section-sub">Cada área de una planta farmacéutica tiene condiciones distintas. POXDRIVE especifica el sistema correcto para cada una.</p>
+    <div class="sistemas-grid">
+      <div class="sistema-card">
+        <div class="num">01</div>
+        <h4>MASTERPOX AC-100</h4>
+        <div class="zona">Laboratorios · Salas técnicas · Producción seca</div>
+        <p>Autonivelante epoxi VOC-free. Acabado liso, sin juntas ni poros. Compatible con áreas controladas y auditorías GMP.</p>
+      </div>
+      <div class="sistema-card">
+        <div class="num">02</div>
+        <h4>MASTERPOX AN-1 AD</h4>
+        <div class="zona">Pasillos técnicos · Depósitos · Áreas de tránsito</div>
+        <p>Multicapa epoxi con opción antideslizante. Alta resistencia al tránsito y al impacto. Buena relación costo/prestación para zonas secundarias.</p>
+      </div>
+      <div class="sistema-card">
+        <div class="num">03</div>
+        <h4>MASTERPOX AN-1</h4>
+        <div class="zona">Zonas de limpieza con alcoholes y desinfectantes</div>
+        <p>Alta resistencia química a etanol, metanol, isopropanol y desinfectantes de uso farmacéutico. Superficie impermeable y no porosa.</p>
+      </div>
+      <div class="sistema-card">
+        <div class="num">04</div>
+        <h4>MASTERPOX MORTERO E</h4>
+        <div class="zona">Reparaciones estructurales · Baches · Juntas sanitarias</div>
+        <p>Reparación técnica sanitaria. Sistema de 2–5 mm con 3 componentes. Excelente adherencia y resistencia mecánica para reconstrucción de sustrato.</p>
+      </div>
+      <div class="sistema-card">
+        <div class="num">05</div>
+        <h4>TEXAFIC CEM-AU</h4>
+        <div class="zona">Producción húmeda · Lavado intenso · GMP con temperatura</div>
+        <p>Poliuretano cementicio de 5 mm para áreas de producción húmeda. Soporta -30°C a +120°C. Ideal donde hay vapor, agua caliente y lavado intensivo.</p>
+      </div>
+      <div class="sistema-card">
+        <div class="num">06</div>
+        <h4>MASTERPOX AN-1 (paredes)</h4>
+        <div class="zona">Revestimiento sanitario de paredes · Media caña</div>
+        <p>Revestimiento epoxi autoimprimante para paredes. Superficies lavables e impermeables. Compatible con áreas GMP. Se complementa con media caña sanitaria en el encuentro piso-pared.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <p class="section-label">Caso de obra</p>
+    <h2 class="section-title">Planta farmacéutica — Producción y laboratorios</h2>
+    <p class="section-sub">Aplicación en área de producción y laboratorios de control de calidad con exigencia GMP.</p>
+    <div class="caso-wrap">
+      <div class="caso-header">
+        <div class="tag">INDUSTRIA FARMACÉUTICA · BUENOS AIRES</div>
+        <h3>Piso GMP: de hormigón deteriorado a superficie auditada</h3>
+      </div>
+      <div class="caso-stats">
+        <div class="caso-stat"><b>800 m²</b><span>área intervenida</span></div>
+        <div class="caso-stat"><b>12 días</b><span>tiempo de obra</span></div>
+        <div class="caso-stat"><b>3 zonas</b><span>sistemas diferenciados</span></div>
+        <div class="caso-stat"><b>GMP</b><span>cumplimiento normativo</span></div>
+      </div>
+      <div class="caso-body">
+        <p>Planta farmacéutica con necesidad de renovación integral de pisos para pasar auditoría GMP. Las áreas incluían laboratorios de control de calidad, pasillos técnicos y zona de producción húmeda con lavado frecuente de equipos.</p>
+        <p>El desafío principal fue ejecutar la obra en etapas para no detener la producción, con tiempo de habilitación ajustado entre sectores.</p>
+        <p style="opacity:0.75; font-size:0.85rem; font-weight: 600; margin-bottom: 0.5rem;">Sistema aplicado:</p>
+        <div class="sistema-steps">
+          <div class="step"><div class="n">1</div><p>Preparación de sustrato: limpieza, hidrolavado y esmerilado mecánico para abrir poros y garantizar adherencia</p></div>
+          <div class="step"><div class="n">2</div><p>Reparación de fisuras y baches con MASTERPOX MORTERO E (2-5 mm)</p></div>
+          <div class="step"><div class="n">3</div><p>MASTERPOX AC-100 autonivelante VOC-free (2-3 mm) en laboratorios y salas técnicas — color blanco</p></div>
+          <div class="step"><div class="n">4</div><p>TEXAFIC CEM-AU (5 mm) en área de producción húmeda con lavado de equipos</p></div>
+          <div class="step"><div class="n">5</div><p>TEXAFIC T-1 terminación poliuretánica alifática en zonas con requerimiento de acabado reforzado y resistencia UV</p></div>
+          <div class="step"><div class="n">6</div><p>Media caña sanitaria MASTERPOX AN-1 en encuentros piso-pared de todas las áreas GMP</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="container">
+    <h2>¿Tiene una planta farmacéutica que auditar?</h2>
+    <p>Le especificamos el sistema correcto para cada área de su planta, cumpliendo GMP/BPF. Sin compromiso.</p>
+    <div class="cta-btns">
+      <a href="https://wa.me/5491138200513" class="btn-white">Hablar por WhatsApp</a>
+      <a href="/#contacto" class="btn-outline">Solicitar visita técnica</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <strong>POXDRIVE</strong><br>
+      FARBENPAINT S.R.L.
+    </div>
+    <div>
+      Rincón 4672 (1766)<br>
+      La Tablada, Buenos Aires
+    </div>
+    <div>
+      WhatsApp +54 9 11 3820-0513<br>
+      Lunes a viernes 8 a 15 h
+    </div>
+    <div>
+      <a href="/alimenticia" style="color:#F0EDEA; text-decoration:none;">Alimentaria</a> ·
+      <a href="/farmaceutica" style="color:#E8500A; text-decoration:none;">Farmacéutica</a> ·
+      <a href="/mineria" style="color:#F0EDEA; text-decoration:none;">Minería</a> ·
+      <a href="/logistica" style="color:#F0EDEA; text-decoration:none;">Logística</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
