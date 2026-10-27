@@ -1,0 +1,312 @@
+---
+---
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pisos para Industria Alimentaria — POXDRIVE</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Calibri, Arial, sans-serif; background: #1A1A1A; color: #F0EDEA; }
+    header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(26,26,26,0.97); border-bottom: 1px solid #2a2a2a; }
+    .nav-inner { max-width: 1100px; margin: 0 auto; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+    .nav-logo { font-size: 1.4rem; font-weight: 900; letter-spacing: 2px; text-decoration: none; color: #F0EDEA; }
+    .nav-logo span { color: #E8500A; }
+    nav { display: flex; gap: 2rem; align-items: center; }
+    nav a { color: #F0EDEA; text-decoration: none; font-size: 0.9rem; opacity: 0.75; transition: opacity 0.2s; }
+    nav a:hover, nav a.active { opacity: 1; color: #E8500A; }
+    .nav-cta { background: #E8500A; color: #fff !important; padding: 0.5rem 1.2rem; font-weight: 700; border-radius: 2px; opacity: 1 !important; }
+
+    /* HERO */
+    .hero { padding: 7rem 2rem 0; max-width: 1100px; margin: 0 auto; }
+    .breadcrumb { font-size: 0.8rem; opacity: 0.5; margin-bottom: 2rem; letter-spacing: 1px; text-transform: uppercase; }
+    .breadcrumb span { color: #E8500A; }
+    .hero-eyebrow { font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; color: #E8500A; margin-bottom: 1rem; }
+    .hero h1 { font-size: 3rem; line-height: 1.15; font-style: italic; font-family: Georgia, serif; margin-bottom: 1.5rem; max-width: 720px; }
+    .hero-sub { font-size: 1.05rem; opacity: 0.65; line-height: 1.7; margin-bottom: 2rem; max-width: 620px; }
+    .hero-badges { display: flex; gap: 0.8rem; flex-wrap: wrap; margin-bottom: 3rem; }
+    .badge { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); padding: 0.45rem 1rem; font-size: 0.82rem; border-radius: 2px; }
+    .badge::before { content: "✓ "; color: #E8500A; }
+    .hero-divider { border: none; border-top: 1px solid rgba(255,255,255,0.08); margin-bottom: 5rem; }
+
+    /* SECCIONES */
+    section { padding: 5rem 2rem; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-label { font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; color: #E8500A; margin-bottom: 0.8rem; }
+    .section-title { font-size: 2rem; font-style: italic; font-family: Georgia, serif; margin-bottom: 0.8rem; }
+    .section-sub { opacity: 0.6; font-size: 0.95rem; max-width: 580px; line-height: 1.7; margin-bottom: 2.5rem; }
+
+    /* REQUISITOS GRID */
+    .req-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1rem; }
+    .req-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 1.8rem 1.5rem; }
+    .req-card .icon { font-size: 1.4rem; margin-bottom: 0.8rem; }
+    .req-card h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .req-card p { font-size: 0.85rem; opacity: 0.6; line-height: 1.6; }
+
+    /* FICHA TÉCNICA */
+    .ficha-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; }
+    .ficha-header { margin-bottom: 1.5rem; }
+    .ficha-nombre { font-size: 1.3rem; font-weight: 700; margin-bottom: 0.3rem; }
+    .ficha-desc { font-size: 0.9rem; opacity: 0.6; line-height: 1.6; }
+    .ficha-tabla { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+    .ficha-tabla tr { border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .ficha-tabla td { padding: 0.6rem 0; }
+    .ficha-tabla td:first-child { opacity: 0.5; width: 45%; }
+    .ficha-tabla td:last-child { font-weight: 600; }
+    .ficha-certifs { margin-top: 1.2rem; display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .certif-tag { background: rgba(232,80,10,0.15); border: 1px solid rgba(232,80,10,0.3); color: #E8500A; font-size: 0.75rem; padding: 0.3rem 0.7rem; border-radius: 2px; }
+    .ficha-nota { background: rgba(255,255,255,0.04); border-left: 3px solid #E8500A; padding: 1rem 1.2rem; font-size: 0.85rem; opacity: 0.7; line-height: 1.6; margin-top: 1.5rem; }
+
+    /* SISTEMAS */
+    .sistemas-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; }
+    .sistema-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 1.5rem; }
+    .sistema-zona { font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: #E8500A; margin-bottom: 0.4rem; }
+    .sistema-nombre { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.3rem; }
+    .sistema-desc { font-size: 0.84rem; opacity: 0.6; line-height: 1.55; }
+    .sistema-spec { font-size: 0.78rem; opacity: 0.4; margin-top: 0.5rem; }
+
+    /* CASO */
+    .caso-wrap { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 2.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: center; }
+    .caso-label { font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; color: #E8500A; margin-bottom: 0.8rem; }
+    .caso-titulo { font-size: 1.4rem; font-style: italic; font-family: Georgia, serif; margin-bottom: 1rem; }
+    .caso-texto { font-size: 0.9rem; opacity: 0.65; line-height: 1.7; }
+    .caso-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .stat { }
+    .stat .val { font-size: 1.8rem; font-style: italic; font-family: Georgia, serif; color: #E8500A; line-height: 1; }
+    .stat .lbl { font-size: 0.78rem; opacity: 0.5; margin-top: 0.3rem; }
+
+    /* CTA */
+    .cta-section { background: #E8500A; }
+    .cta-section h2 { font-size: 1.8rem; font-style: italic; font-family: Georgia, serif; margin-bottom: 0.8rem; }
+    .cta-section p { opacity: 0.92; margin-bottom: 2rem; line-height: 1.6; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 0.8rem; align-items: end; }
+    .form-row input, .form-row select { padding: 0.8rem 1rem; border: none; border-radius: 2px; font-family: Calibri, Arial, sans-serif; font-size: 0.9rem; background: rgba(255,255,255,0.2); color: #fff; width: 100%; }
+    .form-row input::placeholder { color: rgba(255,255,255,0.7); }
+    .btn-white { background: #fff; color: #E8500A; padding: 0.8rem 1.8rem; font-weight: 700; border-radius: 2px; font-size: 0.9rem; border: none; cursor: pointer; font-family: Calibri, Arial, sans-serif; white-space: nowrap; }
+    .cta-alt { margin-top: 1.2rem; font-size: 0.85rem; opacity: 0.85; }
+    .cta-alt a { color: #fff; font-weight: 700; }
+    .success-msg { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.4); border-radius: 4px; padding: 1.5rem; text-align: center; display: none; }
+
+    footer { background: #111; border-top: 1px solid #222; padding: 3rem 2rem; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 2rem; font-size: 0.85rem; opacity: 0.6; }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2rem; }
+      .ficha-wrap { grid-template-columns: 1fr; }
+      .caso-wrap { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      nav { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">POX<span>DRIVE</span></a>
+    <nav>
+      <a href="/alimenticia" class="active">Alimentaria</a>
+      <a href="/farmaceutica">Farmacéutica</a>
+      <a href="/mineria">Minería</a>
+      <a href="/logistica">Logística</a>
+      <a href="/aplicadores">Aplicadores</a>
+      <a href="/#contacto" class="nav-cta">Solicitar presupuesto</a>
+    </nav>
+  </div>
+</header>
+
+<div style="padding-top: 4rem;">
+  <div class="hero">
+    <p class="breadcrumb">POXDRIVE / <span>INDUSTRIA ALIMENTARIA</span></p>
+    <p class="hero-eyebrow">Pisos para industria alimentaria</p>
+    <h1>Cumplimiento SENASA desde el piso hacia arriba</h1>
+    <p class="hero-sub">Sistemas de revestimiento sin juntas, sin porosidad y resistentes a desinfectantes de alto nivel para plantas de elaboración, cámaras frigoríficas y depósitos de alimentos bajo normativa SENASA e IRAM.</p>
+    <div class="hero-badges">
+      <span class="badge">SENASA / BPF</span>
+      <span class="badge">Sin juntas ni poros</span>
+      <span class="badge">Resistencia química</span>
+      <span class="badge">Apto cámara frigorífica</span>
+    </div>
+    <hr class="hero-divider" />
+  </div>
+</div>
+
+<!-- REQUISITOS -->
+<section>
+  <div class="container">
+    <p class="section-label">Lo que exige la industria</p>
+    <h2 class="section-title">Requisitos técnicos de la industria alimentaria</h2>
+    <p class="section-sub">Las plantas de elaboración tienen condicionantes técnicos que no admiten soluciones estándar. El piso es una superficie de contacto indirecto con el alimento.</p>
+    <div class="req-grid">
+      <div class="req-card">
+        <div class="icon">⬡</div>
+        <h4>Sin juntas ni porosidad superficial</h4>
+        <p>Las juntas y la porosidad acumulan microorganismos que no se eliminan con los ciclos de limpieza estándar. Se requiere un sistema continuo, sin poros y con curva sanitaria en los encuentros piso-pared.</p>
+      </div>
+      <div class="req-card">
+        <div class="icon">⚗</div>
+        <h4>Resistencia a desinfectantes agresivos</h4>
+        <p>Hipoclorito de sodio, ácido peracético, amonio cuaternario y soluciones CIP a concentraciones elevadas. El sistema debe soportar la dosificación, no solo el contacto esporádico.</p>
+      </div>
+      <div class="req-card">
+        <div class="icon">🌡</div>
+        <h4>Rango térmico de -30°C a +80°C</h4>
+        <p>Desde cámaras de congelado hasta zonas de cocción. El piso debe mantener adherencia y continuidad sin fisuras por contracción térmica en las transiciones de temperatura.</p>
+      </div>
+      <div class="req-card">
+        <div class="icon">📋</div>
+        <h4>Auditabilidad y trazabilidad</h4>
+        <p>El piso debe poder ser inspeccionado y documentado: sin desprendimientos, con delimitación de zonas y superficie lavable que evidencie el estado de higiene durante las auditorías.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FICHA TÉCNICA -->
+<section style="background: rgba(255,255,255,0.02); border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06);">
+  <div class="container">
+    <p class="section-label">Producto principal</p>
+    <h2 class="section-title">MASTERPOX CEM-AU — Sistema base cemento aluminoso</h2>
+    <div class="ficha-wrap">
+      <div>
+        <div class="ficha-header">
+          <div class="ficha-nombre">MASTERPOX CEM-AU</div>
+          <div class="ficha-desc">Mortero cementicio de alto rendimiento con base de cemento aluminoso. Diseñado para pisos industriales con requerimientos de HACCP, SENASA y tolerancia a agua caliente, vapor y ciclos de limpieza agresivos.</div>
+        </div>
+        <table class="ficha-tabla">
+          <tr><td>Tecnología</td><td>Cemento aluminoso + áridos seleccionados</td></tr>
+          <tr><td>Espesor de aplicación</td><td>6 a 12 mm</td></tr>
+          <tr><td>Resistencia a compresión</td><td>&gt; 60 MPa</td></tr>
+          <tr><td>Temperatura de servicio</td><td>-30°C a +150°C</td></tr>
+          <tr><td>Resistencia química</td><td>Ácidos orgánicos, álcalis, desinfectantes</td></tr>
+          <tr><td>Acabado</td><td>Liso, antideslizante o rayado</td></tr>
+          <tr><td>Habilitación al tránsito</td><td>24 a 48 horas</td></tr>
+        </table>
+        <div class="ficha-certifs">
+          <span class="certif-tag">SENASA compatible</span>
+          <span class="certif-tag">HACCP</span>
+          <span class="certif-tag">Libre de solventes</span>
+          <span class="certif-tag">Sin VOC</span>
+        </div>
+      </div>
+      <div>
+        <div class="ficha-nota">
+          <strong>Por qué cemento aluminoso en alimentaria:</strong> A diferencia de los sistemas epoxi convencionales, el CEM-AU tolera la presencia de humedad en el sustrato, vapor de agua y agua caliente hasta 150°C de forma continua. Esto lo hace indicado para zonas de cocción, esterilización y lavado con agua a presión donde un sistema epoxi se deslaminará en los primeros ciclos.
+        </div>
+        <div style="margin-top: 1.5rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 1.5rem;">
+          <p style="font-size: 0.82rem; opacity: 0.5; margin-bottom: 1rem; letter-spacing: 1px; text-transform: uppercase;">Sistemas complementarios frecuentes</p>
+          <p style="font-size: 0.88rem; opacity: 0.7; line-height: 1.7;">MASTERPOX AN-1 AD para pasillos y zonas secas · MASTERPOX I-PISOS imprimación · AD-5 sellador de juntas · Curva sanitaria epoxi piso-pared</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SISTEMAS POR ZONA -->
+<section>
+  <div class="container">
+    <p class="section-label">Aplicaciones por zona</p>
+    <h2 class="section-title">Sistemas POXDRIVE para planta alimentaria</h2>
+    <p class="section-sub">Cada zona tiene requerimientos distintos. El sistema se especifica según uso, temperatura, agente químico y carga de tránsito.</p>
+    <div class="sistemas-grid">
+      <div class="sistema-card">
+        <p class="sistema-zona">Zonas de elaboración húmeda</p>
+        <p class="sistema-nombre">MASTERPOX CEM-AU</p>
+        <p class="sistema-desc">Mortero aluminoso continuo sin juntas. Para cámaras, cocinas industriales y zonas con agua caliente, vapor y limpieza CIP frecuente.</p>
+        <p class="sistema-spec">6–12 mm · hasta +150°C · sin juntas</p>
+      </div>
+      <div class="sistema-card">
+        <p class="sistema-zona">Pasillos y zonas de paso</p>
+        <p class="sistema-nombre">MASTERPOX AN-1 AD</p>
+        <p class="sistema-desc">Epoxi autonivelante antideslizante. Alta resistencia al tránsito de zorras y autoelevadores en zonas secas de planta.</p>
+        <p class="sistema-spec">2–3 mm · clase AD · fácil limpieza</p>
+      </div>
+      <div class="sistema-card">
+        <p class="sistema-zona">Salas limpias y laboratorios</p>
+        <p class="sistema-nombre">MASTERPOX AN-1 (liso)</p>
+        <p class="sistema-desc">Sistema epoxi de alta densidad sin solventes. Superficie impermeable y lavable para salas de envasado y control de calidad.</p>
+        <p class="sistema-spec">2–3 mm · 0 VOC · acabado liso</p>
+      </div>
+      <div class="sistema-card">
+        <p class="sistema-zona">Cámaras frigoríficas</p>
+        <p class="sistema-nombre">MASTERPOX CEM-AU criogénico</p>
+        <p class="sistema-desc">Formulación específica para temperaturas negativas. Resistencia a contracción térmica y ciclos de descongelado sin fisuras.</p>
+        <p class="sistema-spec">desde -30°C · ciclos térmicos · sin desprendimiento</p>
+      </div>
+      <div class="sistema-card">
+        <p class="sistema-zona">Reparación y mantenimiento</p>
+        <p class="sistema-nombre">MASTERPOX MORTERO E</p>
+        <p class="sistema-desc">Reparación puntual de fisuras, huecos y bordes de desagüe. Curado rápido para minimizar parada de planta.</p>
+        <p class="sistema-spec">reparación rápida · compatible con sistemas existentes</p>
+      </div>
+      <div class="sistema-card">
+        <p class="sistema-zona">Encuentro piso-pared</p>
+        <p class="sistema-nombre">Curva sanitaria epoxi</p>
+        <p class="sistema-desc">Media caña continua en el encuentro piso-pared para eliminar ángulos rectos donde se acumulan microorganismos. Requisito SENASA en zonas húmedas.</p>
+        <p class="sistema-spec">radio mínimo 25 mm · SENASA / HACCP</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CASO DE OBRA -->
+<section style="background: rgba(255,255,255,0.02); border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06);">
+  <div class="container">
+    <p class="section-label">Referencia de obra</p>
+    <div class="caso-wrap">
+      <div>
+        <p class="caso-label">Caso de aplicación</p>
+        <h3 class="caso-titulo">Planta de elaboración láctea — Provincia de Buenos Aires</h3>
+        <p class="caso-texto">Renovación completa de piso en planta de quesos: sala de elaboración, cámaras de maduración y zona de expedición. El sistema anterior (cerámico con juntas) generaba rechazos por acumulación de hongos. Se aplicó CEM-AU continuo con curvas sanitarias en todos los encuentros, quedando habilitado por SENASA en la primera inspección.</p>
+      </div>
+      <div class="caso-stats">
+        <div class="stat"><div class="val">950m²</div><div class="lbl">superficie total tratada</div></div>
+        <div class="stat"><div class="val">3</div><div class="lbl">zonas con distinto sistema</div></div>
+        <div class="stat"><div class="val">10</div><div class="lbl">días de obra con planta operativa</div></div>
+        <div class="stat"><div class="val">1ª</div><div class="lbl">inspección SENASA aprobada</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container" style="max-width: 820px;">
+    <h2>¿Su planta necesita cumplir SENASA?</h2>
+    <p>Solicitá una inspección técnica gratuita. Evaluamos el estado del sustrato, identificamos zonas de riesgo y especificamos el sistema correcto antes de presupuestar.</p>
+    <form id="form-alimenticia" onsubmit="
+      event.preventDefault();
+      document.getElementById('form-alimenticia').style.display='none';
+      document.getElementById('success-alimenticia').style.display='block';
+    ">
+      <div class="form-row">
+        <input type="text" placeholder="Empresa / Planta" required />
+        <input type="text" placeholder="Localidad" required />
+        <input type="tel" placeholder="WhatsApp" required />
+        <button type="submit" class="btn-white">Solicitar inspección</button>
+      </div>
+    </form>
+    <div id="success-alimenticia" class="success-msg">
+      <h3>✓ Solicitud recibida</h3>
+      <p>Un técnico se comunica en menos de 24 horas para coordinar la visita.</p>
+    </div>
+    <p class="cta-alt">O escribinos directo: <a href="https://wa.me/5491138200513">WhatsApp +54 9 11 3820-0513</a></p>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div><strong>POXDRIVE</strong><br>FARBENTEC S.R.L.</div>
+    <div>Rincón 4672 (1766)<br>La Tablada, Buenos Aires</div>
+    <div>WhatsApp +54 9 11 3820-0513<br>Lunes a viernes 8 a 15 h</div>
+    <div>
+      <a href="/farmaceutica" style="color:#F0EDEA; text-decoration:none;">Farmacéutica</a> ·
+      <a href="/mineria" style="color:#F0EDEA; text-decoration:none;">Minería</a> ·
+      <a href="/logistica" style="color:#F0EDEA; text-decoration:none;">Logística</a> ·
+      <a href="/aplicadores" style="color:#F0EDEA; text-decoration:none;">Aplicadores</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
