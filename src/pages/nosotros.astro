@@ -47,10 +47,20 @@
     }
     .nav-logo { font-size: 1.4rem; font-weight: 900; letter-spacing: 2px; text-decoration: none; color: #F0EDEA; }
     .nav-logo span { color: #E8500A; }
-    .nav-links { display: flex; gap: 2rem; align-items: center; }
-    .nav-links a { color: var(--text); text-decoration: none; font-size: 0.9rem; opacity: 0.75; transition: opacity 0.2s; }
-    .nav-links a:hover, .nav-links a.active { opacity: 1; color: var(--naranja); }
-    .nav-cta { background: var(--naranja); color: #fff !important; padding: 0.5rem 1.2rem; font-weight: 700; border-radius: 2px; opacity: 1 !important; }
+        .nav-links-group { display: flex; gap: 32px; align-items: center; }
+    .nav-links-group a { color: var(--muted, rgba(232,228,224,0.45)); text-decoration: none; font-size: 0.875rem; font-weight: 500; }
+    .nav-links-group a:hover, .nav-links-group a.active { color: #F0EDEA; }
+    .nav-dropdown { position: relative; display: inline-block; }
+    .nav-dropdown-btn { background: none; border: none; cursor: pointer; color: rgba(232,228,224,0.7); font-size: 0.875rem; font-family: inherit; padding: 0; display: flex; align-items: center; gap: 4px; font-weight: 500; }
+    .nav-dropdown-btn:hover { color: #F0EDEA; }
+    .dropdown-menu { display: none; position: absolute; top: calc(100% + 10px); left: 50%; transform: translateX(-50%); background: #1C1C1C; border: 1px solid #333; border-radius: 6px; min-width: 170px; padding: 6px 0; z-index: 999; box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+    .dropdown-menu.open { display: block; }
+    .dropdown-menu a { display: block; padding: 9px 16px; color: #9a9490 !important; text-decoration: none; font-size: 0.875rem; font-weight: 400; opacity: 1 !important; }
+    .dropdown-menu a:hover { color: #F0EDEA !important; background: #252525; }
+    .nav-cta { background: var(--naranja); color: #fff !important; padding: 0.5rem 1.2rem; font-weight: 700; border-radius: 6px; text-decoration: none; }
+    .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: #F0EDEA; margin: 5px 0; border-radius: 2px; }
+    @media(max-width:768px) { .nav-links-group, .nav-cta { display: none; } .hamburger { display: block; } }
 
     /* HERO */
     .hero {
@@ -229,7 +239,7 @@
       .metricas { grid-template-columns: 1fr; }
       .dos-col { grid-template-columns: 1fr; gap: 3rem; }
       .valores-grid { grid-template-columns: 1fr; }
-      .nav-links { display: none; }
+      .nav-links-group, .nav-cta { display: none; }
       .cta-inner { flex-direction: column; align-items: flex-start; }
     }
   </style>
@@ -240,14 +250,22 @@
 <nav>
   <div class="nav-inner">
     <a href="/" class="nav-logo">POX<span>DRIVE</span></a>
-    <div class="nav-links">
-      <a href="/industrias">Industrias</a>
+    <div class="nav-links-group">
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-btn" id="dd-btn">Industrias <span style="font-size:0.65em">▼</span></button>
+        <div class="dropdown-menu" id="dd-menu">
+          <a href="/alimenticia">Alimentaria</a>
+          <a href="/farmaceutica">Farmacéutica</a>
+          <a href="/mineria">Minería</a>
+          <a href="/logistica">Logística</a>
+        </div>
+      </div>
+      <a href="/blog">Blog</a>
       <a href="/casos">Casos de obra</a>
-      <a href="/blog">Blog técnico</a>
-      <a href="/descargas">Descargas</a>
-      <a href="/nosotros" class="active">Nosotros</a>
-      <a href="/contacto" class="nav-cta">Contacto</a>
+      <a href="/nosotros">Nosotros</a>
     </div>
+    <a href="/contacto" class="nav-cta">Consultá</a>
+    <button class="hamburger" aria-label="Menú"><span></span><span></span><span></span></button>
   </div>
 </nav>
 
@@ -418,9 +436,18 @@
 <footer>
   <div class="footer-inner">
     <div class="footer-logo">POX<span>DRIVE</span></div>
-    <p class="footer-copy">FARBENPAINT S.R.L. · Rincón 4672, La Tablada, Bs. As. · consultas@poxdrive.com.ar</p>
+    <p class="footer-copy">FARBENTEC S.R.L. · Rincón 4672, La Tablada, Bs. As. · consultas@poxdrive.com.ar</p>
   </div>
 </footer>
 
+<script>
+(function(){
+  var btn=document.getElementById('dd-btn'),menu=document.getElementById('dd-menu');
+  if(!btn||!menu) return;
+  btn.addEventListener('click',function(e){e.stopPropagation();menu.classList.toggle('open');});
+  menu.addEventListener('click',function(e){e.stopPropagation();});
+  document.addEventListener('click',function(){menu.classList.remove('open');});
+})();
+</script>
 </body>
 </html>
