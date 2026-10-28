@@ -1,0 +1,424 @@
+---
+// src/pages/descargas.astro
+const familias = [
+  {
+    id: "epoxi",
+    nombre: "Familia Epoxi",
+    descripcion: "Sistemas MASTERPOX — esmaltes, autonivelantes, imprimaciones y morteros epoxi de dos y tres componentes.",
+    productos: [
+      { codigo: "AN-1",            nombre: "MASTERPOX AN-1",              desc: "Esmalte epoxi multipropósito — apto hidrocarburos",          tags: ["Esmalte","Tanques","Pisos"],      archivo: "/fichas/MASTERPOX_AN-1.pdf" },
+      { codigo: "AN-1 AD",         nombre: "MASTERPOX AN-1 AD",           desc: "Esmalte epoxi antideslizante multipropósito",               tags: ["Esmalte","Antideslizante","Pisos"], archivo: "/fichas/MASTERPOX_AN-1_AD.pdf" },
+      { codigo: "AC-4",            nombre: "MASTERPOX AC-4",              desc: "Autoimprimante epoxi anticorrosivo con fosfato de zinc",     tags: ["Esmalte","Anticorrosivo","Estructuras"], archivo: "/fichas/MASTERPOX_AC-4.pdf" },
+      { codigo: "AC-12",           nombre: "MASTERPOX AC-12",             desc: "Epoxi autoimprimante de altos sólidos — bajo VOC",           tags: ["Esmalte","Estructuras","Bajo VOC"], archivo: "/fichas/MASTERPOX_AC-12.pdf" },
+      { codigo: "AC-21",           nombre: "MASTERPOX AC-21",             desc: "Revestimiento epoxi de alta resistencia química y mecánica", tags: ["Esmalte","Resistencia química"],  archivo: "/fichas/MASTERPOX_AC-21.pdf" },
+      { codigo: "AC-23",           nombre: "MASTERPOX AC-23",             desc: "Autonivelante epoxi — apto industria alimenticia y farmacéutica", tags: ["Autonivelante","Pisos","Alimenticia","Farmacéutica"], archivo: "/fichas/MASTERPOX_AC-23.pdf" },
+      { codigo: "AC-33",           nombre: "MASTERPOX AC-33",             desc: "Autonivelante epoxi con color — VOC free",                   tags: ["Autonivelante","Pisos","Color"],  archivo: "/fichas/MASTERPOX_AC-33.pdf" },
+      { codigo: "I-2",             nombre: "MASTERPOX I-2",               desc: "Imprimación epoxi multipropósito",                          tags: ["Imprimación","Pisos"],            archivo: "/fichas/MASTERPOX_I-2.pdf" },
+      { codigo: "I-PISOS",         nombre: "MASTERPOX I-PISOS",           desc: "Imprimación epoxi curable en humedad",                      tags: ["Imprimación","Pisos","Humedad"],  archivo: "/fichas/MASTERPOX_I-PISOS.pdf" },
+      { codigo: "M-2",             nombre: "MASTERPOX M-2",               desc: "Masilla epoxi para sustratos no ferrosos",                  tags: ["Masilla","Reparación"],           archivo: "/fichas/MASTERPOX_M-2.pdf" },
+      { codigo: "MORTERO E",       nombre: "MASTERPOX MORTERO E",         desc: "Grout epoxi para encarpetado de pisos — 100% sólidos",      tags: ["Mortero","Pisos","Maquinaria"],   archivo: "/fichas/MASTERPOX_MORTERO-E.pdf" },
+      { codigo: "MORTERO ANTIACIDO", nombre: "MASTERPOX MORTERO ANTIACIDO", desc: "Grout epoxi NOVOLAC — alta resistencia química a ácidos", tags: ["Mortero","Antiacido","Química"],  archivo: "/fichas/MASTERPOX_MORTERO-ANTIACIDO.pdf" },
+      { codigo: "AD-3",            nombre: "MASTERPOX AD-3",              desc: "Grouter epoxi autonivelante para anclaje",                  tags: ["Anclaje","Nivelación"],           archivo: "/fichas/MASTERPOX_AD-3.pdf" },
+    ]
+  },
+  {
+    id: "poliuretano",
+    nombre: "Familia Poliuretano",
+    descripcion: "Sistemas TEXAFIC — morteros y autonivelantes poliuretánicos de tres componentes para condiciones extremas.",
+    productos: [
+      { codigo: "MORTERO PU",  nombre: "TEXAFIC MORTERO PU",  desc: "Mortero poliuretánico 100% sólidos — resistente al impacto",          tags: ["Mortero","Pisos","Impacto"],        archivo: "/fichas/TEXAFIC_MORTERO-PU.pdf" },
+      { codigo: "CEM-AU",      nombre: "TEXAFIC CEM-AU",       desc: "Autonivelante PU — rango térmico -40°C / +120°C — apto cámaras frías", tags: ["Autonivelante","Pisos","Temperatura"], archivo: "/fichas/TEXAFIC_CEM-AU.pdf" },
+      { codigo: "T-1",         nombre: "TEXAFIC T-1",          desc: "Esmalte poliuretánico alifático para exterior — resistente a UV",      tags: ["Esmalte","Exterior","UV"],          archivo: "/fichas/TEXAFIC_T-1.pdf" },
+    ]
+  },
+  {
+    id: "acrilicos",
+    nombre: "Familia Acrílicos",
+    descripcion: "Selladores, revestimientos y recubrimientos acrílicos — base solvente y base acuosa.",
+    productos: [
+      { codigo: "SAS-1",    nombre: "POXDRIVE SAS-1",    desc: "Sellador acrílico al solvente — secado rápido",             tags: ["Sellador","Pisos","Interior","Exterior"], archivo: "/fichas/POXDRIVE_SAS-1.pdf" },
+      { codigo: "SAS-1 AD", nombre: "POXDRIVE SAS-1 AD", desc: "Sellador acrílico antideslizante — zonas húmedas y rampas", tags: ["Sellador","Antideslizante","Exterior"],    archivo: "/fichas/POXDRIVE_SAS-1-AD.pdf" },
+      { codigo: "PA-1",     nombre: "POXDRIVE PA-1",     desc: "Revestimiento elastomérico para techos y muros — base acuosa", tags: ["Elastomérico","Techos","Impermeabilización"], archivo: "/fichas/POXDRIVE_PA-1.pdf" },
+    ]
+  },
+  {
+    id: "cementicia",
+    nombre: "Familia Cementicia",
+    descripcion: "Morteros y grouts poliméricos cementicios para reparación y nivelación.",
+    productos: [
+      { codigo: "GROUT ST", nombre: "GROUT ST", desc: "Mortero polimérico cementicio para nivelación — baja contracción", tags: ["Mortero","Reparación","Cementicio"], archivo: "/fichas/GROUT_ST.pdf" },
+    ]
+  },
+  {
+    id: "vial",
+    nombre: "Demarcación Vial",
+    descripcion: "Sistema VIAL AE-3 — demarcación en frío de alto espesor para calles industriales y vías privadas.",
+    productos: [
+      { codigo: "VIAL AE-3", nombre: "VIAL AE-3", desc: "Demarcación vial en frío — mortero acrílico-cementicio bicomponente 3-4 mm", tags: ["Vial","Demarcación","Exterior"], archivo: "/fichas/VIAL_AE-3.pdf" },
+    ]
+  },
+];
+const totalProductos = familias.reduce((s, f) => s + f.productos.length, 0);
+---
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Descargas técnicas — POXDRIVE</title>
+  <meta name="description" content="Fichas técnicas y hojas de seguridad de los sistemas epoxi, poliuretánicos y acrílicos POXDRIVE. Descarga gratuita en PDF." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ---- RESET & TOKENS ---- */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --negro:    #1A1A1A;
+      --naranja:  #E8500A;
+      --concreto: #F0EDEA;
+      --bg:       #111111;
+      --surface:  #1C1C1C;
+      --border:   rgba(255,255,255,0.08);
+      --text:     #E8E4E0;
+      --muted:    rgba(232,228,224,0.45);
+      --accent:   #E8500A;
+    }
+
+    body {
+      font-family: 'Inter', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ---- NAV ---- */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(17,17,17,0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 1200px; margin: 0 auto;
+      padding: 0 max(1.5rem, env(safe-area-inset-left,0px));
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+    }
+    .nav-logo {
+      font-size: 1.15rem; font-weight: 700; letter-spacing: 2px;
+      text-decoration: none; color: var(--concreto);
+      text-transform: uppercase;
+    }
+    .nav-logo span { color: var(--naranja); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--muted); text-decoration: none; font-size: 0.85rem;
+      font-weight: 500; letter-spacing: 0.5px; transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+
+    /* ---- HERO ---- */
+    .hero {
+      padding: 4rem max(1.5rem, env(safe-area-inset-left,0px)) 3rem;
+      max-width: 1200px; margin: 0 auto;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-label {
+      font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--naranja); margin-bottom: 1rem;
+    }
+    .hero h1 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700;
+      line-height: 1.15; color: var(--concreto); margin-bottom: 1rem;
+    }
+    .hero p {
+      color: var(--muted); font-size: 1rem; max-width: 560px; margin-bottom: 1.5rem;
+    }
+    .hero-stats {
+      display: flex; gap: 2.5rem; flex-wrap: wrap;
+    }
+    .stat { }
+    .stat-n { font-size: 2rem; font-weight: 700; color: var(--naranja); line-height: 1; }
+    .stat-l { font-size: 0.75rem; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-top: 0.2rem; }
+
+    /* ---- FILTROS ---- */
+    .filtros-bar {
+      max-width: 1200px; margin: 0 auto;
+      padding: 1.5rem max(1.5rem, env(safe-area-inset-left,0px));
+      display: flex; gap: 0.6rem; flex-wrap: wrap;
+    }
+    .filtro-btn {
+      padding: 0.45rem 1.1rem; border-radius: 3px;
+      border: 1px solid var(--border); background: transparent;
+      color: var(--muted); font-size: 0.8rem; font-weight: 600;
+      letter-spacing: 0.5px; cursor: pointer; transition: all 0.2s;
+    }
+    .filtro-btn:hover { border-color: rgba(255,255,255,0.25); color: var(--text); }
+    .filtro-btn.active { background: var(--naranja); border-color: var(--naranja); color: #fff; }
+
+    /* ---- CONTENIDO ---- */
+    .contenido {
+      max-width: 1200px; margin: 0 auto;
+      padding: 0 max(1.5rem, env(safe-area-inset-left,0px)) 5rem;
+    }
+
+    /* ---- FAMILIA BLOQUE ---- */
+    .familia-bloque {
+      margin-bottom: 3.5rem;
+      transition: opacity 0.25s;
+    }
+    .familia-bloque.oculta { display: none; }
+
+    .familia-header {
+      display: flex; align-items: baseline; gap: 1.2rem; flex-wrap: wrap;
+      margin-bottom: 0.5rem;
+    }
+    .familia-nombre {
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--naranja);
+    }
+    .familia-titulo {
+      font-size: 1.25rem; font-weight: 700; color: var(--concreto);
+    }
+    .familia-desc {
+      color: var(--muted); font-size: 0.85rem; margin-bottom: 1.5rem;
+      max-width: 640px;
+    }
+    .separador {
+      height: 1px; background: var(--border); margin-bottom: 1.5rem;
+    }
+
+    /* ---- GRILLA DE PRODUCTOS ---- */
+    .productos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    /* ---- CARD ---- */
+    .prod-card {
+      background: var(--surface);
+      padding: 1.4rem 1.5rem;
+      display: flex; flex-direction: column; gap: 0.6rem;
+      position: relative;
+      transition: background 0.2s;
+    }
+    .prod-card:hover { background: #222; }
+
+    .prod-codigo {
+      font-size: 0.65rem; letter-spacing: 2.5px; text-transform: uppercase;
+      color: var(--naranja); font-weight: 700;
+    }
+    .prod-nombre {
+      font-size: 1rem; font-weight: 700; color: var(--concreto); line-height: 1.2;
+    }
+    .prod-desc {
+      font-size: 0.8rem; color: var(--muted); line-height: 1.45; flex: 1;
+    }
+    .prod-tags {
+      display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.2rem;
+    }
+    .tag {
+      font-size: 0.62rem; letter-spacing: 1px; text-transform: uppercase;
+      border: 1px solid var(--border); border-radius: 2px;
+      padding: 0.18rem 0.5rem; color: var(--muted);
+    }
+    .prod-actions {
+      display: flex; gap: 0.6rem; margin-top: 0.4rem;
+    }
+    .btn-descarga {
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      padding: 0.5rem 1rem; border-radius: 3px;
+      background: var(--naranja); color: #fff;
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.5px;
+      text-decoration: none; text-transform: uppercase;
+      transition: background 0.2s;
+      border: none; cursor: pointer;
+    }
+    .btn-descarga:hover { background: #c94008; }
+    .btn-descarga svg { width: 13px; height: 13px; flex-shrink: 0; }
+
+    .btn-ver {
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      padding: 0.5rem 1rem; border-radius: 3px;
+      background: transparent; color: var(--muted);
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.5px;
+      text-decoration: none; text-transform: uppercase;
+      transition: color 0.2s, border-color 0.2s;
+      border: 1px solid var(--border);
+    }
+    .btn-ver:hover { color: var(--text); border-color: rgba(255,255,255,0.25); }
+    .btn-ver svg { width: 13px; height: 13px; flex-shrink: 0; }
+
+    /* ---- AVISO HOJAS SEGURIDAD ---- */
+    .aviso-sds {
+      margin: 3rem 0 0;
+      padding: 1.4rem 1.6rem;
+      background: rgba(232,80,10,0.06);
+      border: 1px solid rgba(232,80,10,0.25);
+      border-radius: 4px;
+      display: flex; gap: 1rem; align-items: flex-start;
+    }
+    .aviso-sds svg { flex-shrink: 0; margin-top: 2px; color: var(--naranja); }
+    .aviso-sds p { font-size: 0.85rem; color: var(--muted); line-height: 1.55; }
+    .aviso-sds strong { color: var(--text); }
+    .aviso-sds a { color: var(--naranja); text-decoration: none; }
+    .aviso-sds a:hover { text-decoration: underline; }
+
+    /* ---- FOOTER ---- */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem max(1.5rem, env(safe-area-inset-left,0px));
+    }
+    .footer-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-logo { font-size: 0.9rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
+    .footer-logo span { color: var(--naranja); }
+    .footer-copy { font-size: 0.75rem; color: var(--muted); }
+
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .hero { padding-top: 2.5rem; }
+      .prod-actions { flex-direction: column; }
+      .btn-descarga, .btn-ver { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">POX<span>DRIVE</span></a>
+    <ul class="nav-links">
+      <li><a href="/industrias">Industrias</a></li>
+      <li><a href="/casos">Casos de obra</a></li>
+      <li><a href="/blog">Blog técnico</a></li>
+      <li><a href="/descargas" class="active">Descargas</a></li>
+      <li><a href="/contacto">Contacto</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <p class="hero-label">Centro de documentación</p>
+  <h1>Fichas técnicas<br/>y documentación de producto</h1>
+  <p>Descargá las fichas técnicas de todos los sistemas POXDRIVE en formato PDF. Actualizadas por nuestro laboratorio.</p>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-n">{totalProductos}</div>
+      <div class="stat-l">Fichas disponibles</div>
+    </div>
+    <div class="stat">
+      <div class="stat-n">{familias.length}</div>
+      <div class="stat-l">Familias de producto</div>
+    </div>
+    <div class="stat">
+      <div class="stat-n">PDF</div>
+      <div class="stat-l">Descarga gratuita</div>
+    </div>
+  </div>
+</div>
+
+<!-- FILTROS -->
+<div class="filtros-bar">
+  <button class="filtro-btn active" data-familia="todas">Todas las familias</button>
+  {familias.map(f => (
+    <button class="filtro-btn" data-familia={f.id}>{f.nombre}</button>
+  ))}
+</div>
+
+<!-- CONTENIDO -->
+<div class="contenido">
+
+  {familias.map(familia => (
+    <div class="familia-bloque" data-familia-id={familia.id}>
+      <div class="familia-header">
+        <span class="familia-nombre">{familia.nombre}</span>
+      </div>
+      <p class="familia-desc">{familia.descripcion}</p>
+      <div class="separador"></div>
+      <div class="productos-grid">
+        {familia.productos.map(prod => (
+          <div class="prod-card">
+            <p class="prod-codigo">{prod.codigo}</p>
+            <p class="prod-nombre">{prod.nombre}</p>
+            <p class="prod-desc">{prod.desc}</p>
+            <div class="prod-tags">
+              {prod.tags.map(t => <span class="tag">{t}</span>)}
+            </div>
+            <div class="prod-actions">
+              <a href={prod.archivo} download class="btn-descarga">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M8 2v8M5 7l3 3 3-3M2 13h12"/>
+                </svg>
+                Descargar PDF
+              </a>
+              <a href={prod.archivo} target="_blank" rel="noopener" class="btn-ver">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="2" width="12" height="12" rx="1"/><path d="M5 8h6M8 5v6"/>
+                </svg>
+                Ver
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  ))}
+
+  <!-- AVISO HOJAS DE SEGURIDAD -->
+  <div class="aviso-sds">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="10" cy="10" r="8"/><path d="M10 6v4M10 14h.01"/>
+    </svg>
+    <p>
+      <strong>Hojas de Seguridad (SDS/MSDS)</strong><br/>
+      Las hojas de seguridad de cada producto se entregan junto con la orden de compra o a solicitud de nuestro equipo técnico.
+      Para solicitarlas escribinos a <a href="mailto:consultas@poxdrive.com.ar">consultas@poxdrive.com.ar</a> indicando el código de producto o contactanos por
+      <strong>WhatsApp +54 9 11 3820-0513</strong>.
+    </p>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">POX<span>DRIVE</span></div>
+    <p class="footer-copy">FARBENTEC S.R.L. · Rincón 4672, La Tablada, Bs. As. · consultas@poxdrive.com.ar</p>
+  </div>
+</footer>
+
+<script>
+  const btns = document.querySelectorAll('.filtro-btn');
+  const bloques = document.querySelectorAll('.familia-bloque');
+
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      btns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const familia = btn.dataset.familia;
+      bloques.forEach(bloque => {
+        if (familia === 'todas' || bloque.dataset.familiaId === familia) {
+          bloque.classList.remove('oculta');
+        } else {
+          bloque.classList.add('oculta');
+        }
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
