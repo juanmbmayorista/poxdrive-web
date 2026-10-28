@@ -25,13 +25,15 @@
         justify-content: space-between;
         align-items: center;
       }
-      .nav-logo { font-size: 1.4rem; font-weight: 900; letter-spacing: 2px; }
+      .nav-logo { font-size: 1.4rem; font-weight: 900; letter-spacing: 2px; text-decoration: none; color: #F0EDEA; }
       .nav-logo span { color: #E8500A; }
       nav { display: flex; gap: 2rem; align-items: center; }
       nav a { color: #F0EDEA; text-decoration: none; font-size: 0.95rem; }
       nav a:hover { color: #E8500A; }
-      .nav-cta { background: #E8500A; color: #fff !important; padding: 0.5rem 1.2rem; font-weight: 700; }
+      .nav-cta { background: #E8500A; color: #fff !important; padding: 0.5rem 1.2rem; font-weight: 700; border-radius: 4px; }
       .nav-cta:hover { background: #c94008; }
+      .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+      .hamburger span { display: block; width: 22px; height: 2px; background: #F0EDEA; margin: 5px 0; border-radius: 2px; }
 
       .hero {
         min-height: 100vh;
@@ -164,18 +166,28 @@
         gap: 0.5rem;
       }
       .footer-bottom p { color: #555; font-size: 0.8rem; }
+
+      @media(max-width: 768px) {
+        nav .nav-links-group { display: none; }
+        .hamburger { display: block; }
+        .problemas-layout { flex-direction: column; }
+        .form-row { flex-direction: column; }
+      }
     </style>
   </head>
   <body>
     <header>
       <div class="nav-inner">
-        <div class="nav-logo">POX<span>DRIVE</span></div>
+        <a href="/" class="nav-logo">POX<span>DRIVE</span></a>
         <nav>
-          <a href="/alimenticia">Alimentaria</a>
-          <a href="/farmaceutica">Farmacéutica</a>
-          <a href="/mineria">Minería</a>
-          <a href="/logistica">Logística</a>
-          <a href="#contacto" class="nav-cta">Consultá</a>
+          <div class="nav-links-group" style="display:flex;gap:2rem;align-items:center;">
+            <a href="/alimenticia">Industrias</a>
+            <a href="/blog">Blog</a>
+            <a href="/casos">Casos de obra</a>
+            <a href="/nosotros">Nosotros</a>
+          </div>
+          <a href="/contacto" class="nav-cta">Consultá</a>
+          <button class="hamburger" aria-label="Menú"><span></span><span></span><span></span></button>
         </nav>
       </div>
     </header>
@@ -202,31 +214,31 @@
               <div class="tag">SOLUCIÓN</div>
               <h3>Mortero epoxi M-2</h3>
               <p>Recubrimiento de alta resistencia mecánica que sella fisuras y reconstruye el sustrato. Apto para aplicación en frío y reanudación de actividad en 24 hs.</p>
-              <a href="#contacto" class="sol-cta">Consultá este caso →</a>
+              <a href="/contacto" class="sol-cta">Consultá este caso →</a>
             </div>
             <div class="solucion hidden" data-id="senasa">
               <div class="tag">SOLUCIÓN</div>
               <h3>Sistema CEM-AU</h3>
               <p>Recubrimiento cementicio-acrílico aprobado para plantas alimenticias y farmacéuticas. Cumple SENASA, BPM y normativa GMP. Sin juntas, sin porosidad.</p>
-              <a href="#contacto" class="sol-cta">Consultá este caso →</a>
+              <a href="/contacto" class="sol-cta">Consultá este caso →</a>
             </div>
             <div class="solucion hidden" data-id="resbaladizo">
               <div class="tag">SOLUCIÓN</div>
               <h3>Epoxi antideslizante AN-1 AD</h3>
               <p>Acabado texturado con partículas de corindón que garantiza coeficiente de fricción seguro en zonas húmedas, grasas o de alto tránsito peatonal.</p>
-              <a href="#contacto" class="sol-cta">Consultá este caso →</a>
+              <a href="/contacto" class="sol-cta">Consultá este caso →</a>
             </div>
             <div class="solucion hidden" data-id="quimicos">
               <div class="tag">SOLUCIÓN</div>
               <h3>Mortero antiácido</h3>
               <p>Sistema multicapa con resina novolaca de alta resistencia química. Soporta ácidos, álcalis y solventes en plantas químicas, petroquímicas y laboratorios.</p>
-              <a href="#contacto" class="sol-cta">Consultá este caso →</a>
+              <a href="/contacto" class="sol-cta">Consultá este caso →</a>
             </div>
             <div class="solucion hidden" data-id="autoelevadores">
               <div class="tag">SOLUCIÓN</div>
               <h3>Epoxi industrial AC-33</h3>
               <p>Alta resistencia a la abrasión y al impacto. Diseñado para soportar el tráfico continuo de autoelevadores, zorras y maquinaria pesada en depósitos y plantas logísticas.</p>
-              <a href="#contacto" class="sol-cta">Consultá este caso →</a>
+              <a href="/contacto" class="sol-cta">Consultá este caso →</a>
             </div>
           </div>
         </div>
@@ -298,6 +310,15 @@
             <li><a href="/farmaceutica">Farmacéutica</a></li>
             <li><a href="/mineria">Minería</a></li>
             <li><a href="/logistica">Logística</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>CONTENIDO</h4>
+          <ul>
+            <li><a href="/blog">Blog técnico</a></li>
+            <li><a href="/casos">Casos de obra</a></li>
+            <li><a href="/nosotros">Nosotros</a></li>
+            <li><a href="/aplicadores">Aplicadores</a></li>
           </ul>
         </div>
         <div class="footer-col">
