@@ -113,12 +113,16 @@ const totalProductos = familias.reduce((s, f) => s + f.productos.length, 0);
       text-transform: uppercase;
     }
     .nav-logo span { color: var(--naranja); }
-    .nav-links { display: flex; gap: 2rem; list-style: none; }
-    .nav-links a {
-      color: var(--muted); text-decoration: none; font-size: 0.85rem;
-      font-weight: 500; letter-spacing: 0.5px; transition: color 0.2s;
-    }
-    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+        .nav-links-group { display: flex; gap: 32px; align-items: center; }
+    .nav-links-group a { color: var(--muted, rgba(232,228,224,0.45)); text-decoration: none; font-size: 0.875rem; font-weight: 500; }
+    .nav-links-group a:hover, .nav-links-group a.active { color: #F0EDEA; }
+    .nav-dropdown { position: relative; display: inline-block; }
+    .nav-dropdown-btn { background: none; border: none; cursor: pointer; color: rgba(232,228,224,0.7); font-size: 0.875rem; font-family: inherit; padding: 0; display: flex; align-items: center; gap: 4px; font-weight: 500; }
+    .nav-dropdown-btn:hover { color: #F0EDEA; }
+    .dropdown-menu { display: none; position: absolute; top: calc(100% + 10px); left: 50%; transform: translateX(-50%); background: #1C1C1C; border: 1px solid #333; border-radius: 6px; min-width: 170px; padding: 6px 0; z-index: 999; box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+    .dropdown-menu.open { display: block; }
+    .dropdown-menu a { display: block; padding: 9px 16px; color: #9a9490 !important; text-decoration: none; font-size: 0.875rem; font-weight: 400; opacity: 1 !important; }
+    .dropdown-menu a:hover { color: #F0EDEA !important; background: #252525; }
 
     /* ---- HERO ---- */
     .hero {
@@ -286,7 +290,7 @@ const totalProductos = familias.reduce((s, f) => s + f.productos.length, 0);
     .footer-copy { font-size: 0.75rem; color: var(--muted); }
 
     @media (max-width: 600px) {
-      .nav-links { display: none; }
+      .nav-links-group, .nav-cta { display: none; }
       .hero { padding-top: 2.5rem; }
       .prod-actions { flex-direction: column; }
       .btn-descarga, .btn-ver { width: 100%; justify-content: center; }
@@ -299,13 +303,22 @@ const totalProductos = familias.reduce((s, f) => s + f.productos.length, 0);
 <nav>
   <div class="nav-inner">
     <a href="/" class="nav-logo">POX<span>DRIVE</span></a>
-    <ul class="nav-links">
-      <li><a href="/industrias">Industrias</a></li>
-      <li><a href="/casos">Casos de obra</a></li>
-      <li><a href="/blog">Blog técnico</a></li>
-      <li><a href="/descargas" class="active">Descargas</a></li>
-      <li><a href="/contacto">Contacto</a></li>
-    </ul>
+    <div class="nav-links-group">
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-btn" id="dd-btn">Industrias <span style="font-size:0.65em">▼</span></button>
+        <div class="dropdown-menu" id="dd-menu">
+          <a href="/alimenticia">Alimentaria</a>
+          <a href="/farmaceutica">Farmacéutica</a>
+          <a href="/mineria">Minería</a>
+          <a href="/logistica">Logística</a>
+        </div>
+      </div>
+      <a href="/blog">Blog</a>
+      <a href="/casos">Casos de obra</a>
+      <a href="/nosotros">Nosotros</a>
+    </div>
+    <a href="/contacto" class="nav-cta">Consultá</a>
+    <button class="hamburger" aria-label="Menú"><span></span><span></span><span></span></button>
   </div>
 </nav>
 
@@ -420,5 +433,14 @@ const totalProductos = familias.reduce((s, f) => s + f.productos.length, 0);
   });
 </script>
 
+<script>
+(function(){
+  var btn=document.getElementById('dd-btn'),menu=document.getElementById('dd-menu');
+  if(!btn||!menu) return;
+  btn.addEventListener('click',function(e){e.stopPropagation();menu.classList.toggle('open');});
+  menu.addEventListener('click',function(e){e.stopPropagation();});
+  document.addEventListener('click',function(){menu.classList.remove('open');});
+})();
+</script>
 </body>
 </html>
