@@ -1,0 +1,310 @@
+---
+// src/pages/blog/index.astro
+---
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog Técnico | POXDRIVE</title>
+  <meta name="description" content="Guías técnicas sobre pisos industriales epoxi y poliuretánico. Soluciones reales para depósitos, plantas alimenticias, zonas húmedas y más." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --naranja: #E8500A;
+      --bg: #111111;
+      --surface: #1C1C1C;
+      --concreto: #F0EDEA;
+      --text: #E8E4E0;
+      --muted: rgba(232,228,224,0.45);
+      --border: rgba(255,255,255,0.08);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(17,17,17,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 max(24px, env(safe-area-inset-left, 0px));
+    }
+    .nav-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+    }
+    .nav-logo {
+      font-size: 1.25rem; font-weight: 700; color: var(--text);
+      text-decoration: none; letter-spacing: -0.02em;
+    }
+    .nav-logo span { color: var(--naranja); }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a {
+      color: var(--muted); text-decoration: none; font-size: 0.875rem;
+      font-weight: 500; transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+    .nav-cta {
+      background: var(--naranja); color: #fff; text-decoration: none;
+      padding: 8px 20px; border-radius: 6px; font-size: 0.875rem;
+      font-weight: 600; transition: opacity 0.2s;
+    }
+    .nav-cta:hover { opacity: 0.85; }
+    .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--text); margin: 5px 0; border-radius: 2px; }
+
+    /* HERO */
+    .blog-hero {
+      padding: 80px max(24px, env(safe-area-inset-left, 0px)) 60px;
+      max-width: 1200px; margin: 0 auto;
+      border-bottom: 1px solid var(--border);
+    }
+    .blog-hero .label {
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--naranja); margin-bottom: 16px;
+    }
+    .blog-hero h1 {
+      font-size: clamp(2rem, 4vw, 3rem); font-weight: 700;
+      letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 20px;
+    }
+    .blog-hero p {
+      font-size: 1.125rem; color: var(--muted); max-width: 560px; line-height: 1.7;
+    }
+
+    /* GRID */
+    .blog-grid-section {
+      max-width: 1200px; margin: 0 auto;
+      padding: 64px max(24px, env(safe-area-inset-left, 0px));
+    }
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 24px;
+    }
+    .blog-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex; flex-direction: column;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .blog-card:hover {
+      border-color: rgba(232,80,10,0.4);
+      transform: translateY(-2px);
+    }
+    .card-tag-row {
+      padding: 24px 24px 0;
+      display: flex; gap: 8px; flex-wrap: wrap;
+    }
+    .tag {
+      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; padding: 4px 10px; border-radius: 4px;
+      background: rgba(232,80,10,0.12); color: var(--naranja);
+    }
+    .tag.blue { background: rgba(59,130,246,0.12); color: #60a5fa; }
+    .tag.green { background: rgba(34,197,94,0.12); color: #4ade80; }
+    .tag.yellow { background: rgba(234,179,8,0.12); color: #facc15; }
+    .card-body {
+      padding: 20px 24px 24px; flex: 1; display: flex; flex-direction: column;
+    }
+    .card-body h2 {
+      font-size: 1.125rem; font-weight: 700; letter-spacing: -0.02em;
+      line-height: 1.3; margin-bottom: 12px; color: var(--text);
+    }
+    .card-body p {
+      font-size: 0.9rem; color: var(--muted); line-height: 1.65;
+      flex: 1; margin-bottom: 24px;
+    }
+    .card-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-top: 16px; border-top: 1px solid var(--border);
+    }
+    .card-read-time { font-size: 0.8rem; color: var(--muted); }
+    .card-link {
+      font-size: 0.875rem; font-weight: 600; color: var(--naranja);
+      text-decoration: none; display: flex; align-items: center; gap: 6px;
+      transition: gap 0.2s;
+    }
+    .card-link:hover { gap: 10px; }
+
+    /* CTA SECTION */
+    .blog-cta {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 64px max(24px, env(safe-area-inset-left, 0px));
+    }
+    .blog-cta-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; flex-direction: column; align-items: center;
+      text-align: center; gap: 20px;
+    }
+    .blog-cta h2 { font-size: 1.75rem; font-weight: 700; letter-spacing: -0.02em; }
+    .blog-cta p { color: var(--muted); max-width: 480px; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--naranja); color: #fff; text-decoration: none;
+      padding: 14px 28px; border-radius: 8px; font-weight: 600;
+      font-size: 0.95rem; transition: opacity 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.85; }
+
+    /* FOOTER */
+    footer {
+      padding: 40px max(24px, env(safe-area-inset-left, 0px));
+      border-top: 1px solid var(--border);
+    }
+    .footer-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 16px;
+    }
+    .footer-copy { font-size: 0.8rem; color: var(--muted); }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a { font-size: 0.8rem; color: var(--muted); text-decoration: none; }
+    .footer-links a:hover { color: var(--text); }
+
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: block; }
+      .blog-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">POX<span>DRIVE</span></a>
+    <ul class="nav-links">
+      <li><a href="/alimenticia">Industrias</a></li>
+      <li><a href="/blog" class="active">Blog</a></li>
+      <li><a href="/casos">Casos de obra</a></li>
+      <li><a href="/nosotros">Nosotros</a></li>
+      <li><a href="/aplicadores">Aplicadores</a></li>
+    </ul>
+    <a href="/contacto" class="nav-cta">Consultar</a>
+    <button class="hamburger" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<section class="blog-hero">
+  <div class="label">Blog técnico</div>
+  <h1>Guías para resolver<br/>problemas reales de piso</h1>
+  <p>Cada artículo responde una consulta frecuente con datos técnicos reales, fichas de producto y casos de obra. Sin relleno.</p>
+</section>
+
+<section class="blog-grid-section">
+  <div class="blog-grid">
+
+    <article class="blog-card">
+      <div class="card-tag-row">
+        <span class="tag">Depósitos</span>
+        <span class="tag blue">Autonivelante</span>
+      </div>
+      <div class="card-body">
+        <h2>Autoelevadores rompen el piso del depósito</h2>
+        <p>Guía técnica sobre pisos autonivelantes epoxi de alto espesor (AC-21, AC-23, AC-33) para depósitos con tránsito de autoelevadores. Ficha técnica real y casos de obra incluidos.</p>
+        <div class="card-footer">
+          <span class="card-read-time">8 min de lectura</span>
+          <a href="/blog/autoelevadores-piso-deposito" class="card-link">Leer guía →</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="blog-card">
+      <div class="card-tag-row">
+        <span class="tag green">Seguridad</span>
+        <span class="tag">Antideslizante</span>
+      </div>
+      <div class="card-body">
+        <h2>Piso resbaladizo en rampas o zonas húmedas</h2>
+        <p>3 sistemas antideslizantes (epoxi, poliuretánico y acrílico) para rampas, zonas húmedas y áreas con grasas o aceites. Cuál elegir según el caso.</p>
+        <div class="card-footer">
+          <span class="card-read-time">6 min de lectura</span>
+          <a href="/blog/piso-antideslizante" class="card-link">Leer guía →</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="blog-card">
+      <div class="card-tag-row">
+        <span class="tag yellow">Alimenticia</span>
+        <span class="tag">SENASA</span>
+      </div>
+      <div class="card-body">
+        <h2>Cumplir SENASA/BPF en tu planta alimenticia</h2>
+        <p>Cómo elegir el piso para cumplir con Buenas Prácticas de Manufactura en plantas alimenticias y cámaras de frío, con TEXAFIC CEM-AU.</p>
+        <div class="card-footer">
+          <span class="card-read-time">7 min de lectura</span>
+          <a href="/blog/senasa-bpf-planta-alimenticia" class="card-link">Leer guía →</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="blog-card">
+      <div class="card-tag-row">
+        <span class="tag">Reparación</span>
+        <span class="tag blue">Fisuras</span>
+      </div>
+      <div class="card-body">
+        <h2>Piso con fisuras y roturas: por qué pasa y cómo solucionarlo</h2>
+        <p>Cómo identificar y reparar fisuras y roturas en pisos de hormigón con MASTERPOX M-2. Con dos casos reales y proceso paso a paso.</p>
+        <div class="card-footer">
+          <span class="card-read-time">7 min de lectura</span>
+          <a href="/blog/fisuras-roturas-piso" class="card-link">Leer guía →</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="blog-card">
+      <div class="card-tag-row">
+        <span class="tag">Química</span>
+        <span class="tag blue">Resistencia</span>
+      </div>
+      <div class="card-body">
+        <h2>Reactivos químicos e hidrocarburos deterioran el piso</h2>
+        <p>Sistema de mortero epoxi + enduido epoxi + MASTERPOX AN-1 para pisos expuestos a hidrocarburos, solventes y reactivos químicos.</p>
+        <div class="card-footer">
+          <span class="card-read-time">8 min de lectura</span>
+          <a href="/blog/reactivos-quimicos-piso" class="card-link">Leer guía →</a>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<section class="blog-cta">
+  <div class="blog-cta-inner">
+    <h2>¿No encontrás lo que buscás?</h2>
+    <p>Contanos tu caso y un técnico de POXDRIVE te responde con la solución correcta para tu piso.</p>
+    <a href="/contacto" class="btn-primary">Hablar con un técnico →</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <span class="footer-copy">© 2025 FARBENPAINT S.R.L. · Rincón 4672, La Tablada, Bs. As. · consultas@poxdrive.com.ar</span>
+    <div class="footer-links">
+      <a href="/nosotros">Nosotros</a>
+      <a href="/aplicadores">Aplicadores</a>
+      <a href="/contacto">Contacto</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

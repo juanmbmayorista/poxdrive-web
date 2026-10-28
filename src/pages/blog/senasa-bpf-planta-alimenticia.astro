@@ -1,0 +1,238 @@
+---
+// src/pages/blog/senasa-bpf-planta-alimenticia.astro
+---
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cumplir SENASA/BPF en tu planta alimenticia | Blog POXDRIVE</title>
+  <meta name="description" content="Cómo elegir el piso correcto para cumplir con Buenas Prácticas de Manufactura en plantas alimenticias y cámaras de frío, con TEXAFIC CEM-AU." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root{--naranja:#E8500A;--bg:#111111;--surface:#1C1C1C;--text:#E8E4E0;--muted:rgba(232,228,224,0.45);--border:rgba(255,255,255,0.08)}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-size:16px;line-height:1.6}
+    nav{position:sticky;top:0;z-index:100;background:rgba(17,17,17,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 max(24px,env(safe-area-inset-left,0px))}
+    .nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px}
+    .nav-logo{font-size:1.25rem;font-weight:700;color:var(--text);text-decoration:none;letter-spacing:-0.02em}
+    .nav-logo span{color:var(--naranja)}
+    .nav-links{display:flex;gap:32px;list-style:none}
+    .nav-links a{color:var(--muted);text-decoration:none;font-size:0.875rem;font-weight:500;transition:color 0.2s}
+    .nav-links a:hover,.nav-links a.active{color:var(--text)}
+    .nav-cta{background:var(--naranja);color:#fff;text-decoration:none;padding:8px 20px;border-radius:6px;font-size:0.875rem;font-weight:600}
+    .hamburger{display:none;background:none;border:none;cursor:pointer;padding:4px}
+    .hamburger span{display:block;width:22px;height:2px;background:var(--text);margin:5px 0;border-radius:2px}
+    .article-wrap{max-width:1200px;margin:0 auto;padding:64px max(24px,env(safe-area-inset-left,0px)) 80px;display:grid;grid-template-columns:1fr 300px;gap:64px;align-items:start}
+    .article-main{min-width:0}
+    .breadcrumb{display:flex;gap:8px;align-items:center;font-size:0.8rem;color:var(--muted);margin-bottom:32px}
+    .breadcrumb a{color:var(--muted);text-decoration:none}.breadcrumb a:hover{color:var(--text)}.breadcrumb span{color:var(--border)}
+    .article-tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+    .tag{font-size:0.7rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;padding:4px 10px;border-radius:4px;background:rgba(232,80,10,0.12);color:var(--naranja)}
+    .tag.yellow{background:rgba(234,179,8,0.12);color:#facc15}
+    .article-main h1{font-size:clamp(1.75rem,3.5vw,2.5rem);font-weight:700;letter-spacing:-0.03em;line-height:1.2;margin-bottom:20px;text-wrap:balance}
+    .article-meta{font-size:0.85rem;color:var(--muted);margin-bottom:40px;padding-bottom:32px;border-bottom:1px solid var(--border)}
+    .article-main h2{font-size:1.35rem;font-weight:700;letter-spacing:-0.02em;margin-top:48px;margin-bottom:16px;color:var(--text)}
+    .article-main h3{font-size:1.05rem;font-weight:700;margin-top:28px;margin-bottom:10px;color:var(--text)}
+    .article-main p{color:var(--muted);margin-bottom:16px;line-height:1.75}
+    .article-main p strong{color:var(--text);font-weight:600}
+    .article-main ul{margin:0 0 16px 24px}
+    .article-main li{color:var(--muted);margin-bottom:8px;line-height:1.65}
+    .article-main li::marker{color:var(--naranja)}
+    .table-wrap{overflow-x:auto;margin:24px 0}
+    table{width:100%;border-collapse:collapse;font-size:0.875rem}
+    th{background:var(--surface);color:var(--text);font-weight:600;padding:12px 16px;text-align:left;border-bottom:1px solid var(--border)}
+    td{padding:10px 16px;border-bottom:1px solid var(--border);color:var(--muted);vertical-align:top}
+    td:first-child{color:var(--text);font-weight:500}
+    tr:last-child td{border-bottom:none}
+    .benefits-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin:24px 0}
+    .benefit-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px}
+    .benefit-card .icon{font-size:1.5rem;margin-bottom:10px}
+    .benefit-card h4{font-size:0.9rem;font-weight:700;color:var(--text);margin-bottom:6px}
+    .benefit-card p{font-size:0.85rem;color:var(--muted);margin:0}
+    .note-box{background:rgba(234,179,8,0.08);border:1px solid rgba(234,179,8,0.25);border-radius:8px;padding:16px 20px;margin:24px 0}
+    .note-box p{font-size:0.875rem;margin:0;color:var(--muted)}
+    .note-box p strong{color:#facc15}
+    .case-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:24px;margin:20px 0}
+    .case-card h3{font-size:1rem;font-weight:700;color:var(--text);margin-bottom:8px;margin-top:0}
+    .case-card p{margin-bottom:0;font-size:0.9rem}
+    .pdf-download{background:linear-gradient(135deg,rgba(232,80,10,0.12),rgba(232,80,10,0.04));border:1px solid rgba(232,80,10,0.3);border-radius:10px;padding:24px;display:flex;align-items:center;gap:20px;margin:40px 0}
+    .pdf-icon{width:48px;height:48px;flex-shrink:0;background:rgba(232,80,10,0.15);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.5rem}
+    .pdf-info h4{font-size:0.95rem;font-weight:700;color:var(--text);margin-bottom:4px}
+    .pdf-info p{font-size:0.8rem;color:var(--muted);margin:0}
+    .pdf-btn{margin-left:auto;flex-shrink:0;background:var(--naranja);color:#fff;text-decoration:none;padding:10px 20px;border-radius:6px;font-size:0.875rem;font-weight:600;white-space:nowrap}
+    .article-cta{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:32px;text-align:center;margin-top:48px}
+    .article-cta h3{font-size:1.25rem;font-weight:700;margin-bottom:12px}
+    .article-cta p{color:var(--muted);margin-bottom:20px}
+    .btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--naranja);color:#fff;text-decoration:none;padding:12px 24px;border-radius:8px;font-weight:600;font-size:0.9rem}
+    .article-sidebar{position:sticky;top:88px}
+    .sidebar-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:24px;margin-bottom:16px}
+    .sidebar-card h4{font-size:0.85rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--muted);margin-bottom:16px}
+    .sidebar-card ul{list-style:none;padding:0;margin:0}
+    .sidebar-card ul li{padding:6px 0;border-bottom:1px solid var(--border);font-size:0.875rem}
+    .sidebar-card ul li:last-child{border-bottom:none}
+    .sidebar-card ul li a{color:var(--muted);text-decoration:none;display:block}
+    .sidebar-card ul li a:hover{color:var(--naranja)}
+    .sidebar-cta{background:var(--naranja);border-radius:10px;padding:24px;text-align:center}
+    .sidebar-cta h4{color:#fff;font-size:1rem;font-weight:700;margin-bottom:8px}
+    .sidebar-cta p{color:rgba(255,255,255,0.75);font-size:0.875rem;margin-bottom:16px}
+    .sidebar-cta a{display:block;background:#fff;color:var(--naranja);padding:10px 16px;border-radius:6px;text-decoration:none;font-weight:700;font-size:0.875rem}
+    footer{padding:40px max(24px,env(safe-area-inset-left,0px));border-top:1px solid var(--border)}
+    .footer-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+    .footer-copy{font-size:0.8rem;color:var(--muted)}
+    .footer-links{display:flex;gap:24px}
+    .footer-links a{font-size:0.8rem;color:var(--muted);text-decoration:none}
+    .footer-links a:hover{color:var(--text)}
+    @media(max-width:900px){.article-wrap{grid-template-columns:1fr}.article-sidebar{position:static}}
+    @media(max-width:768px){.nav-links,.nav-cta{display:none}.hamburger{display:block}.pdf-download{flex-wrap:wrap}.pdf-btn{margin-left:0;width:100%;text-align:center}}
+  </style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">POX<span>DRIVE</span></a>
+    <ul class="nav-links">
+      <li><a href="/alimenticia">Industrias</a></li>
+      <li><a href="/blog" class="active">Blog</a></li>
+      <li><a href="/casos">Casos de obra</a></li>
+      <li><a href="/nosotros">Nosotros</a></li>
+      <li><a href="/aplicadores">Aplicadores</a></li>
+    </ul>
+    <a href="/contacto" class="nav-cta">Consultar</a>
+    <button class="hamburger" aria-label="Menú"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="article-wrap">
+  <main class="article-main">
+    <div class="breadcrumb">
+      <a href="/">Inicio</a><span>/</span><a href="/blog">Blog técnico</a><span>/</span><span>SENASA / BPF</span>
+    </div>
+    <div class="article-tags">
+      <span class="tag yellow">Alimenticia</span>
+      <span class="tag">SENASA</span>
+    </div>
+    <h1>Necesito cumplir SENASA/BPF en mi planta alimenticia</h1>
+    <div class="article-meta">7 min de lectura · Sistema TEXAFIC CEM-AU para plantas alimenticias y cámaras de frío</div>
+
+    <p>Un piso que no cumple con Buenas Prácticas de Manufactura no es solo un problema estético: puede ser motivo de observación en una auditoría SENASA, y en cámaras de frío o zonas de proceso, el piso incorrecto se rompe, se descascara o genera puntos de acumulación de suciedad en poco tiempo.</p>
+
+    <div class="pdf-download">
+      <div class="pdf-icon">📄</div>
+      <div class="pdf-info">
+        <h4>Guía completa en PDF</h4>
+        <p>Ficha técnica TEXAFIC CEM-AU + caso real + checklist BPF</p>
+      </div>
+      <a href="/blog/pdfs/guia-senasa-bpf-planta-alimenticia.pdf" class="pdf-btn" download>Descargar PDF</a>
+    </div>
+
+    <h2>Qué exige un piso de planta alimenticia</h2>
+    <p>Más allá del sistema puntual que se elija, un piso apto para BPF necesita cumplir con algunos requisitos que no son negociables:</p>
+    <ul>
+      <li>Superficie continua, sin juntas ni poros donde se acumule suciedad o líquidos</li>
+      <li>Resistencia al lavado frecuente con agua a presión y soluciones detersivas</li>
+      <li>Sin generar polvo ni desprendimientos que puedan contaminar el producto</li>
+      <li>En cámaras de frío: resistencia a temperaturas extremas y a los ciclos de frío/calor</li>
+    </ul>
+
+    <div class="note-box">
+      <p><strong>Nota:</strong> esta guía describe el sistema técnico recomendado para resolver estos requisitos. La verificación del cumplimiento normativo exacto (Código Alimentario Argentino, alcance SENASA según tu actividad) debe hacerse con tu responsable de calidad.</p>
+    </div>
+
+    <h2>La solución: TEXAFIC CEM-AU</h2>
+    <p>TEXAFIC CEM-AU es un autonivelante poliuretánico de 5 mm, <strong>100% sólidos</strong>, desarrollado específicamente para la industria alimenticia y cámaras de frío. Su rango térmico de servicio va de <strong>-30°C a +120°C</strong>, algo poco común en pisos industriales, lo que lo hace apto tanto para zonas de frío extremo como para sectores de proceso con temperaturas elevadas.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Dato técnico</th><th>Valor</th></tr></thead>
+        <tbody>
+          <tr><td>Sólidos</td><td>100% — sin solventes</td></tr>
+          <tr><td>Rango térmico de servicio</td><td>-30°C a +120°C</td></tr>
+          <tr><td>Terminación</td><td>Mate</td></tr>
+          <tr><td>Espesor de película seca</td><td>Entre 4 y 5 mm</td></tr>
+          <tr><td>Consumo</td><td>1,8 kg/m² por mm de espesor</td></tr>
+          <tr><td>Secado al tacto</td><td>3 horas</td></tr>
+          <tr><td>Secado duro</td><td>8 horas</td></tr>
+          <tr><td>Topeado (habilitación al tránsito)</td><td>Mínimo a las 8 horas</td></tr>
+          <tr><td>Secado final</td><td>7 días</td></tr>
+          <tr><td>Presentación</td><td>Envase de 20 kg</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>La habilitación al tránsito en apenas <strong>8 horas</strong> es clave en plantas que no pueden detener producción por muchos días: se aplica en una parada programada y el sector vuelve a operar casi de inmediato.</p>
+
+    <h2>Beneficios clave</h2>
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <div class="icon">🌡️</div>
+        <h4>Rango térmico extremo</h4>
+        <p>Apto desde -30°C hasta +120°C, único en pisos industriales.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="icon">💧</div>
+        <h4>Aplica en húmedo</h4>
+        <p>Puede aplicarse sobre superficies húmedas con la técnica adecuada.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="icon">⚡</div>
+        <h4>Rápida habilitación</h4>
+        <p>Topeable a las 8 horas, optimiza los tiempos de parada de planta.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="icon">🔄</div>
+        <h4>Elasticidad plástica</h4>
+        <p>Absorbe deformaciones e impactos sin fisurarse.</p>
+      </div>
+    </div>
+
+    <h2>Caso real: planta procesadora de maíz, Baradero</h2>
+    <div class="case-card">
+      <h3>Zona de carga de fructosa, planta procesadora de maíz</h3>
+      <p>Una multinacional alimenticia necesitaba resolver la zona de carga de fructosa de su planta: hormigón corroído por el contacto constante con azúcares y ácidos, y lavados frecuentes con agua a presión. Se aplicó GROUT ST para encarpetar, MASTERPOX I-PISOS como imprimación, <strong>5 mm de TEXAFIC CEM-AU color mostaza</strong> como autonivelante, y 2 manos de TEXAFIC T-1 como terminación.</p>
+    </div>
+
+    <h2>¿Cuándo conviene este sistema?</h2>
+    <ul>
+      <li>Plantas de producción alimenticia que necesitan resolver observaciones de auditoría sobre el estado del piso</li>
+      <li>Cámaras de frío, con ciclos de temperatura extremos</li>
+      <li>Zonas con lavado diario a presión y contacto con sustancias corrosivas (azúcares, ácidos, grasas)</li>
+      <li>Plantas que no pueden detener producción por muchos días para hacer la obra</li>
+    </ul>
+
+    <div class="article-cta">
+      <h3>¿Tu planta necesita cumplir BPF?</h3>
+      <p>Contanos cómo está tu piso hoy y te recomendamos el sistema correcto para tu proceso, sin compromiso.</p>
+      <a href="/contacto" class="btn-primary">Consultar sin compromiso →</a>
+    </div>
+  </main>
+
+  <aside class="article-sidebar">
+    <div class="sidebar-card">
+      <h4>Más guías técnicas</h4>
+      <ul>
+        <li><a href="/blog/autoelevadores-piso-deposito">Autoelevadores y piso de depósito (AC-33)</a></li>
+        <li><a href="/blog/piso-antideslizante">Pisos antideslizantes: rampas y zonas húmedas</a></li>
+        <li><a href="/blog/fisuras-roturas-piso">Reparación de fisuras con MASTERPOX M-2</a></li>
+        <li><a href="/blog/reactivos-quimicos-piso">Pisos con resistencia química a hidrocarburos</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-cta">
+      <h4>¿Necesitás asesoramiento?</h4>
+      <p>Un técnico POXDRIVE te responde con la solución correcta para tu piso.</p>
+      <a href="/contacto">Escribinos ahora</a>
+    </div>
+  </aside>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <span class="footer-copy">© 2025 FARBENPAINT S.R.L. · Rincón 4672, La Tablada, Bs. As. · consultas@poxdrive.com.ar</span>
+    <div class="footer-links">
+      <a href="/nosotros">Nosotros</a><a href="/blog">Blog</a><a href="/contacto">Contacto</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,243 @@
+---
+// src/pages/blog/reactivos-quimicos-piso.astro
+---
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reactivos químicos e hidrocarburos deterioran el piso | Blog POXDRIVE</title>
+  <meta name="description" content="Sistema de 3 capas epoxi para pisos expuestos a aceites, solventes e hidrocarburos. Tabla de resistencia química y caso real en Pilar." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root{--naranja:#E8500A;--bg:#111111;--surface:#1C1C1C;--text:#E8E4E0;--muted:rgba(232,228,224,0.45);--border:rgba(255,255,255,0.08)}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-size:16px;line-height:1.6}
+    nav{position:sticky;top:0;z-index:100;background:rgba(17,17,17,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 max(24px,env(safe-area-inset-left,0px))}
+    .nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px}
+    .nav-logo{font-size:1.25rem;font-weight:700;color:var(--text);text-decoration:none;letter-spacing:-0.02em}
+    .nav-logo span{color:var(--naranja)}
+    .nav-links{display:flex;gap:32px;list-style:none}
+    .nav-links a{color:var(--muted);text-decoration:none;font-size:0.875rem;font-weight:500}
+    .nav-links a:hover,.nav-links a.active{color:var(--text)}
+    .nav-cta{background:var(--naranja);color:#fff;text-decoration:none;padding:8px 20px;border-radius:6px;font-size:0.875rem;font-weight:600}
+    .hamburger{display:none;background:none;border:none;cursor:pointer;padding:4px}
+    .hamburger span{display:block;width:22px;height:2px;background:var(--text);margin:5px 0;border-radius:2px}
+    .article-wrap{max-width:1200px;margin:0 auto;padding:64px max(24px,env(safe-area-inset-left,0px)) 80px;display:grid;grid-template-columns:1fr 300px;gap:64px;align-items:start}
+    .article-main{min-width:0}
+    .breadcrumb{display:flex;gap:8px;align-items:center;font-size:0.8rem;color:var(--muted);margin-bottom:32px}
+    .breadcrumb a{color:var(--muted);text-decoration:none}.breadcrumb a:hover{color:var(--text)}.breadcrumb span{color:var(--border)}
+    .article-tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+    .tag{font-size:0.7rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;padding:4px 10px;border-radius:4px;background:rgba(232,80,10,0.12);color:var(--naranja)}
+    .tag.blue{background:rgba(59,130,246,0.12);color:#60a5fa}
+    .article-main h1{font-size:clamp(1.75rem,3.5vw,2.5rem);font-weight:700;letter-spacing:-0.03em;line-height:1.2;margin-bottom:20px;text-wrap:balance}
+    .article-meta{font-size:0.85rem;color:var(--muted);margin-bottom:40px;padding-bottom:32px;border-bottom:1px solid var(--border)}
+    .article-main h2{font-size:1.35rem;font-weight:700;letter-spacing:-0.02em;margin-top:48px;margin-bottom:16px;color:var(--text)}
+    .article-main h3{font-size:1.05rem;font-weight:700;margin-top:28px;margin-bottom:10px;color:var(--text)}
+    .article-main p{color:var(--muted);margin-bottom:16px;line-height:1.75}
+    .article-main p strong{color:var(--text);font-weight:600}
+    .article-main ul{margin:0 0 16px 24px}
+    .article-main li{color:var(--muted);margin-bottom:8px;line-height:1.65}
+    .article-main li::marker{color:var(--naranja)}
+    .layers{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:24px 0}
+    .layer-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px}
+    .layer-num{font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--naranja);margin-bottom:8px}
+    .layer-card h3{font-size:0.95rem;font-weight:700;color:var(--text);margin:0 0 8px}
+    .layer-card p{font-size:0.85rem;color:var(--muted);margin:0;line-height:1.6}
+    .table-wrap{overflow-x:auto;margin:24px 0}
+    table{width:100%;border-collapse:collapse;font-size:0.875rem}
+    th{background:var(--surface);color:var(--text);font-weight:600;padding:12px 16px;text-align:left;border-bottom:1px solid var(--border)}
+    td{padding:10px 16px;border-bottom:1px solid var(--border);color:var(--muted);vertical-align:top}
+    td:first-child{color:var(--text);font-weight:500}
+    tr:last-child td{border-bottom:none}
+    td.ok{color:#4ade80}td.no{color:#f87171}
+    .alert-box{background:rgba(232,80,10,0.08);border:1px solid rgba(232,80,10,0.25);border-radius:8px;padding:16px 20px;margin:24px 0}
+    .alert-box p{font-size:0.875rem;margin:0;color:var(--muted)}
+    .alert-box p strong{color:var(--naranja)}
+    .case-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:24px;margin:20px 0}
+    .case-card h3{font-size:1rem;font-weight:700;color:var(--text);margin-bottom:8px;margin-top:0}
+    .case-card p{margin-bottom:0;font-size:0.9rem}
+    .pdf-download{background:linear-gradient(135deg,rgba(232,80,10,0.12),rgba(232,80,10,0.04));border:1px solid rgba(232,80,10,0.3);border-radius:10px;padding:24px;display:flex;align-items:center;gap:20px;margin:40px 0}
+    .pdf-icon{width:48px;height:48px;flex-shrink:0;background:rgba(232,80,10,0.15);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.5rem}
+    .pdf-info h4{font-size:0.95rem;font-weight:700;color:var(--text);margin-bottom:4px}
+    .pdf-info p{font-size:0.8rem;color:var(--muted);margin:0}
+    .pdf-btn{margin-left:auto;flex-shrink:0;background:var(--naranja);color:#fff;text-decoration:none;padding:10px 20px;border-radius:6px;font-size:0.875rem;font-weight:600;white-space:nowrap}
+    .article-cta{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:32px;text-align:center;margin-top:48px}
+    .article-cta h3{font-size:1.25rem;font-weight:700;margin-bottom:12px}
+    .article-cta p{color:var(--muted);margin-bottom:20px}
+    .btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--naranja);color:#fff;text-decoration:none;padding:12px 24px;border-radius:8px;font-weight:600;font-size:0.9rem}
+    .article-sidebar{position:sticky;top:88px}
+    .sidebar-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:24px;margin-bottom:16px}
+    .sidebar-card h4{font-size:0.85rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--muted);margin-bottom:16px}
+    .sidebar-card ul{list-style:none;padding:0;margin:0}
+    .sidebar-card ul li{padding:6px 0;border-bottom:1px solid var(--border);font-size:0.875rem}
+    .sidebar-card ul li:last-child{border-bottom:none}
+    .sidebar-card ul li a{color:var(--muted);text-decoration:none;display:block}
+    .sidebar-card ul li a:hover{color:var(--naranja)}
+    .sidebar-cta{background:var(--naranja);border-radius:10px;padding:24px;text-align:center}
+    .sidebar-cta h4{color:#fff;font-size:1rem;font-weight:700;margin-bottom:8px}
+    .sidebar-cta p{color:rgba(255,255,255,0.75);font-size:0.875rem;margin-bottom:16px}
+    .sidebar-cta a{display:block;background:#fff;color:var(--naranja);padding:10px 16px;border-radius:6px;text-decoration:none;font-weight:700;font-size:0.875rem}
+    footer{padding:40px max(24px,env(safe-area-inset-left,0px));border-top:1px solid var(--border)}
+    .footer-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+    .footer-copy{font-size:0.8rem;color:var(--muted)}
+    .footer-links{display:flex;gap:24px}
+    .footer-links a{font-size:0.8rem;color:var(--muted);text-decoration:none}
+    .footer-links a:hover{color:var(--text)}
+    @media(max-width:900px){.article-wrap{grid-template-columns:1fr}.article-sidebar{position:static}.layers{grid-template-columns:1fr}}
+    @media(max-width:768px){.nav-links,.nav-cta{display:none}.hamburger{display:block}.pdf-download{flex-wrap:wrap}.pdf-btn{margin-left:0;width:100%;text-align:center}}
+  </style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">POX<span>DRIVE</span></a>
+    <ul class="nav-links">
+      <li><a href="/alimenticia">Industrias</a></li>
+      <li><a href="/blog" class="active">Blog</a></li>
+      <li><a href="/casos">Casos de obra</a></li>
+      <li><a href="/nosotros">Nosotros</a></li>
+      <li><a href="/aplicadores">Aplicadores</a></li>
+    </ul>
+    <a href="/contacto" class="nav-cta">Consultar</a>
+    <button class="hamburger" aria-label="Menú"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="article-wrap">
+  <main class="article-main">
+    <div class="breadcrumb">
+      <a href="/">Inicio</a><span>/</span><a href="/blog">Blog técnico</a><span>/</span><span>Reactivos químicos</span>
+    </div>
+    <div class="article-tags">
+      <span class="tag">Química</span>
+      <span class="tag blue">Resistencia</span>
+    </div>
+    <h1>Reactivos químicos e hidrocarburos deterioran el piso</h1>
+    <div class="article-meta">8 min de lectura · MASTERPOX AN-1 · Sistema de 3 capas · Caso real en Pilar</div>
+
+    <p>En plantas industriales donde el piso está expuesto a aceites, solventes, combustibles o derrames químicos frecuentes, un contrapiso de hormigón sin protección se degrada rápido: absorbe manchas, se fisura y pierde resistencia mecánica en las zonas de mayor exposición.</p>
+    <p>La solución no es una sola capa, sino un <strong>sistema completo de tres capas epoxi</strong>: mortero para nivelar y dar resistencia mecánica, enduido para sellar los poros, y una terminación de alta resistencia química.</p>
+
+    <div class="pdf-download">
+      <div class="pdf-icon">📄</div>
+      <div class="pdf-info">
+        <h4>Guía completa en PDF</h4>
+        <p>Sistema de 3 capas + tabla de resistencia química + caso real Pilar</p>
+      </div>
+      <a href="/blog/pdfs/guia-reactivos-quimicos-piso.pdf" class="pdf-btn" download>Descargar PDF</a>
+    </div>
+
+    <h2>Por qué el hormigón convencional no alcanza</h2>
+    <p>El hormigón es poroso: los hidrocarburos y solventes se filtran, generan manchas permanentes y, con el tiempo, debilitan la superficie. En plantas con máquinas pesadas, calderas o equipos que generan derrames constantes, además hace falta un sustrato mecánicamente resistente antes de pensar en la terminación química.</p>
+
+    <h2>El sistema en 3 capas</h2>
+    <div class="layers">
+      <div class="layer-card">
+        <div class="layer-num">Capa 1</div>
+        <h3>Mortero epoxi</h3>
+        <p>Nivela el contrapiso existente y aporta resistencia mecánica al tránsito pesado y a las cargas puntuales de máquinas y equipos.</p>
+      </div>
+      <div class="layer-card">
+        <div class="layer-num">Capa 2</div>
+        <h3>Enduido epoxi</h3>
+        <p>Sella los poros del mortero, dejando una superficie uniforme y sin microporosidad donde puedan filtrarse líquidos.</p>
+      </div>
+      <div class="layer-card">
+        <div class="layer-num">Capa 3</div>
+        <h3>MASTERPOX AN-1</h3>
+        <p>Terminación esmalte epoxi de altos sólidos (70% en peso), autoimprimante, con resistencia comprobada a hidrocarburos y solventes.</p>
+      </div>
+    </div>
+
+    <h2>Resistencia química comprobada</h2>
+    <p>Estos son los datos reales de resistencia química de MASTERPOX AN-1, según ficha técnica:</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Sustancia</th><th>Resultado</th></tr></thead>
+        <tbody>
+          <tr><td>Etanol</td><td class="ok">Resistente</td></tr>
+          <tr><td>Metanol puro</td><td class="ok">Resistente</td></tr>
+          <tr><td>Metanol crudo (95%)</td><td class="no">No resistente</td></tr>
+          <tr><td>Aceite convencional de autos (sin plomo)</td><td class="ok">Resistente</td></tr>
+          <tr><td>Diésel</td><td class="ok">Resistente</td></tr>
+          <tr><td>Aceite crudo</td><td class="ok">Resistente</td></tr>
+          <tr><td>Nafta/MTBE (95:5 y 90:10)</td><td class="ok">Resistente</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="alert-box">
+      <p><strong>Nota importante:</strong> El metanol crudo (95%) es la única sustancia de esta tabla frente a la que AN-1 no es resistente. Si tu planta maneja este reactivo específico, contanos para evaluar una alternativa.</p>
+    </div>
+
+    <h2>MASTERPOX AN-1: ficha técnica</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Dato técnico</th><th>Valor</th></tr></thead>
+        <tbody>
+          <tr><td>Sólidos en peso</td><td>70%</td></tr>
+          <tr><td>Terminación</td><td>Satinado, según carta de color</td></tr>
+          <tr><td>Aplicación</td><td>Autoimprimante — directo sobre acero u hormigón preparado</td></tr>
+          <tr><td>Consumo</td><td>9,0 m²/L para 100 µm de película seca</td></tr>
+          <tr><td>Espesor de película seca</td><td>80 a 100 µ por mano</td></tr>
+          <tr><td>Cantidad de manos</td><td>1 o 2</td></tr>
+          <tr><td>Vida útil de la mezcla</td><td>6 horas</td></tr>
+          <tr><td>Secado al tacto / duro / final</td><td>4 h / 16 h / 7 días</td></tr>
+          <tr><td>Repintado</td><td>4 días</td></tr>
+          <tr><td>Almacenaje</td><td>24 meses</td></tr>
+          <tr><td>Presentación</td><td>Envases de 8, 20 y 40 litros</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Caso real: fábrica de colchones, Pilar</h2>
+    <div class="case-card">
+      <h3>Fábrica de colchones, Pilar (Buenos Aires) — 300 m²</h3>
+      <p>Planta industrial con máquinas y calderas, expuesta a aceites y solventes propios del proceso productivo. Se aplicó <strong>mortero epoxi para nivelar y dar resistencia mecánica</strong>, enduido epoxi para sellar los poros, y se terminó con MASTERPOX AN-1 como revestimiento final. El resultado: superficie continua, sin poros, resistente a los derrames del proceso sin interrumpir la producción de forma prolongada.</p>
+    </div>
+
+    <h2>¿Cuándo conviene este sistema?</h2>
+    <ul>
+      <li>Plantas con derrames frecuentes de aceites, combustibles o solventes</li>
+      <li>Salas de máquinas, calderas o equipos con riesgo de fugas</li>
+      <li>Pisos de hormigón poroso que ya muestran manchas o deterioro por hidrocarburos</li>
+      <li>Sectores que requieren resistencia mecánica y química al mismo tiempo</li>
+    </ul>
+
+    <div class="article-cta">
+      <h3>¿Tu piso está expuesto a químicos o hidrocarburos?</h3>
+      <p>Contanos qué sustancias maneja tu planta y el estado actual del piso. Te decimos qué sistema corresponde a tu caso.</p>
+      <a href="/contacto" class="btn-primary">Consultar sin compromiso →</a>
+    </div>
+  </main>
+
+  <aside class="article-sidebar">
+    <div class="sidebar-card">
+      <h4>Más guías técnicas</h4>
+      <ul>
+        <li><a href="/blog/autoelevadores-piso-deposito">Autoelevadores y piso de depósito (AC-33)</a></li>
+        <li><a href="/blog/piso-antideslizante">Pisos antideslizantes: rampas y zonas húmedas</a></li>
+        <li><a href="/blog/senasa-bpf-planta-alimenticia">Cumplir SENASA/BPF en plantas alimenticias</a></li>
+        <li><a href="/blog/fisuras-roturas-piso">Reparar fisuras y roturas de piso</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-cta">
+      <h4>¿Necesitás asesoramiento?</h4>
+      <p>Un técnico POXDRIVE te responde con la solución correcta para tu piso.</p>
+      <a href="/contacto">Escribinos ahora</a>
+    </div>
+  </aside>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <span class="footer-copy">© 2025 FARBENPAINT S.R.L. · Rincón 4672, La Tablada, Bs. As. · consultas@poxdrive.com.ar</span>
+    <div class="footer-links">
+      <a href="/nosotros">Nosotros</a><a href="/blog">Blog</a><a href="/contacto">Contacto</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

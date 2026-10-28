@@ -1,0 +1,431 @@
+---
+// src/pages/blog/autoelevadores-piso-deposito.astro
+---
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Autoelevadores rompen el piso del depósito | Blog POXDRIVE</title>
+  <meta name="description" content="Guía técnica POXDRIVE: pisos autonivelantes epoxi de alto espesor (AC-21, AC-23, AC-33) para depósitos con tránsito de autoelevadores. Ficha técnica real y casos de obra incluidos." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --naranja: #E8500A;
+      --bg: #111111;
+      --surface: #1C1C1C;
+      --concreto: #F0EDEA;
+      --text: #E8E4E0;
+      --muted: rgba(232,228,224,0.45);
+      --border: rgba(255,255,255,0.08);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(17,17,17,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 max(24px, env(safe-area-inset-left, 0px));
+    }
+    .nav-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+    }
+    .nav-logo { font-size: 1.25rem; font-weight: 700; color: var(--text); text-decoration: none; letter-spacing: -0.02em; }
+    .nav-logo span { color: var(--naranja); }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.875rem; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+    .nav-cta { background: var(--naranja); color: #fff; text-decoration: none; padding: 8px 20px; border-radius: 6px; font-size: 0.875rem; font-weight: 600; transition: opacity 0.2s; }
+    .nav-cta:hover { opacity: 0.85; }
+    .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--text); margin: 5px 0; border-radius: 2px; }
+
+    /* ARTICLE LAYOUT */
+    .article-wrap {
+      max-width: 1200px; margin: 0 auto;
+      padding: 0 max(24px, env(safe-area-inset-left, 0px));
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 64px;
+      padding-top: 64px;
+      padding-bottom: 80px;
+      align-items: start;
+    }
+    .article-main { min-width: 0; }
+
+    /* BREADCRUMB */
+    .breadcrumb {
+      display: flex; gap: 8px; align-items: center;
+      font-size: 0.8rem; color: var(--muted); margin-bottom: 32px;
+    }
+    .breadcrumb a { color: var(--muted); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--text); }
+    .breadcrumb span { color: var(--border); }
+
+    /* TAGS */
+    .article-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+    .tag {
+      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; padding: 4px 10px; border-radius: 4px;
+      background: rgba(232,80,10,0.12); color: var(--naranja);
+    }
+    .tag.blue { background: rgba(59,130,246,0.12); color: #60a5fa; }
+
+    /* HEADINGS */
+    .article-main h1 {
+      font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+      font-weight: 700; letter-spacing: -0.03em;
+      line-height: 1.2; margin-bottom: 20px;
+      text-wrap: balance;
+    }
+    .article-meta {
+      font-size: 0.85rem; color: var(--muted); margin-bottom: 40px;
+      padding-bottom: 32px; border-bottom: 1px solid var(--border);
+    }
+    .article-main h2 {
+      font-size: 1.35rem; font-weight: 700; letter-spacing: -0.02em;
+      margin-top: 48px; margin-bottom: 16px; color: var(--text);
+    }
+    .article-main h3 {
+      font-size: 1.05rem; font-weight: 700; margin-top: 28px; margin-bottom: 10px;
+      color: var(--text);
+    }
+    .article-main p { color: var(--muted); margin-bottom: 16px; line-height: 1.75; }
+    .article-main p strong { color: var(--text); font-weight: 600; }
+    .article-main ul, .article-main ol { margin: 0 0 16px 24px; }
+    .article-main li { color: var(--muted); margin-bottom: 8px; line-height: 1.65; }
+    .article-main li::marker { color: var(--naranja); }
+
+    /* TABLE */
+    .table-wrap { overflow-x: auto; margin: 24px 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+    th {
+      background: var(--surface); color: var(--text);
+      font-weight: 600; padding: 12px 16px; text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    td {
+      padding: 10px 16px; border-bottom: 1px solid var(--border);
+      color: var(--muted); vertical-align: top;
+    }
+    td:first-child { color: var(--text); font-weight: 500; }
+    tr:last-child td { border-bottom: none; }
+
+    /* CASE CARD */
+    .case-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; padding: 24px; margin: 20px 0;
+    }
+    .case-card h3 {
+      font-size: 1rem; font-weight: 700; color: var(--text);
+      margin-bottom: 8px; margin-top: 0;
+    }
+    .case-card p { margin-bottom: 0; font-size: 0.9rem; }
+
+    /* STEP LIST */
+    .steps { list-style: none; margin: 0 0 24px; padding: 0; counter-reset: steps; }
+    .steps li {
+      counter-increment: steps;
+      padding: 16px 16px 16px 56px;
+      position: relative;
+      border-left: 2px solid var(--border);
+      margin-bottom: 8px;
+    }
+    .steps li::before {
+      content: counter(steps);
+      position: absolute; left: -1px; top: 12px;
+      width: 28px; height: 28px;
+      background: var(--naranja); color: #fff;
+      border-radius: 50%; display: flex; align-items: center;
+      justify-content: center; font-size: 0.8rem; font-weight: 700;
+      transform: translateX(-50%);
+    }
+    .steps li strong { display: block; color: var(--text); margin-bottom: 4px; }
+
+    /* PDF DOWNLOAD BOX */
+    .pdf-download {
+      background: linear-gradient(135deg, rgba(232,80,10,0.12), rgba(232,80,10,0.04));
+      border: 1px solid rgba(232,80,10,0.3);
+      border-radius: 10px; padding: 24px;
+      display: flex; align-items: center; gap: 20px;
+      margin: 40px 0;
+    }
+    .pdf-icon {
+      width: 48px; height: 48px; flex-shrink: 0;
+      background: rgba(232,80,10,0.15); border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem;
+    }
+    .pdf-info h4 { font-size: 0.95rem; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .pdf-info p { font-size: 0.8rem; color: var(--muted); margin: 0; }
+    .pdf-btn {
+      margin-left: auto; flex-shrink: 0;
+      background: var(--naranja); color: #fff; text-decoration: none;
+      padding: 10px 20px; border-radius: 6px; font-size: 0.875rem;
+      font-weight: 600; white-space: nowrap; transition: opacity 0.2s;
+    }
+    .pdf-btn:hover { opacity: 0.85; }
+
+    /* SIDEBAR */
+    .article-sidebar { position: sticky; top: 88px; }
+    .sidebar-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; padding: 24px; margin-bottom: 16px;
+    }
+    .sidebar-card h4 {
+      font-size: 0.85rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.06em; color: var(--muted); margin-bottom: 16px;
+    }
+    .sidebar-card ul { list-style: none; padding: 0; margin: 0; }
+    .sidebar-card ul li { padding: 6px 0; border-bottom: 1px solid var(--border); font-size: 0.875rem; }
+    .sidebar-card ul li:last-child { border-bottom: none; }
+    .sidebar-card ul li a { color: var(--muted); text-decoration: none; transition: color 0.15s; display: block; }
+    .sidebar-card ul li a:hover { color: var(--naranja); }
+    .sidebar-cta {
+      background: var(--naranja); border-radius: 10px; padding: 24px;
+      text-align: center;
+    }
+    .sidebar-cta h4 { color: #fff; font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+    .sidebar-cta p { color: rgba(255,255,255,0.75); font-size: 0.875rem; margin-bottom: 16px; }
+    .sidebar-cta a {
+      display: block; background: #fff; color: var(--naranja);
+      padding: 10px 16px; border-radius: 6px; text-decoration: none;
+      font-weight: 700; font-size: 0.875rem; transition: opacity 0.2s;
+    }
+    .sidebar-cta a:hover { opacity: 0.9; }
+
+    /* HIGHLIGHT BOX */
+    .highlight-box {
+      background: var(--surface); border-left: 3px solid var(--naranja);
+      padding: 16px 20px; margin: 24px 0; border-radius: 0 8px 8px 0;
+    }
+    .highlight-box p { margin: 0; font-size: 0.9rem; }
+
+    /* ARTICLE CTA */
+    .article-cta {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 32px; text-align: center; margin-top: 48px;
+    }
+    .article-cta h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 12px; }
+    .article-cta p { color: var(--muted); margin-bottom: 20px; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--naranja); color: #fff; text-decoration: none;
+      padding: 12px 24px; border-radius: 8px; font-weight: 600;
+      font-size: 0.9rem; transition: opacity 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.85; }
+
+    footer {
+      padding: 40px max(24px, env(safe-area-inset-left, 0px));
+      border-top: 1px solid var(--border);
+    }
+    .footer-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+    }
+    .footer-copy { font-size: 0.8rem; color: var(--muted); }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a { font-size: 0.8rem; color: var(--muted); text-decoration: none; }
+    .footer-links a:hover { color: var(--text); }
+
+    @media (max-width: 900px) {
+      .article-wrap { grid-template-columns: 1fr; }
+      .article-sidebar { position: static; }
+    }
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: block; }
+      .pdf-download { flex-wrap: wrap; }
+      .pdf-btn { margin-left: 0; width: 100%; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">POX<span>DRIVE</span></a>
+    <ul class="nav-links">
+      <li><a href="/alimenticia">Industrias</a></li>
+      <li><a href="/blog" class="active">Blog</a></li>
+      <li><a href="/casos">Casos de obra</a></li>
+      <li><a href="/nosotros">Nosotros</a></li>
+      <li><a href="/aplicadores">Aplicadores</a></li>
+    </ul>
+    <a href="/contacto" class="nav-cta">Consultar</a>
+    <button class="hamburger" aria-label="Menú"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="article-wrap">
+  <main class="article-main">
+
+    <div class="breadcrumb">
+      <a href="/">Inicio</a>
+      <span>/</span>
+      <a href="/blog">Blog técnico</a>
+      <span>/</span>
+      <span>Autoelevadores y piso de depósito</span>
+    </div>
+
+    <div class="article-tags">
+      <span class="tag">Depósitos</span>
+      <span class="tag blue">Autonivelante epoxi</span>
+    </div>
+
+    <h1>Autoelevadores rompen el piso del depósito</h1>
+    <div class="article-meta">8 min de lectura · Guía técnica con ficha de producto y casos de obra</div>
+
+    <p>Un contrapiso de hormigón común no está pensado para el tránsito constante de autoelevadores: las cargas puntuales de las ruedas, el frenado y el giro sobre el mismo punto terminan fisurando la superficie, descascarando los bordes de las juntas y generando polvo de hormigón en suspensión.</p>
+
+    <p>La solución no es un simple revestimiento fino, sino un sistema autonivelante epoxi de mayor espesor, capaz de absorber ese tipo de esfuerzo sin perder monolitismo. POXDRIVE tiene tres variantes según el espesor y la exigencia del piso.</p>
+
+    <div class="pdf-download">
+      <div class="pdf-icon">📄</div>
+      <div class="pdf-info">
+        <h4>Guía completa en PDF</h4>
+        <p>Ficha técnica + tabla comparativa + casos de obra</p>
+      </div>
+      <a href="/blog/pdfs/guia-autoelevadores-ac33.pdf" class="pdf-btn" download>Descargar PDF</a>
+    </div>
+
+    <h2>La familia de autonivelantes: AC-21, AC-23 y AC-33</h2>
+    <p>La diferencia entre las tres líneas es el espesor de aplicación, que se elige según el tránsito y las cargas que va a recibir el piso:</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Producto</th><th>Espesor</th><th>Uso recomendado</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>AC-21</td><td>Hasta 1 mm</td><td>Nivelación fina y renovación estética de pisos con desgaste leve</td></tr>
+          <tr><td>AC-23</td><td>1 a 2 mm</td><td>Zonas de tránsito moderado, con irregularidades leves del contrapiso</td></tr>
+          <tr><td>AC-33</td><td>2 a 4 mm</td><td>Depósitos y plantas con tránsito de autoelevadores, cargas puntuales altas y abrasión intensa</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="highlight-box">
+      <p>Para pisos que reciben autoelevadores, pallets pesados o cargas rodantes constantes, la variante indicada es <strong>MASTERPOX AC-33</strong>, la de mayor espesor de la familia.</p>
+    </div>
+
+    <h2>La solución: MASTERPOX AC-33</h2>
+    <p>Revestimiento epoxi autonivelante de dos componentes, <strong>100% sólidos, sin solventes ni VOC</strong>. Genera una superficie continua y monolítica, sin juntas, con alta resistencia química y mecánica para tránsito industrial.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Dato técnico</th><th>Valor</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Sólidos en volumen</td><td>100%</td></tr>
+          <tr><td>Peso específico</td><td>1,60 g/cm³</td></tr>
+          <tr><td>Terminación</td><td>Brillante, color según carta</td></tr>
+          <tr><td>Fondo recomendado</td><td>MASTERPOX AN-1 (mismo color del acabado)</td></tr>
+          <tr><td>Consumo</td><td>1,6 kg/m² por mm de espesor</td></tr>
+          <tr><td>Espesor de película</td><td>2 a 3 mm (hasta 4 mm según proyecto)</td></tr>
+          <tr><td>Vida útil de la mezcla</td><td>1 hora (para 4 litros)</td></tr>
+          <tr><td>Secado al tacto / duro / final</td><td>10 h / 24–36 h / 7 días</td></tr>
+          <tr><td>Almacenaje</td><td>24 meses</td></tr>
+          <tr><td>Presentación</td><td>Envases de 19 y 31 kg</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>En obras con exigencias particulares (frigoríficos, salas limpias, espesores mayores a 3 mm), el espesor real puede ajustarse por proyecto: en uno de los casos de esta guía se aplicó a <strong>4 mm</strong> por la magnitud de la carga.</p>
+
+    <h2>El proceso completo</h2>
+
+    <ol class="steps">
+      <li>
+        <strong>Preparación del sustrato</strong>
+        Eliminación de sales solubles, grasas y aceites mediante lavado a presión con agua dulce y soluciones detersivas. Se verifica la existencia de barrera de vapor (nylon de 150 a 250 micrones) bajo el hormigón.
+      </li>
+      <li>
+        <strong>Reparación de fisuras (si las hay)</strong>
+        Si el piso ya presenta grietas o roturas, se sellan antes de continuar con MASTERPOX M-2, para no autonivelar sobre un sustrato fisurado.
+      </li>
+      <li>
+        <strong>Sellado con MASTERPOX AN-1</strong>
+        Imprimación epoxi sellante, de 1 a 3 manos según la porosidad del sustrato, en el mismo color del acabado.
+      </li>
+      <li>
+        <strong>Aplicación del autonivelante AC-33</strong>
+        Mezcla de módulo completo (componentes A y B) y volcado en una mano, a un espesor de 2 a 4 mm según el proyecto.
+      </li>
+      <li>
+        <strong>Curado</strong>
+        Secado al tacto en 10 horas, duro entre 24 y 36 horas, y curado final a los 7 días, momento en que el piso alcanza su resistencia definitiva.
+      </li>
+    </ol>
+
+    <h2>Casos reales</h2>
+
+    <div class="case-card">
+      <h3>Planta de panificados supercongelados, Santa Fe</h3>
+      <p>Se aplicó AC-33 sobre aproximadamente <strong>500 m²</strong> de depósito, con tránsito constante de autoelevadores para el movimiento de pallets. Se pulió el contrapiso existente y se aplicó el sistema completo con acabado continuo, sin juntas.</p>
+    </div>
+
+    <div class="case-card">
+      <h3>Sala de medicina nuclear, Formosa</h3>
+      <p>Trabajo sobre <strong>35 m²</strong>. El piso existente tenía fisuras, que se sellaron primero con MASTERPOX M-2 e imprimación MASTERPOX I-PISOS. Sobre ese sustrato reparado se aplicó AC-33 a <strong>4 mm de espesor</strong>, volcado en paños delimitados por perfiles de PVC para controlar las juntas de la superficie.</p>
+    </div>
+
+    <h2>¿Cuándo conviene un autonivelante de alto espesor?</h2>
+    <ul>
+      <li>Depósitos y plantas con circulación constante de autoelevadores o zorras hidráulicas</li>
+      <li>Pisos que ya muestran fisuras, descascarados en juntas o generación de polvo</li>
+      <li>Áreas con cargas puntuales altas (racks, pallets, equipos pesados)</li>
+      <li>Sectores que requieren superficie continua, sin juntas, de fácil limpieza</li>
+    </ul>
+
+    <div class="article-cta">
+      <h3>¿El piso de tu depósito se está rompiendo?</h3>
+      <p>Contanos la superficie, el tránsito y el estado actual del piso, y te recomendamos qué espesor de autonivelante corresponde a tu caso.</p>
+      <a href="/contacto" class="btn-primary">Consultar sin compromiso →</a>
+    </div>
+
+  </main>
+
+  <aside class="article-sidebar">
+    <div class="sidebar-card">
+      <h4>Más guías técnicas</h4>
+      <ul>
+        <li><a href="/blog/piso-antideslizante">Pisos antideslizantes: rampas y zonas húmedas</a></li>
+        <li><a href="/blog/senasa-bpf-planta-alimenticia">Cumplir SENASA/BPF en plantas alimenticias</a></li>
+        <li><a href="/blog/fisuras-roturas-piso">Reparación de fisuras con MASTERPOX M-2</a></li>
+        <li><a href="/blog/reactivos-quimicos-piso">Pisos con resistencia química a hidrocarburos</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-cta">
+      <h4>¿Necesitás asesoramiento?</h4>
+      <p>Un técnico POXDRIVE te responde con la solución correcta para tu piso.</p>
+      <a href="/contacto">Escribinos ahora</a>
+    </div>
+  </aside>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <span class="footer-copy">© 2025 FARBENPAINT S.R.L. · Rincón 4672, La Tablada, Bs. As. · consultas@poxdrive.com.ar</span>
+    <div class="footer-links">
+      <a href="/nosotros">Nosotros</a>
+      <a href="/blog">Blog</a>
+      <a href="/contacto">Contacto</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
