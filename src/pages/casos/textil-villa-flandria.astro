@@ -1,0 +1,130 @@
+---
+// src/pages/casos/textil-villa-flandria.astro
+---
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Planta Textil Villa Flandria | Casos de Obra POXDRIVE</title>
+  <meta name="description" content="Renovación del piso en planta textil proveedora de la industria automotriz. 3 manos de MASTERPOX AN-1. Caso real POXDRIVE." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root{--naranja:#E8500A;--bg:#111111;--surface:#1C1C1C;--text:#E8E4E0;--muted:rgba(232,228,224,0.45);--border:rgba(255,255,255,0.08)}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-size:16px;line-height:1.6}
+    nav{position:sticky;top:0;z-index:100;background:rgba(17,17,17,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 max(24px,env(safe-area-inset-left,0px))}
+    .nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px}
+    .nav-logo{font-size:1.25rem;font-weight:700;color:var(--text);text-decoration:none;letter-spacing:-0.02em}
+    .nav-logo span{color:var(--naranja)}
+    .nav-links{display:flex;gap:32px;list-style:none}
+    .nav-links a{color:var(--muted);text-decoration:none;font-size:0.875rem;font-weight:500}
+    .nav-links a:hover,.nav-links a.active{color:var(--text)}
+    .nav-cta{background:var(--naranja);color:#fff;text-decoration:none;padding:8px 20px;border-radius:6px;font-size:0.875rem;font-weight:600}
+    .hamburger{display:none;background:none;border:none;cursor:pointer;padding:4px}
+    .hamburger span{display:block;width:22px;height:2px;background:var(--text);margin:5px 0;border-radius:2px}
+    .caso-wrap{max-width:900px;margin:0 auto;padding:64px max(24px,env(safe-area-inset-left,0px)) 80px}
+    .breadcrumb{display:flex;gap:8px;align-items:center;font-size:0.8rem;color:var(--muted);margin-bottom:32px}
+    .breadcrumb a{color:var(--muted);text-decoration:none}.breadcrumb a:hover{color:var(--text)}.breadcrumb span{color:var(--border)}
+    .caso-tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+    .tag{font-size:0.7rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;padding:4px 10px;border-radius:4px;background:rgba(232,80,10,0.12);color:var(--naranja)}
+    .tag.blue{background:rgba(59,130,246,0.12);color:#60a5fa}
+    h1{font-size:clamp(1.75rem,3.5vw,2.5rem);font-weight:700;letter-spacing:-0.03em;line-height:1.2;margin-bottom:12px;text-wrap:balance}
+    .caso-location{font-size:1rem;color:var(--naranja);font-weight:600;margin-bottom:32px;padding-bottom:32px;border-bottom:1px solid var(--border)}
+    .caso-hero-box{background:linear-gradient(135deg,rgba(232,80,10,0.12),rgba(232,80,10,0.04));border:1px solid rgba(232,80,10,0.2);border-radius:12px;padding:32px;margin-bottom:48px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+    .stat{text-align:center}
+    .stat-value{font-size:1.5rem;font-weight:700;color:var(--naranja);display:block;line-height:1.2;margin-bottom:4px}
+    .stat-label{font-size:0.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em}
+    h2{font-size:1.25rem;font-weight:700;letter-spacing:-0.02em;margin-top:40px;margin-bottom:14px;color:var(--text)}
+    p{color:var(--muted);margin-bottom:16px;line-height:1.75}
+    p strong{color:var(--text);font-weight:600}
+    ul{margin:0 0 16px 24px}
+    li{color:var(--muted);margin-bottom:8px;line-height:1.65}
+    li::marker{color:var(--naranja)}
+    .product-box{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:24px;margin:28px 0}
+    .product-box h3{font-size:0.9rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--naranja);margin-bottom:12px}
+    .product-box p{margin:0;font-size:0.9rem}
+    .steps-list{list-style:none;margin:0 0 16px;padding:0;counter-reset:steps}
+    .steps-list li{counter-increment:steps;padding:12px 12px 12px 48px;position:relative;border-left:2px solid var(--border);margin-bottom:6px;color:var(--muted)}
+    .steps-list li::before{content:counter(steps);position:absolute;left:-1px;top:10px;width:24px;height:24px;background:var(--naranja);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:700;transform:translateX(-50%)}
+    .bottom-nav{display:flex;justify-content:space-between;align-items:center;margin-top:64px;padding-top:32px;border-top:1px solid var(--border);flex-wrap:wrap;gap:16px}
+    .bottom-nav a.back{font-size:0.875rem;color:var(--muted);text-decoration:none;font-weight:500}
+    .bottom-nav a.back:hover{color:var(--text)}
+    .btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--naranja);color:#fff;text-decoration:none;padding:12px 24px;border-radius:8px;font-weight:600;font-size:0.9rem}
+    footer{padding:40px max(24px,env(safe-area-inset-left,0px));border-top:1px solid var(--border)}
+    .footer-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+    .footer-copy{font-size:0.8rem;color:var(--muted)}
+    .footer-links{display:flex;gap:24px}
+    .footer-links a{font-size:0.8rem;color:var(--muted);text-decoration:none}
+    .footer-links a:hover{color:var(--text)}
+    @media(max-width:768px){.nav-links,.nav-cta{display:none}.hamburger{display:block}.caso-hero-box{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">POX<span>DRIVE</span></a>
+    <ul class="nav-links">
+      <li><a href="/alimenticia">Industrias</a></li>
+      <li><a href="/blog">Blog</a></li>
+      <li><a href="/casos" class="active">Casos de obra</a></li>
+      <li><a href="/nosotros">Nosotros</a></li>
+      <li><a href="/aplicadores">Aplicadores</a></li>
+    </ul>
+    <a href="/contacto" class="nav-cta">Consultar</a>
+    <button class="hamburger" aria-label="Menú"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="caso-wrap">
+  <div class="breadcrumb">
+    <a href="/">Inicio</a><span>/</span><a href="/casos">Casos de obra</a><span>/</span><span>Planta textil Villa Flandria</span>
+  </div>
+  <div class="caso-tags">
+    <span class="tag">Textil</span>
+    <span class="tag blue">MASTERPOX AN-1</span>
+  </div>
+  <h1>Renovación estética y resistente para una planta textil de alta complejidad</h1>
+  <div class="caso-location">📍 Villa Flandria, Buenos Aires</div>
+
+  <div class="caso-hero-box">
+    <div class="stat"><span class="stat-value">Textil</span><span class="stat-label">Industria</span></div>
+    <div class="stat"><span class="stat-value">MASTERPOX AN-1</span><span class="stat-label">Sistema</span></div>
+    <div class="stat"><span class="stat-value">5 días</span><span class="stat-label">Plazo de obra</span></div>
+  </div>
+
+  <h2>El problema</h2>
+  <p>El piso de hormigón era viejo pero estaba en buen estado general: ya había sido pintado antes, aunque muy desgastado. El objetivo era lograr <strong>un acabado estético y resistente</strong>, a la altura de los estándares de una planta que provee a la industria automotriz.</p>
+
+  <h2>La solución</h2>
+  <div class="product-box">
+    <h3>Sistema aplicado</h3>
+    <p>Preparación de superficie (limpieza e hidrolavado) y <strong>3 manos de revestimiento epoxi autoimprimante MASTERPOX AN-1</strong>, completado en 5 días corridos a través de un contratista.</p>
+  </div>
+  <ol class="steps-list">
+    <li>Limpieza e hidrolavado de toda la superficie</li>
+    <li>Primera mano de MASTERPOX AN-1 como imprimación directa</li>
+    <li>Segunda mano de AN-1 para consolidar el sistema</li>
+    <li>Tercera mano de AN-1 para terminación final</li>
+  </ol>
+
+  <h2>Por qué MASTERPOX AN-1</h2>
+  <p>MASTERPOX AN-1 es un esmalte epoxi de altos sólidos (70% en peso), autoimprimante — puede aplicarse directamente sobre el hormigón preparado sin necesidad de una imprimación separada. Su acabado satinado y su resistencia a la abrasión lo hacen ideal para plantas industriales que combinan exigencia operativa con requisitos estéticos.</p>
+
+  <div class="bottom-nav">
+    <a href="/casos" class="back">← Todos los casos</a>
+    <a href="/contacto" class="btn-primary">Consultar para mi planta →</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <span class="footer-copy">© 2025 FARBENPAINT S.R.L. · Rincón 4672, La Tablada, Bs. As. · consultas@poxdrive.com.ar</span>
+    <div class="footer-links">
+      <a href="/nosotros">Nosotros</a><a href="/blog">Blog</a><a href="/contacto">Contacto</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

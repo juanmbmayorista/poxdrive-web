@@ -1,0 +1,140 @@
+---
+// src/pages/casos/planta-maiz-baradero.astro
+---
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Planta Procesadora Baradero | Casos de Obra POXDRIVE</title>
+  <meta name="description" content="Zona de carga de fructosa: piso recuperado con sistema poliuretánico en planta procesadora de maíz, Baradero. 3 años después: excelentes condiciones. Caso real POXDRIVE." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root{--naranja:#E8500A;--bg:#111111;--surface:#1C1C1C;--text:#E8E4E0;--muted:rgba(232,228,224,0.45);--border:rgba(255,255,255,0.08)}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-size:16px;line-height:1.6}
+    nav{position:sticky;top:0;z-index:100;background:rgba(17,17,17,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 max(24px,env(safe-area-inset-left,0px))}
+    .nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px}
+    .nav-logo{font-size:1.25rem;font-weight:700;color:var(--text);text-decoration:none;letter-spacing:-0.02em}
+    .nav-logo span{color:var(--naranja)}
+    .nav-links{display:flex;gap:32px;list-style:none}
+    .nav-links a{color:var(--muted);text-decoration:none;font-size:0.875rem;font-weight:500}
+    .nav-links a:hover,.nav-links a.active{color:var(--text)}
+    .nav-cta{background:var(--naranja);color:#fff;text-decoration:none;padding:8px 20px;border-radius:6px;font-size:0.875rem;font-weight:600}
+    .hamburger{display:none;background:none;border:none;cursor:pointer;padding:4px}
+    .hamburger span{display:block;width:22px;height:2px;background:var(--text);margin:5px 0;border-radius:2px}
+    .caso-wrap{max-width:900px;margin:0 auto;padding:64px max(24px,env(safe-area-inset-left,0px)) 80px}
+    .breadcrumb{display:flex;gap:8px;align-items:center;font-size:0.8rem;color:var(--muted);margin-bottom:32px}
+    .breadcrumb a{color:var(--muted);text-decoration:none}.breadcrumb a:hover{color:var(--text)}.breadcrumb span{color:var(--border)}
+    .caso-tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+    .tag{font-size:0.7rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;padding:4px 10px;border-radius:4px;background:rgba(232,80,10,0.12);color:var(--naranja)}
+    .tag.yellow{background:rgba(234,179,8,0.12);color:#facc15}
+    .tag.green{background:rgba(34,197,94,0.12);color:#4ade80}
+    h1{font-size:clamp(1.75rem,3.5vw,2.5rem);font-weight:700;letter-spacing:-0.03em;line-height:1.2;margin-bottom:12px;text-wrap:balance}
+    .caso-location{font-size:1rem;color:var(--naranja);font-weight:600;margin-bottom:32px;padding-bottom:32px;border-bottom:1px solid var(--border)}
+    .caso-hero-box{background:linear-gradient(135deg,rgba(232,80,10,0.12),rgba(232,80,10,0.04));border:1px solid rgba(232,80,10,0.2);border-radius:12px;padding:32px;margin-bottom:48px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+    .stat{text-align:center}
+    .stat-value{font-size:1.4rem;font-weight:700;color:var(--naranja);display:block;line-height:1.2;margin-bottom:4px}
+    .stat-label{font-size:0.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em}
+    h2{font-size:1.25rem;font-weight:700;letter-spacing:-0.02em;margin-top:40px;margin-bottom:14px;color:var(--text)}
+    p{color:var(--muted);margin-bottom:16px;line-height:1.75}
+    p strong{color:var(--text);font-weight:600}
+    ul{margin:0 0 16px 24px}
+    li{color:var(--muted);margin-bottom:8px;line-height:1.65}
+    li::marker{color:var(--naranja)}
+    .product-box{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:24px;margin:28px 0}
+    .product-box h3{font-size:0.9rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--naranja);margin-bottom:12px}
+    .product-box p{margin:0;font-size:0.9rem}
+    .steps-list{list-style:none;margin:0 0 16px;padding:0;counter-reset:steps}
+    .steps-list li{counter-increment:steps;padding:12px 12px 12px 48px;position:relative;border-left:2px solid var(--border);margin-bottom:6px;color:var(--muted)}
+    .steps-list li::before{content:counter(steps);position:absolute;left:-1px;top:10px;width:24px;height:24px;background:var(--naranja);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:700;transform:translateX(-50%)}
+    .followup-box{background:rgba(34,197,94,0.06);border:1px solid rgba(34,197,94,0.2);border-radius:10px;padding:24px;margin:28px 0}
+    .followup-box .followup-label{font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#4ade80;margin-bottom:10px}
+    .followup-box p{margin:0;color:var(--muted);font-size:0.9rem}
+    .bottom-nav{display:flex;justify-content:space-between;align-items:center;margin-top:64px;padding-top:32px;border-top:1px solid var(--border);flex-wrap:wrap;gap:16px}
+    .bottom-nav a.back{font-size:0.875rem;color:var(--muted);text-decoration:none;font-weight:500}
+    .bottom-nav a.back:hover{color:var(--text)}
+    .btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--naranja);color:#fff;text-decoration:none;padding:12px 24px;border-radius:8px;font-weight:600;font-size:0.9rem}
+    footer{padding:40px max(24px,env(safe-area-inset-left,0px));border-top:1px solid var(--border)}
+    .footer-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+    .footer-copy{font-size:0.8rem;color:var(--muted)}
+    .footer-links{display:flex;gap:24px}
+    .footer-links a{font-size:0.8rem;color:var(--muted);text-decoration:none}
+    .footer-links a:hover{color:var(--text)}
+    @media(max-width:768px){.nav-links,.nav-cta{display:none}.hamburger{display:block}.caso-hero-box{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">POX<span>DRIVE</span></a>
+    <ul class="nav-links">
+      <li><a href="/alimenticia">Industrias</a></li>
+      <li><a href="/blog">Blog</a></li>
+      <li><a href="/casos" class="active">Casos de obra</a></li>
+      <li><a href="/nosotros">Nosotros</a></li>
+      <li><a href="/aplicadores">Aplicadores</a></li>
+    </ul>
+    <a href="/contacto" class="nav-cta">Consultar</a>
+    <button class="hamburger" aria-label="Menú"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="caso-wrap">
+  <div class="breadcrumb">
+    <a href="/">Inicio</a><span>/</span><a href="/casos">Casos de obra</a><span>/</span><span>Planta procesadora Baradero</span>
+  </div>
+  <div class="caso-tags">
+    <span class="tag yellow">Alimenticia</span>
+    <span class="tag">Recuperación química</span>
+    <span class="tag green">3 años después: OK</span>
+  </div>
+  <h1>Zona de carga de fructosa: piso recuperado en planta procesadora de maíz</h1>
+  <div class="caso-location">📍 Baradero, Buenos Aires</div>
+
+  <div class="caso-hero-box">
+    <div class="stat"><span class="stat-value">Alimenticia</span><span class="stat-label">Industria</span></div>
+    <div class="stat"><span class="stat-value">Poliuretánico</span><span class="stat-label">Sistema (3 capas)</span></div>
+    <div class="stat"><span class="stat-value">3 años</span><span class="stat-label">Seguimiento</span></div>
+  </div>
+
+  <h2>El problema</h2>
+  <p>El piso de hormigón de la zona de carga estaba <strong>completamente corroído</strong>: la combinación constante de azúcares y lavados había deteriorado el sustrato. Los canales de desagote y las estructuras de las rejillas — tanto marcos como rejillas — se encontraban totalmente corroídos, y la pendiente del piso no favorecía el escurrimiento del agua de lavado.</p>
+
+  <h2>La solución</h2>
+  <div class="product-box">
+    <h3>Sistema aplicado</h3>
+    <p><strong>Sistema poliuretánico de alto desempeño en tres capas</strong>, precedido de preparación intensiva de superficie: limpieza, hidroarenado y neutralización química de azúcares. Se aplicó también grout cementicio para nivelar y dar pendiente adecuada al escurrimiento.</p>
+  </div>
+  <ol class="steps-list">
+    <li>Limpieza e hidroarenado intensivo de la superficie deteriorada</li>
+    <li>Neutralización química de los azúcares presentes en el hormigón</li>
+    <li>Aplicación de grout cementicio para nivelar y corregir la pendiente de escurrimiento</li>
+    <li>Sistema poliuretánico en tres capas sobre la superficie preparada</li>
+  </ol>
+
+  <h2>Por qué un sistema poliuretánico</h2>
+  <p>Los pisos expuestos constantemente a azúcares, lavados frecuentes y tránsito operativo requieren un sistema con <strong>máxima resistencia química y flexibilidad</strong>. El poliuretano supera al epoxi estándar en ambientes con variación térmica y exposición prolongada a ácidos orgánicos como los que se generan en el procesamiento de maíz y fructosa.</p>
+
+  <div class="followup-box">
+    <div class="followup-label">✓ Seguimiento a 3 años</div>
+    <p>En una revisión realizada 3 años después de la ejecución, la superficie se encontró en <strong>excelentes condiciones</strong>, sin señales de deterioro pese a la exposición constante a azúcares, lavados y tránsito operativo diario.</p>
+  </div>
+
+  <div class="bottom-nav">
+    <a href="/casos" class="back">← Todos los casos</a>
+    <a href="/contacto" class="btn-primary">Consultar para mi planta →</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <span class="footer-copy">© 2025 FARBENPAINT S.R.L. · Rincón 4672, La Tablada, Bs. As. · consultas@poxdrive.com.ar</span>
+    <div class="footer-links">
+      <a href="/nosotros">Nosotros</a><a href="/blog">Blog</a><a href="/contacto">Contacto</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
