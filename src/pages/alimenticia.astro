@@ -97,6 +97,15 @@
       .form-row { grid-template-columns: 1fr; }
       nav { display: none; }
     }
+
+    /* RECURSOS */
+    .recursos-section { border-top: 1px solid rgba(255,255,255,0.06); }
+    .recursos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-top: 2rem; }
+    .recurso-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 1.4rem 1.5rem; text-decoration: none; color: #F0EDEA; display: block; transition: border-color 0.2s, background 0.2s; }
+    .recurso-card:hover { border-color: #E8500A; background: rgba(232,80,10,0.07); }
+    .recurso-tipo { font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase; color: #E8500A; margin-bottom: 0.5rem; }
+    .recurso-nombre { font-size: 0.92rem; font-weight: 700; line-height: 1.3; margin-bottom: 0.3rem; }
+    .recurso-meta { font-size: 0.78rem; opacity: 0.45; }
   </style>
 </head>
 <body>
@@ -291,6 +300,41 @@
       <p>Un técnico se comunica en menos de 24 horas para coordinar la visita.</p>
     </div>
     <p class="cta-alt">O escribinos directo: <a href="https://wa.me/5491138200513">WhatsApp +54 9 11 3820-0513</a></p>
+  </div>
+</section>
+
+<!-- RECURSOS TÉCNICOS -->
+<section class="recursos-section">
+  <div class="container">
+    <p class="section-label">Recursos técnicos</p>
+    <h2 class="section-title">Documentación para industria alimentaria</h2>
+    <div class="recursos-grid">
+      <a href="/esquemas/POXDRIVE_Esquemas_Alimenticia.html" class="recurso-card">
+        <p class="recurso-tipo">Esquema de solución</p>
+        <p class="recurso-nombre">Sistemas por zona — Industria Alimentaria</p>
+        <p class="recurso-meta">8 zonas · especificaciones técnicas</p>
+      </a>
+      <a href="/checklists/POX-CK-001.html" class="recurso-card">
+        <p class="recurso-tipo">Checklist de inspección</p>
+        <p class="recurso-nombre">POX-CK-001 — Autoevaluación planta alimenticia</p>
+        <p class="recurso-meta">30 puntos de inspección · exportar a PDF</p>
+      </a>
+      <a href="/blog/POXDRIVE_Blog_Guia_SENASA_CEMAU.html" class="recurso-card">
+        <p class="recurso-tipo">Guía técnica</p>
+        <p class="recurso-nombre">Pisos bajo normativa SENASA y CEMAU</p>
+        <p class="recurso-meta">Normativa · requisitos · materiales</p>
+      </a>
+      <a href="/blog/POXDRIVE_Blog_Guia_Fisuras.html" class="recurso-card">
+        <p class="recurso-tipo">Guía técnica</p>
+        <p class="recurso-nombre">Reparación de fisuras en pisos industriales</p>
+        <p class="recurso-meta">Diagnóstico · materiales · procedimiento</p>
+      </a>
+      <a href="/blog/POXDRIVE_Blog_Guia_Antideslizante.html" class="recurso-card">
+        <p class="recurso-tipo">Guía técnica</p>
+        <p class="recurso-nombre">Sistemas antideslizantes para zonas húmedas</p>
+        <p class="recurso-meta">Seguridad · clasificación · aplicación</p>
+      </a>
+    </div>
   </div>
 </section>
 
