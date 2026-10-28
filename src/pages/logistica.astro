@@ -375,31 +375,23 @@
   </div>
 </footer>
 
-  <script>
-    // Dropdown industrias
-    (function(){
-      var btn = document.getElementById('dd-btn');
-      var menu = document.getElementById('dd-menu');
-      if(!btn||!menu) return;
-      btn.addEventListener('click', function(e){
-        e.stopPropagation();
-        menu.classList.toggle('open');
-      });
-      document.addEventListener('click', function(){
-        menu.classList.remove('open');
-      });
-    })();
-  </script>
+  
+
 <script>
-  // Dropdown industrias
   (function(){
     var btn = document.getElementById('dd-btn');
     var menu = document.getElementById('dd-menu');
     if(!btn||!menu) return;
+    // Toggle al hacer click en el botón
     btn.addEventListener('click', function(e){
       e.stopPropagation();
       menu.classList.toggle('open');
     });
+    // Evitar que el click en links del menú cierre antes de navegar
+    menu.addEventListener('click', function(e){
+      e.stopPropagation();
+    });
+    // Cerrar al hacer click fuera
     document.addEventListener('click', function(){
       menu.classList.remove('open');
     });
