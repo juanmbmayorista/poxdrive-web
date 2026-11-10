@@ -226,6 +226,23 @@ const FORMSPREE_ID = "mzeerlqo";
       .nav-links-group, .nav-cta { display: none; }
     }
   </style>
+  <!-- Google tag (GA4) + eventos de conversión -->
+  <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-0GN6S6NJN9"></script>
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-0GN6S6NJN9');
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a[href]');
+      if (!a) return;
+      var h = a.getAttribute('href') || '';
+      if (h.indexOf('wa.me') > -1) gtag('event', 'whatsapp_click', { link_url: h, page_path: location.pathname });
+      else if (h.indexOf('tel:') === 0) gtag('event', 'telefono_click', { page_path: location.pathname });
+      else if (h.indexOf('mailto:') === 0) gtag('event', 'email_click', { page_path: location.pathname });
+      else if (/\.pdf($|\?)/i.test(h)) gtag('event', 'descarga_ficha', { file_name: h.split('/').pop(), page_path: location.pathname });
+    });
+  </script>
 </head>
 <body>
 
@@ -414,6 +431,7 @@ const FORMSPREE_ID = "mzeerlqo";
         body: new FormData(form),
       });
       if (res.ok) {
+        if (window.gtag) gtag('event', 'generate_lead', { form_id: 'contacto' });
         ok.style.display = 'block';
         form.reset();
       } else {
