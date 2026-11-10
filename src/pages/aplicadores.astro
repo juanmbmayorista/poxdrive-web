@@ -240,14 +240,39 @@
   <div class="container">
     <h2>¿Sos una empresa aplicadora de pisos industriales?</h2>
     <p>Certificate con POXDRIVE y empezá a acceder a obras que hoy no llegan a tu negocio. Mandanos tus datos y te contactamos.</p>
-    <form onsubmit="event.preventDefault(); this.innerHTML='<p style=\'color:#fff;font-size:1.1rem;margin-top:1rem;\'>✓ Recibimos tu postulación. Te contactamos a la brevedad.</p>'">
+    <form id="form-aplicador" action="https://formspree.io/f/mzeerlqo" method="POST">
+      <input type="hidden" name="formulario" value="Postulación de aplicador (poxdrive.ar/aplicadores)" />
+      <input type="hidden" name="_subject" value="Nueva postulación de aplicador — poxdrive.ar" />
+      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none" />
       <div class="form-row">
-        <input type="text" placeholder="Nombre de tu empresa" required />
-        <input type="text" placeholder="Zona de trabajo" required />
-        <input type="tel" placeholder="WhatsApp de contacto" required />
-        <button type="submit" class="btn-white">Quiero sumarme</button>
+        <input type="text" name="empresa" placeholder="Nombre de tu empresa" required />
+        <input type="text" name="zona" placeholder="Zona de trabajo" required />
+        <input type="tel" name="whatsapp" placeholder="WhatsApp de contacto" required />
+        <button type="submit" class="btn-white" id="btn-aplicador">Quiero sumarme</button>
       </div>
+      <p id="msg-aplicador" role="status" style="color:#fff;font-size:1.05rem;margin-top:1rem;"></p>
     </form>
+    <script is:inline>
+      document.getElementById('form-aplicador').addEventListener('submit', async function (e) {
+        e.preventDefault();
+        var f = e.target, btn = document.getElementById('btn-aplicador'), msg = document.getElementById('msg-aplicador');
+        btn.disabled = true; btn.textContent = 'Enviando...'; msg.textContent = '';
+        try {
+          var res = await fetch(f.action, { method: 'POST', headers: { 'Accept': 'application/json' }, body: new FormData(f) });
+          if (res.ok) {
+            if (window.gtag) gtag('event', 'generate_lead', { form_id: 'aplicadores' });
+            f.reset();
+            msg.textContent = '✓ Recibimos tu postulación. Te contactamos a la brevedad.';
+          } else {
+            msg.textContent = 'No pudimos enviar tu postulación. Escribinos por WhatsApp al +54 9 11 3820-0513.';
+          }
+        } catch (err) {
+          msg.textContent = 'No pudimos enviar tu postulación. Escribinos por WhatsApp al +54 9 11 3820-0513.';
+        } finally {
+          btn.disabled = false; btn.textContent = 'Quiero sumarme';
+        }
+      });
+    </script>
     <p class="wa-alt">O escribinos directamente: <a href="https://wa.me/5491138200513">WhatsApp +54 9 11 3820-0513</a></p>
   </div>
 </section>
