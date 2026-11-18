@@ -1,0 +1,57 @@
+---
+// Bloque de video de YouTube reutilizable (youtube-nocookie, carga diferida, CTA con UTM y VideoObject JSON-LD).
+interface Props {
+  id: string;
+  title: string;
+  description: string;
+  uploadDate: string; // YYYY-MM-DD, tal como figura en YouTube
+  campaign: string;   // utm_campaign
+  label?: string;     // texto chico sobre el título
+  heading?: string;   // título visible (por defecto, title)
+  intro?: string;
+  vertical?: boolean; // Short 9:16
+  ctaText?: string;
+  ctaHref?: string;
+}
+const { id, title, description, uploadDate, campaign, label = 'En video', heading, intro, vertical = false, ctaText = 'Pedir evaluación técnica', ctaHref = '/contacto' } = Astro.props;
+const href = `${ctaHref}?utm_source=web&utm_medium=video&utm_campaign=${campaign}`;
+const ld = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'VideoObject',
+  name: title,
+  description,
+  thumbnailUrl: `https://i.ytimg.com/vi/${id}/hqdefault.jpg`,
+  uploadDate,
+  contentUrl: `https://www.youtube.com/watch?v=${id}`,
+  embedUrl: `https://www.youtube-nocookie.com/embed/${id}`,
+});
+---
+<section class="vb">
+  <div class="vb-inner">
+    <p class="vb-label">{label}</p>
+    <h2 class="vb-title">{heading ?? title}</h2>
+    {intro && <p class="vb-intro">{intro}</p>}
+    <div class:list={['vb-frame', { 'vb-vertical': vertical }]}>
+      <iframe
+        src={`https://www.youtube-nocookie.com/embed/${id}`}
+        title={title}
+        loading="lazy"
+        allow="accelerometer; encrypted-media; picture-in-picture"
+        allowfullscreen></iframe>
+    </div>
+    <a class="vb-cta" href={href}>{ctaText}</a>
+  </div>
+  <script type="application/ld+json" set:html={ld}></script>
+</section>
+<style>
+  .vb{background:rgba(255,255,255,0.02);border-top:1px solid rgba(255,255,255,0.08);border-bottom:1px solid rgba(255,255,255,0.08);padding:64px 2rem}
+  .vb-inner{max-width:1100px;margin:0 auto}
+  .vb-label{font-size:.7rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#E8500A;margin-bottom:12px}
+  .vb-title{font-family:Georgia,serif;font-size:clamp(1.4rem,2.5vw,2rem);font-style:italic;font-weight:700;margin-bottom:12px;line-height:1.2}
+  .vb-intro{opacity:.65;font-size:.95rem;line-height:1.7;max-width:640px;margin-bottom:28px}
+  .vb-frame{position:relative;width:100%;max-width:720px;aspect-ratio:16/9;border-radius:8px;overflow:hidden;background:#000;margin-top:16px}
+  .vb-frame.vb-vertical{max-width:340px;aspect-ratio:9/16}
+  .vb-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .vb-cta{display:inline-block;margin-top:20px;padding:10px 20px;border:1px solid #E8500A;color:#E8500A;border-radius:4px;font-size:.85rem;font-weight:600;text-decoration:none}
+  .vb-cta:hover{background:#E8500A;color:#fff}
+</style>
