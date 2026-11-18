@@ -7,6 +7,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bunji Kombucha, Chacarita | Casos de Obra POXDRIVE</title>
   <meta name="description" content="Piso nuevo protegido antes de la puesta en marcha de producción en Bunji Kombucha. Sistema TEXAFIC T-1 aplicado por el propio equipo. Caso real POXDRIVE." />
+  <link rel="canonical" href="https://poxdrive.ar/casos/kombucha-bunji-chacarita/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="es_AR" />
+  <meta property="og:site_name" content="POXDRIVE" />
+  <meta property="og:title" content="Bunji Kombucha, Chacarita | Casos de Obra POXDRIVE" />
+  <meta property="og:description" content="Piso nuevo protegido antes de la puesta en marcha de producción en Bunji Kombucha. Sistema TEXAFIC T-1 aplicado por el propio equipo. Caso real POXDRIVE." />
+  <meta property="og:url" content="https://poxdrive.ar/casos/kombucha-bunji-chacarita/" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -83,6 +90,23 @@
     @media(max-width:768px){.nav-links-group,.nav-cta{display:none}.hamburger{display:block}.two-col{grid-template-columns:1fr}.galeria-3{grid-template-columns:1fr 1fr}}
     @media(max-width:500px){.galeria-3{grid-template-columns:1fr}.galeria-2{grid-template-columns:1fr}}
   </style>
+  <!-- Google tag (GA4) + eventos de conversión -->
+  <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-0GN6S6NJN9"></script>
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-0GN6S6NJN9');
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a[href]');
+      if (!a) return;
+      var h = a.getAttribute('href') || '';
+      if (h.indexOf('wa.me') > -1) gtag('event', 'whatsapp_click', { link_url: h, page_path: location.pathname });
+      else if (h.indexOf('tel:') === 0) gtag('event', 'telefono_click', { page_path: location.pathname });
+      else if (h.indexOf('mailto:') === 0) gtag('event', 'email_click', { page_path: location.pathname });
+      else if (/\.pdf($|\?)/i.test(h)) gtag('event', 'descarga_ficha', { file_name: h.split('/').pop(), page_path: location.pathname });
+    });
+  </script>
 </head>
 <body>
 <nav>

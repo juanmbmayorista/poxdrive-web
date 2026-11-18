@@ -9,8 +9,15 @@ const FORMSPREE_ID = "mzeerlqo";
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contacto — POXDRIVE</title>
+  <title>Contacto y presupuesto de pisos industriales | POXDRIVE</title>
   <meta name="description" content="Consultanos sobre sistemas de pisos y revestimientos industriales. Presupuestos sin cargo, asistencia técnica directa de fábrica." />
+  <link rel="canonical" href="https://poxdrive.ar/contacto/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="es_AR" />
+  <meta property="og:site_name" content="POXDRIVE" />
+  <meta property="og:title" content="Contacto y presupuesto de pisos industriales | POXDRIVE" />
+  <meta property="og:description" content="Consultanos sobre sistemas de pisos y revestimientos industriales. Presupuestos sin cargo, asistencia técnica directa de fábrica." />
+  <meta property="og:url" content="https://poxdrive.ar/contacto/" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
@@ -219,6 +226,23 @@ const FORMSPREE_ID = "mzeerlqo";
       .nav-links-group, .nav-cta { display: none; }
     }
   </style>
+  <!-- Google tag (GA4) + eventos de conversión -->
+  <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-0GN6S6NJN9"></script>
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-0GN6S6NJN9');
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a[href]');
+      if (!a) return;
+      var h = a.getAttribute('href') || '';
+      if (h.indexOf('wa.me') > -1) gtag('event', 'whatsapp_click', { link_url: h, page_path: location.pathname });
+      else if (h.indexOf('tel:') === 0) gtag('event', 'telefono_click', { page_path: location.pathname });
+      else if (h.indexOf('mailto:') === 0) gtag('event', 'email_click', { page_path: location.pathname });
+      else if (/\.pdf($|\?)/i.test(h)) gtag('event', 'descarga_ficha', { file_name: h.split('/').pop(), page_path: location.pathname });
+    });
+  </script>
 </head>
 <body>
 
@@ -407,6 +431,7 @@ const FORMSPREE_ID = "mzeerlqo";
         body: new FormData(form),
       });
       if (res.ok) {
+        if (window.gtag) gtag('event', 'generate_lead', { form_id: 'contacto' });
         ok.style.display = 'block';
         form.reset();
       } else {

@@ -4,7 +4,15 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Pisos para Centros Logísticos — POXDRIVE</title>
+  <title>Pisos para depósitos y centros logísticos | POXDRIVE</title>
+  <meta name="description" content="Pisos epoxi para depósitos y centros logísticos con tránsito constante de autoelevadores, racks de alta carga y docks. Sistema por zona. Pedí tu diagnóstico." />
+  <link rel="canonical" href="https://poxdrive.ar/logistica/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="es_AR" />
+  <meta property="og:site_name" content="POXDRIVE" />
+  <meta property="og:title" content="Pisos para depósitos y centros logísticos | POXDRIVE" />
+  <meta property="og:description" content="Pisos epoxi para depósitos y centros logísticos con tránsito constante de autoelevadores, racks de alta carga y docks. Sistema por zona. Pedí tu diagnóstico." />
+  <meta property="og:url" content="https://poxdrive.ar/logistica/" />
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: Calibri, Arial, sans-serif; background: #1A1A1A; color: #F0EDEA; }
@@ -130,6 +138,23 @@
   .dropdown-menu a:hover { color: #F0EDEA !important; background: #252525; }
 
   </style>
+  <!-- Google tag (GA4) + eventos de conversión -->
+  <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-0GN6S6NJN9"></script>
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-0GN6S6NJN9');
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a[href]');
+      if (!a) return;
+      var h = a.getAttribute('href') || '';
+      if (h.indexOf('wa.me') > -1) gtag('event', 'whatsapp_click', { link_url: h, page_path: location.pathname });
+      else if (h.indexOf('tel:') === 0) gtag('event', 'telefono_click', { page_path: location.pathname });
+      else if (h.indexOf('mailto:') === 0) gtag('event', 'email_click', { page_path: location.pathname });
+      else if (/\.pdf($|\?)/i.test(h)) gtag('event', 'descarga_ficha', { file_name: h.split('/').pop(), page_path: location.pathname });
+    });
+  </script>
 </head>
 <body>
 

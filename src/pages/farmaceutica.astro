@@ -5,7 +5,25 @@ import VideoBlock from "../components/VideoBlock.astro";
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Pisos para Industria Farmacéutica — POXDRIVE</title>
+  <title>Pisos para industria farmacéutica y laboratorios | POXDRIVE</title>
+  <meta name="description" content="Pisos y revestimientos sin juntas ni poros para plantas farmacéuticas y laboratorios, pensados para auditorías de GMP/BPF. Sistema por área. Consultanos." />
+  <link rel="canonical" href="https://poxdrive.ar/farmaceutica/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="es_AR" />
+  <meta property="og:site_name" content="POXDRIVE" />
+  <meta property="og:title" content="Pisos para industria farmacéutica y laboratorios | POXDRIVE" />
+  <meta property="og:description" content="Pisos y revestimientos sin juntas ni poros para plantas farmacéuticas y laboratorios, pensados para auditorías de GMP/BPF. Sistema por área. Consultanos." />
+  <meta property="og:url" content="https://poxdrive.ar/farmaceutica/" />
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Pisos industriales para industria farmacéutica y laboratorios",
+    "description": "Pisos y revestimientos sin juntas ni poros para plantas farmacéuticas y laboratorios. Diseñados para auditorías GMP/BPF. Autonivelante epoxi sanitario.",
+    "provider": { "@type": "LocalBusiness", "name": "POXDRIVE", "url": "https://poxdrive.ar" },
+    "areaServed": { "@type": "Country", "name": "Argentina" },
+    "url": "https://poxdrive.ar/farmaceutica/",
+    "serviceType": "Pisos industriales"
+  }</script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: Calibri, Arial, sans-serif; background: #1A1A1A; color: #F0EDEA; }
@@ -139,6 +157,23 @@ import VideoBlock from "../components/VideoBlock.astro";
   .dropdown-menu a:hover { color: #F0EDEA !important; background: #252525; }
 
   </style>
+  <!-- Google tag (GA4) + eventos de conversión -->
+  <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-0GN6S6NJN9"></script>
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-0GN6S6NJN9');
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a[href]');
+      if (!a) return;
+      var h = a.getAttribute('href') || '';
+      if (h.indexOf('wa.me') > -1) gtag('event', 'whatsapp_click', { link_url: h, page_path: location.pathname });
+      else if (h.indexOf('tel:') === 0) gtag('event', 'telefono_click', { page_path: location.pathname });
+      else if (h.indexOf('mailto:') === 0) gtag('event', 'email_click', { page_path: location.pathname });
+      else if (/\.pdf($|\?)/i.test(h)) gtag('event', 'descarga_ficha', { file_name: h.split('/').pop(), page_path: location.pathname });
+    });
+  </script>
 </head>
 <body>
 
