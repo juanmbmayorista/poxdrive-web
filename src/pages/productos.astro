@@ -1,0 +1,405 @@
+---
+// src/pages/productos.astro
+const destacados = [
+  {
+    codigo: "TEXAFIC CEM-AU",
+    familia: "Poliuretánico",
+    badge: "Más consultado",
+    badgeColor: "naranja",
+    titulo: "Autonivelante para industria alimenticia y cámaras frías",
+    desc: "Sistema poliuretánico-cementicio de 5 mm formulado para resistir shock térmico de −40°C a +120°C. Superficie continua sin juntas, apta para lavados a vapor y auditorías BPM/HACCP.",
+    sectores: ["Alimenticia", "Frigoríficos", "Farmacéutica"],
+    ficha: "/fichas/TEXAFIC_CEM-AU.pdf",
+  },
+  {
+    codigo: "MASTERPOX AN-1",
+    familia: "Epoxi",
+    badge: "Más versátil",
+    badgeColor: "azul",
+    titulo: "Esmalte epoxi multipropósito para pisos industriales",
+    desc: "Revestimiento epoxi autoimprimante de altos sólidos. Resiste hidrocarburos, aceites y lavados frecuentes. Ideal para naves industriales, depósitos y plantas en general.",
+    sectores: ["Logística", "Alimenticia", "Petróleo", "General"],
+    ficha: "/fichas/MASTERPOX_AN-1.pdf",
+  },
+  {
+    codigo: "MASTERPOX MORTERO ANTIACIDO",
+    familia: "Epoxi NOVOLAC",
+    badge: "Alta resistencia química",
+    badgeColor: "verde",
+    titulo: "Grout epoxi NOVOLAC para industria química y minería",
+    desc: "Mortero epoxi de tres componentes con resina NOVOLAC. Máxima resistencia a ácidos concentrados, solventes y agentes oxidantes. Para ambientes de química agresiva.",
+    sectores: ["Minería", "Petroquímica", "Química"],
+    ficha: "/fichas/MASTERPOX_MORTERO-ANTIACIDO.pdf",
+  },
+  {
+    codigo: "VIAL AE-3",
+    familia: "Demarcación vial",
+    badge: "Nuevo sistema",
+    badgeColor: "amarillo",
+    titulo: "Demarcación vial en frío para calles y playas industriales",
+    desc: "Mortero acrílico-cementicio bicomponente de 3–4 mm de espesor. Alta visibilidad, resistencia al tránsito pesado y rápida puesta en servicio. Para demarcación interior y exterior.",
+    sectores: ["Logística", "Industria general", "Vial"],
+    ficha: "/fichas/VIAL_AE-3.pdf",
+  },
+];
+
+const novedades = [
+  {
+    codigo: "VIAL AE-3",
+    fecha: "2025",
+    titulo: "Nuevo sistema de demarcación vial en frío",
+    desc: "VIAL AE-3 incorpora nuestra línea de demarcación vial: mortero bicomponente de 3–4 mm, apto para tránsito pesado y aplicación en frío sin equipos especiales.",
+    ficha: "/fichas/VIAL_AE-3.pdf",
+  },
+  {
+    codigo: "TEXAFIC T-1",
+    fecha: "2025",
+    titulo: "TEXAFIC T-1 — poliuretánico alifático para exterior",
+    desc: "Nueva versión de nuestra línea poliuretánica con mayor resistencia UV y retención de color para aplicaciones en exterior e intemperie. Ideal como terminación en zonas expuestas.",
+    ficha: "/fichas/TEXAFIC_T-1.pdf",
+  },
+];
+
+const familias = [
+  {
+    id: "epoxi",
+    icono: "⬡",
+    nombre: "Familia Epoxi — MASTERPOX",
+    desc: "Esmaltes, autonivelantes, imprimaciones y morteros epoxi de dos y tres componentes.",
+    productos: [
+      { codigo: "AN-1",              nombre: "MASTERPOX AN-1",              desc: "Esmalte epoxi multipropósito — apto hidrocarburos",              ficha: "/fichas/MASTERPOX_AN-1.pdf" },
+      { codigo: "AN-1 AD",           nombre: "MASTERPOX AN-1 AD",           desc: "Esmalte epoxi antideslizante multipropósito",                    ficha: "/fichas/MASTERPOX_AN-1_AD.pdf" },
+      { codigo: "AC-4",              nombre: "MASTERPOX AC-4",              desc: "Autoimprimante anticorrosivo con fosfato de zinc",               ficha: "/fichas/MASTERPOX_AC-4.pdf" },
+      { codigo: "AC-12",             nombre: "MASTERPOX AC-12",             desc: "Epoxi autoimprimante de altos sólidos — bajo VOC",               ficha: "/fichas/MASTERPOX_AC-12.pdf" },
+      { codigo: "AC-21",             nombre: "MASTERPOX AC-21",             desc: "Alta resistencia química y mecánica",                            ficha: "/fichas/MASTERPOX_AC-21.pdf" },
+      { codigo: "AC-23",             nombre: "MASTERPOX AC-23",             desc: "Autonivelante epoxi — apto alimenticia y farmacéutica",          ficha: "/fichas/MASTERPOX_AC-23.pdf" },
+      { codigo: "AC-33",             nombre: "MASTERPOX AC-33",             desc: "Autonivelante epoxi con color — VOC free",                       ficha: "/fichas/MASTERPOX_AC-33.pdf" },
+      { codigo: "I-2",               nombre: "MASTERPOX I-2",               desc: "Imprimación epoxi multipropósito",                              ficha: "/fichas/MASTERPOX_I-2.pdf" },
+      { codigo: "I-PISOS",           nombre: "MASTERPOX I-PISOS",           desc: "Imprimación epoxi curable en humedad",                          ficha: "/fichas/MASTERPOX_I-PISOS.pdf" },
+      { codigo: "M-2",               nombre: "MASTERPOX M-2",               desc: "Masilla epoxi para reparación de sustratos",                    ficha: "/fichas/MASTERPOX_M-2.pdf" },
+      { codigo: "MORTERO E",         nombre: "MASTERPOX MORTERO E",         desc: "Grout epoxi para encarpetado de pisos — 100% sólidos",          ficha: "/fichas/MASTERPOX_MORTERO-E.pdf" },
+      { codigo: "MORTERO ANTIACIDO", nombre: "MASTERPOX MORTERO ANTIACIDO", desc: "Grout NOVOLAC — máxima resistencia química a ácidos",           ficha: "/fichas/MASTERPOX_MORTERO-ANTIACIDO.pdf" },
+      { codigo: "AD-3",              nombre: "MASTERPOX AD-3",              desc: "Grouter epoxi autonivelante para anclaje",                      ficha: "/fichas/MASTERPOX_AD-3.pdf" },
+    ],
+  },
+  {
+    id: "poliuretano",
+    icono: "◈",
+    nombre: "Familia Poliuretánico — TEXAFIC",
+    desc: "Morteros y autonivelantes poliuretánicos para condiciones extremas: temperatura, impacto y lavados agresivos.",
+    productos: [
+      { codigo: "MORTERO PU", nombre: "TEXAFIC MORTERO PU", desc: "Mortero PU 100% sólidos — resistente al impacto", ficha: "/fichas/TEXAFIC_MORTERO-PU.pdf" },
+      { codigo: "CEM-AU",     nombre: "TEXAFIC CEM-AU",     desc: "Autonivelante PU — rango térmico −40°C / +120°C", ficha: "/fichas/TEXAFIC_CEM-AU.pdf" },
+      { codigo: "T-1",        nombre: "TEXAFIC T-1",        desc: "Esmalte PU alifático — resistencia UV, exterior",  ficha: "/fichas/TEXAFIC_T-1.pdf" },
+    ],
+  },
+  {
+    id: "acrilicos",
+    icono: "○",
+    nombre: "Familia Acrílicos",
+    desc: "Selladores y revestimientos acrílicos base solvente y base acuosa para pisos, techos y muros.",
+    productos: [
+      { codigo: "SAS-1",    nombre: "POXDRIVE SAS-1",    desc: "Sellador acrílico al solvente — secado rápido",             ficha: "/fichas/POXDRIVE_SAS-1.pdf" },
+      { codigo: "SAS-1 AD", nombre: "POXDRIVE SAS-1 AD", desc: "Sellador acrílico antideslizante — zonas húmedas y rampas", ficha: "/fichas/POXDRIVE_SAS-1-AD.pdf" },
+      { codigo: "PA-1",     nombre: "POXDRIVE PA-1",     desc: "Elastomérico para techos y muros — base acuosa",            ficha: "/fichas/POXDRIVE_PA-1.pdf" },
+    ],
+  },
+  {
+    id: "cementicia",
+    icono: "▪",
+    nombre: "Familia Cementicia",
+    desc: "Morteros y grouts cementicios poliméricos para reparación, nivelación y preparación de superficie.",
+    productos: [
+      { codigo: "GROUT ST", nombre: "GROUT ST", desc: "Mortero polimérico cementicio — baja contracción, nivelación de pisos", ficha: "/fichas/GROUT_ST.pdf" },
+    ],
+  },
+  {
+    id: "vial",
+    icono: "⬜",
+    nombre: "Demarcación Vial — VIAL AE-3",
+    desc: "Sistema de demarcación en frío de alto espesor para calles industriales, playas de maniobras y vías privadas.",
+    productos: [
+      { codigo: "VIAL AE-3", nombre: "VIAL AE-3", desc: "Mortero acrílico-cementicio bicomponente 3–4 mm — tránsito pesado", ficha: "/fichas/VIAL_AE-3.pdf" },
+    ],
+  },
+];
+---
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Productos y fichas técnicas | POXDRIVE</title>
+  <meta name="description" content="Catálogo completo de sistemas epoxi, poliuretánicos y cementicios POXDRIVE. Descargá fichas técnicas en PDF." />
+  <link rel="canonical" href="https://poxdrive.ar/productos/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="es_AR" />
+  <meta property="og:site_name" content="POXDRIVE" />
+  <meta property="og:title" content="Productos y fichas técnicas | POXDRIVE" />
+  <meta property="og:description" content="Catálogo completo de sistemas epoxi, poliuretánicos y cementicios POXDRIVE. Descargá fichas técnicas en PDF." />
+  <meta property="og:url" content="https://poxdrive.ar/productos/" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{background:#1A1A1A;color:#F0EDEA;font-family:'Inter',Calibri,Arial,sans-serif;font-size:16px;line-height:1.6}
+
+    /* NAV */
+    header{position:sticky;top:0;z-index:100;background:rgba(26,26,26,0.95);border-bottom:1px solid #2a2a2a;backdrop-filter:blur(12px)}
+    .nav-inner{max-width:1100px;margin:0 auto;padding:0 2rem;display:flex;justify-content:space-between;align-items:center;height:64px}
+    .nav-logo{font-size:1.3rem;font-weight:900;letter-spacing:2px;text-decoration:none;color:#F0EDEA}
+    .nav-logo span{color:#E8500A}
+    .nav-links{display:flex;gap:28px;align-items:center;list-style:none}
+    .nav-links a{color:#F0EDEA;text-decoration:none;font-size:0.9rem;opacity:.7}
+    .nav-links a:hover,.nav-links a.active{opacity:1;color:#E8500A}
+    .nav-cta{background:#E8500A;color:#fff!important;padding:8px 20px;border-radius:4px;font-weight:700;font-size:0.875rem;opacity:1!important}
+    .nav-cta:hover{background:#c94008}
+    .hamburger{display:none;background:none;border:none;cursor:pointer;padding:4px}
+    .hamburger span{display:block;width:22px;height:2px;background:#F0EDEA;margin:5px 0;border-radius:2px}
+
+    /* PAGE */
+    .page-wrap{max-width:1100px;margin:0 auto;padding:60px 2rem 80px}
+
+    /* HERO */
+    .page-hero{padding:48px 0 40px;border-bottom:1px solid #2a2a2a;margin-bottom:56px}
+    .page-hero h1{font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:700;letter-spacing:-0.03em;margin-bottom:12px}
+    .page-hero p{color:#9a9490;font-size:1.05rem;max-width:580px;line-height:1.7}
+
+    /* SECTION HEADERS */
+    .section-label{font-size:0.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#E8500A;margin-bottom:12px}
+    .section-title{font-size:1.4rem;font-weight:700;letter-spacing:-0.02em;margin-bottom:8px}
+    .section-sub{color:#9a9490;font-size:0.95rem;margin-bottom:32px}
+    .section-block{margin-bottom:72px}
+
+    /* DESTACADOS */
+    .destacados-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+    .dest-card{background:#222;border:1px solid #2a2a2a;border-radius:10px;padding:28px;display:flex;flex-direction:column;gap:14px;transition:border-color .2s}
+    .dest-card:hover{border-color:#E8500A}
+    .dest-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+    .dest-codigo{font-size:0.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#9a9490}
+    .badge{display:inline-block;font-size:0.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border-radius:20px;white-space:nowrap}
+    .badge-naranja{background:rgba(232,80,10,.15);color:#E8500A}
+    .badge-azul{background:rgba(59,130,246,.15);color:#60a5fa}
+    .badge-verde{background:rgba(34,197,94,.15);color:#4ade80}
+    .badge-amarillo{background:rgba(234,179,8,.15);color:#facc15}
+    .dest-familia{font-size:0.7rem;text-transform:uppercase;letter-spacing:.1em;color:#E8500A;margin-bottom:4px}
+    .dest-titulo{font-size:1.05rem;font-weight:700;line-height:1.3;margin-bottom:6px}
+    .dest-desc{color:#9a9490;font-size:0.875rem;line-height:1.65;flex:1}
+    .dest-sectores{display:flex;gap:6px;flex-wrap:wrap}
+    .sector-tag{font-size:0.65rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:3px;background:rgba(255,255,255,.06);color:#9a9490}
+    .dest-footer{border-top:1px solid #2a2a2a;padding-top:14px;display:flex;justify-content:flex-end}
+    .btn-ficha{display:inline-flex;align-items:center;gap:6px;font-size:0.8rem;font-weight:600;color:#E8500A;text-decoration:none;letter-spacing:.04em}
+    .btn-ficha:hover{text-decoration:underline}
+    .btn-ficha svg{width:14px;height:14px;flex-shrink:0}
+
+    /* NOVEDADES */
+    .novedades-lista{display:flex;flex-direction:column;gap:14px}
+    .novedad-card{background:#1a1a1a;border:1px solid #2a2a2a;border-left:3px solid #E8500A;border-radius:0 8px 8px 0;padding:20px 24px;display:flex;gap:20px;align-items:flex-start}
+    .nov-fecha{font-size:0.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#9a9490;white-space:nowrap;padding-top:3px;min-width:40px}
+    .nov-codigo{font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#E8500A;margin-bottom:4px}
+    .nov-titulo{font-size:0.95rem;font-weight:700;margin-bottom:6px}
+    .nov-desc{color:#9a9490;font-size:0.875rem;line-height:1.6;margin-bottom:12px}
+
+    /* CATÁLOGO */
+    .familia-block{margin-bottom:48px}
+    .familia-header{display:flex;align-items:center;gap:14px;margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid #2a2a2a}
+    .familia-icono{font-size:1.2rem;color:#E8500A;width:28px;text-align:center}
+    .familia-info{}
+    .familia-nombre{font-size:1rem;font-weight:700;margin-bottom:2px}
+    .familia-desc{font-size:0.8rem;color:#9a9490}
+    .productos-tabla{width:100%;border-collapse:collapse}
+    .productos-tabla tr{border-bottom:1px solid #222}
+    .productos-tabla tr:last-child{border-bottom:none}
+    .productos-tabla td{padding:12px 10px;vertical-align:top}
+    .prod-codigo{font-size:0.75rem;font-weight:700;letter-spacing:.06em;color:#E8500A;white-space:nowrap;width:160px}
+    .prod-desc{font-size:0.875rem;color:#9a9490}
+    .prod-ficha{text-align:right;white-space:nowrap}
+    .productos-tabla tr:hover td{background:rgba(255,255,255,.02)}
+
+    /* FOOTER */
+    footer{background:#111;border-top:1px solid #2a2a2a;padding:3rem 2rem}
+    .footer-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-start;gap:3rem;flex-wrap:wrap}
+    .footer-logo{font-size:1.3rem;font-weight:900;letter-spacing:2px;margin-bottom:0.5rem}
+    .footer-logo span{color:#E8500A}
+    .footer-brand p{color:#9a9490;font-size:0.85rem;line-height:1.6;max-width:260px}
+    .footer-col h4{font-size:0.7rem;letter-spacing:3px;color:#E8500A;text-transform:uppercase;margin-bottom:1rem}
+    .footer-col ul{list-style:none}
+    .footer-col ul li{margin-bottom:.5rem}
+    .footer-col ul li a{color:#9a9490;text-decoration:none;font-size:0.875rem}
+    .footer-col ul li a:hover{color:#F0EDEA}
+    .footer-col address{color:#9a9490;font-style:normal;font-size:0.875rem;line-height:1.7}
+    .footer-bottom{max-width:1100px;margin:2rem auto 0;padding-top:1.5rem;border-top:1px solid #2a2a2a;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem}
+    .footer-bottom p{color:#555;font-size:0.8rem}
+
+    @media(max-width:768px){
+      .nav-links{display:none}.hamburger{display:block}
+      .destacados-grid{grid-template-columns:1fr}
+      .novedad-card{flex-direction:column;gap:6px}
+      .prod-codigo{width:auto}
+    }
+  </style>
+  <!-- GA4 -->
+  <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-0GN6S6NJN9"></script>
+  <script is:inline>
+    window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+    gtag('js',new Date());gtag('config','G-0GN6S6NJN9');
+  </script>
+</head>
+<body>
+
+<header>
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">POX<span>DRIVE</span></a>
+    <ul class="nav-links">
+      <li><a href="/alimenticia">Industrias</a></li>
+      <li><a href="/productos" class="active">Productos</a></li>
+      <li><a href="/blog">Blog</a></li>
+      <li><a href="/casos">Casos de obra</a></li>
+      <li><a href="/nosotros">Nosotros</a></li>
+      <li><a href="/aplicadores">Aplicadores</a></li>
+    </ul>
+    <a href="/contacto" class="nav-cta">Consultar</a>
+    <button class="hamburger" aria-label="Menú"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="page-wrap">
+
+  <!-- HERO -->
+  <div class="page-hero">
+    <h1>Productos y fichas técnicas</h1>
+    <p>Sistemas epoxi, poliuretánicos y cementicios de formulación propia para industria alimenticia, farmacéutica, minería, logística y construcción. Descargá la ficha técnica de cada producto.</p>
+  </div>
+
+  <!-- DESTACADOS -->
+  <div class="section-block">
+    <div class="section-label">Productos destacados</div>
+    <div class="section-title">Los sistemas más consultados</div>
+    <div class="section-sub">Los cuatro productos que concentran la mayor parte de nuestros proyectos industriales.</div>
+    <div class="destacados-grid">
+      {destacados.map(p => (
+        <div class="dest-card">
+          <div class="dest-top">
+            <div>
+              <div class="dest-familia">{p.familia}</div>
+              <div class="dest-codigo">{p.codigo}</div>
+            </div>
+            <span class={`badge badge-${p.badgeColor}`}>{p.badge}</span>
+          </div>
+          <div class="dest-titulo">{p.titulo}</div>
+          <div class="dest-desc">{p.desc}</div>
+          <div class="dest-sectores">
+            {p.sectores.map(s => <span class="sector-tag">{s}</span>)}
+          </div>
+          <div class="dest-footer">
+            <a href={p.ficha} class="btn-ficha" target="_blank" rel="noopener">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2v8m0 0L5 7m3 3 3-3M2 12v1a1 1 0 001 1h10a1 1 0 001-1v-1"/></svg>
+              Ficha técnica PDF
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- NOVEDADES -->
+  <div class="section-block">
+    <div class="section-label">Novedades</div>
+    <div class="section-title">Incorporaciones recientes al catálogo</div>
+    <div class="section-sub">Nuevos sistemas y actualizaciones de formulación.</div>
+    <div class="novedades-lista">
+      {novedades.map(n => (
+        <div class="novedad-card">
+          <div class="nov-fecha">{n.fecha}</div>
+          <div>
+            <div class="nov-codigo">{n.codigo}</div>
+            <div class="nov-titulo">{n.titulo}</div>
+            <div class="nov-desc">{n.desc}</div>
+            <a href={n.ficha} class="btn-ficha" target="_blank" rel="noopener">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2v8m0 0L5 7m3 3 3-3M2 12v1a1 1 0 001 1h10a1 1 0 001-1v-1"/></svg>
+              Ficha técnica PDF
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- CATÁLOGO COMPLETO -->
+  <div class="section-block">
+    <div class="section-label">Catálogo completo</div>
+    <div class="section-title">Todos los sistemas disponibles</div>
+    <div class="section-sub">Fichas técnicas en PDF para descarga. ¿Necesitás una solución específica? <a href="/contacto" style="color:#E8500A">Consultanos</a>.</div>
+
+    {familias.map(f => (
+      <div class="familia-block">
+        <div class="familia-header">
+          <div class="familia-icono">{f.icono}</div>
+          <div class="familia-info">
+            <div class="familia-nombre">{f.nombre}</div>
+            <div class="familia-desc">{f.desc}</div>
+          </div>
+        </div>
+        <table class="productos-tabla">
+          {f.productos.map(p => (
+            <tr>
+              <td class="prod-codigo">{p.codigo}</td>
+              <td class="prod-desc">{p.desc}</td>
+              <td class="prod-ficha">
+                <a href={p.ficha} class="btn-ficha" target="_blank" rel="noopener">
+                  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2v8m0 0L5 7m3 3 3-3M2 12v1a1 1 0 001 1h10a1 1 0 001-1v-1"/></svg>
+                  PDF
+                </a>
+              </td>
+            </tr>
+          ))}
+        </table>
+      </div>
+    ))}
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo">POX<span>DRIVE</span></div>
+      <p>Fabricamos sistemas de pisos y revestimientos industriales desde 2004. Formulación propia, asesoramiento técnico directo.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Industrias</h4>
+      <ul>
+        <li><a href="/alimenticia">Alimentaria</a></li>
+        <li><a href="/farmaceutica">Farmacéutica</a></li>
+        <li><a href="/mineria">Minería</a></li>
+        <li><a href="/logistica">Logística</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Empresa</h4>
+      <ul>
+        <li><a href="/productos">Productos</a></li>
+        <li><a href="/blog">Blog técnico</a></li>
+        <li><a href="/casos">Casos de obra</a></li>
+        <li><a href="/nosotros">Nosotros</a></li>
+        <li><a href="/aplicadores">Aplicadores</a></li>
+        <li><a href="/contacto">Contacto</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contacto</h4>
+      <address>
+        Rincón 4672, La Tablada<br/>
+        La Matanza, Bs. As.<br/>
+        consultas@poxdrive.ar<br/>
+        011 3527-7140
+      </address>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 FARBENPAINT S.R.L. · Todos los derechos reservados</p>
+    <p><a href="/contacto" style="color:#9a9490;text-decoration:none">Consultá tu proyecto →</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
